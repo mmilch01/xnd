@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rule type="dicom" id="xnatDICOM" generate_collections="1" special_recursion="1">
+	<tag name="Project" defaultValue="default"/>
+	<tag name="coll_content" defaultValue="RAW"/>
+	<tag name="coll_format" defaultValue="DICOM"/>
+	<tag name="Subject" defaultValue="subj_undefined">
+		<DICOMTag group="0010" element="0010" alias="PatientName" priority="1" />
+		<DICOMTag group="0010" element="0020" alias="PatientID" priority="2" />
+	</tag>
+	<tag name="Experiment" defaultValue="experiment_undefined">
+		<DICOMTag group="0008" element="1030" alias="StudyDescription" priority="1" />
+		<DICOMTag group="0032" element="4000" alias="StudyComments" priority="2" />
+		<DICOMTag group="0020" element="0010" alias="StudyID" priority="3" />
+		<DICOMTag group="0020" element="000d" alias="StudyInstanceUID" priority="4" />
+	</tag>
+	<tag name="Scan" defaultValue="scan_undefined">
+		<DICOMTag group="0020" element="0011" alias="SeriesNumber" priority="1" />
+		<DICOMTag group="0020" element="000e" alias="SeriesInstanceUID" priority="2" />
+	</tag>
+	<tag name="SeriesDescription" defaultValue="">
+		<DICOMTag group="0008" element="103e" alias="SeriesDescription" priority="1" />
+		<DICOMTag group="0018" element="1030" alias="Protocolname" priority="2" />
+	</tag>
+	<tag name="Modality" defaultValue="OT">
+		<DICOMTag group="0008" element="0060" alias="SeriesModality" priority="1" />
+		<DICOMTag group="0008" element="0061" alias="ModalitiesInStudy" priority="2" />
+	</tag>
+	<tag name="Date" defaultValue="">
+		<DICOMTag group="0008" element="0020" alias="StudyDate" priority="1" />
+		<DICOMTag group="0008" element="0021" alias="SeriesDate" priority="2" />
+		<DICOMTag group="0008" element="0023" alias="ContentDate" priority="3" />
+		<DICOMTag group="0008" element="0022" alias="AcquisitionDate" priority="4" />
+	</tag>
+</rule>

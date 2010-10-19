@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rule type="dicom" id="dicom_rule_pacs">
+	<tag name="coll_content" defaultValue="RAW"/>
+	<tag name="coll_format" defaultValue="DICOM"/>
+	<tag name="Project" defaultValue="default"/>
+	<tag name="Patient" defaultValue="unknown">
+		<DICOMTag group="0010" element="0010" alias="Patient Name" priority="1" />
+	</tag>
+	<tag name="PatientID" defaultValue="undefined">
+		<DICOMTag group="0010" element="0020" alias="Patient ID" priority="1" />
+	</tag>
+	<tag name="BirthDate" defaultValue="">
+		<DICOMTag group="0010" element="0030" alias="Patient birth date" priority="1" />
+	</tag>
+	<tag name="PatientSex" defaultValue="">
+		<DICOMTag group="0010" element="0040" alias="Patient sex" priority="1" />
+	</tag>
+	<tag name="StudyTime" defaultValue="">
+		<DICOMTag group="0008" element="0030" alias="Study time" priority="1" />		
+	</tag>
+	<tag name="StudyDate" defaultValue="">
+		<DICOMTag group="0008" element="0020" alias="Study date" priority="1" />
+	</tag>
+	<tag name="Modality" defaultValue="">
+		<DICOMTag group="0008" element="0060" alias="SeriesModality" priority="1" />
+		<DICOMTag group="0008" element="0061" alias="ModalitiesInStudy" priority="2" />
+	</tag>
+	<tag name="Description" defaultValue="">
+		<DICOMTag group="0008" element="1030" alias="Study description" priority="1" />
+	</tag>
+	<tag name="NumImages" defaultValue="">
+		<DICOMTag group="0020" element="1002" alias="Images in acquisition"/>
+	</tag>
+	<tag name="AccessionNumber" defaultValue="">
+		<DICOMTag group="0008" element="0050" alias="Accession number"/>
+	</tag>
+	<tag name="Study" defaultValue="experiment_undefined">
+		<DICOMTag group="0008" element="1030" alias="StudyDescription" priority="1" />
+		<DICOMTag group="0032" element="4000" alias="StudyComments" priority="2" />
+		<DICOMTag group="0020" element="0010" alias="StudyID" priority="3" />
+		<DICOMTag group="0020" element="000d" alias="StudyInstanceUID" priority="4" />
+	</tag>
+	<tag name="Series" defaultValue="series_undefined">
+		<DICOMTag group="0020" element="0011" alias="SeriesNumber" priority="1" />
+		<DICOMTag group="0020" element="000e" alias="SeriesInstanceUID" priority="2" />
+	</tag>
+	<tag name="Image" defaultValue="image">
+		<DICOMTag group="0020" element="0013" alias="InstanceNumber" priority="1" />
+	</tag>
+</rule>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Filters>
+  <Filter ID="MPRAGE" Enable="true">
+    <Clause ID="123756767371820.2009.1" Code="37" Pattern="MPRAGE_RAW">
+      <TagDescr Name="coll_content" Code="4"/>
+    </Clause>
+  </Filter>
+  <Filter ID="OASIS_FSEG" Enable="true">
+    <Clause ID="123756650260920.2009.1" Code="37" Pattern="FSEG">
+      <TagDescr Name="coll_content" Code="4"/>
+    </Clause>
+  </Filter>
+  <Filter ID="RECONSTRUCTIONS" Enable="true">
+    <Clause ID="123756760814020.2009.0" Code="21" Pattern=".*">
+      <TagDescr Name="Reconstruction" Code="4"/>
+    </Clause>
+  </Filter>
+</Filters>

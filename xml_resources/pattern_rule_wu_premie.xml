@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rule type="modtag" id="modtag_hypo">
+	<tag name="Scan_Type">
+		<replace match="[\x3c\x5b\x3e\x5d]" with=""/>
+		<replace match="[ ]" with="_"/>
+		<replace match="[-]" with="_"/>
+		<replace match="[\x26]" with="_"/>
+	</tag>
+</rule>

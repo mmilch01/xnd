@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="org.nrg.xnd.app.XNDApp">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.nrg.xnd.app.PACSPerspective"
+            id="org.nrg.xnat.desktop.pacsperspective"
+            name="PACS Perspective">
+      </perspective>
+      <perspective
+            name="XND Perspective"
+            class="org.nrg.xnd.app.XNDPerspective"
+            id="org.nrg.xnat.desktop.xndperspective">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+      		allowMultiple="true"
+            class="org.nrg.xnd.app.FileView"
+            id="org.nrg.xnat.desktop.FileView"
+            name="FileView">
+      </view>
+      <view
+            allowMultiple="true"
+            class="org.nrg.xnd.app.ConsoleView"
+            id="org.nrg.xnat.desktop.ConsoleView"
+            name="ConsoleView">
+      </view>
+      <view
+            allowMultiple="false"
+            class="org.nrg.xnd.app.ActionView"
+            id="org.nrg.xnat.desktop.TaskView"
+            name="TaskView">
+      </view>
+      <view
+            class="org.nrg.xnd.app.PACSView"
+            id="org.nrg.xnat.desktop.PACSView"
+            name="PACSView"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         id="xnd_product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.nrg.xnat.desktop.application"
+            name="XNAT Desktop">
+         <property
+               name="appName"
+               value="XNAT Desktop">
+         </property>
+         <property
+               name="aboutImage"
+               value="icons/logo.gif">
+         </property>
+         <property
+               name="aboutText"
+               value="XNAT Desktop ver. 0.92&#x0A;(c) Copyright NRG 2009&#x0A;Online user manual: http://www.xnat.org/xnd">
+         </property>
+         <property
+               name="windowImages"
+               value="icons/xnd_16.gif,icons/xnd_32.gif,icons/xnd_48.gif,icons/xnd_64.gif,icons/xnd_128.gif">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
+      </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.nrg.xnd.ui.prefs.PrefsClientServer"
+            id="org.nrg.xnat.desktop.PrefsClientServer"
+            name="Client/Server">
+      </page>
+      <page
+            class="org.nrg.xnd.ui.prefs.PrefsFileTransfer"
+            id="org.nrg.xnat.desktop.PrefsFileTransfer"
+            name="File transfer">
+      </page>
+      <page
+            class="org.nrg.xnd.ui.prefs.PrefsOntology"
+            id="org.nrg.xnat.desktop.PrefsOntology"
+            name="Ontology and rules">
+      </page>
+      <page
+            class="org.nrg.xnd.ui.prefs.PrefsView"
+            id="org.nrg.xnat.desktop.PrefsView"
+            name="View properties">
+      </page>
+      <page
+            class="org.nrg.xnd.ui.prefs.PrefsFilter"
+            id="org.nrg.xnat.desktop.PrefsFilter"
+            name="Search/Filter">
+      </page>
+   </extension>
+
+</plugin>

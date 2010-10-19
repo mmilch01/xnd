@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ontology id="xnat" descr="Research PACS ontology">
+ <!-- Fist, the ontology tags -->
+ <tag name="Project" treeRoot="1" tableView="0" anValue="1" type="ontology">
+  <child>Patient</child>
+ </tag>
+ <tag name="Patient" tableView="0" anValue="1" type="ontology" context="1">
+   <child>Study</child>
+ </tag>
+ <tag name="Study" tableView="0" anValue="1" type="ontology">
+   <child>Series</child>
+ </tag>
+ <tag name="Series" tableView="0" anValue="1" type="ontology">
+ </tag>
+ <tag name="Assessor" tableView="0" type="ontology">
+ 	<child>Resource</child>
+ </tag>
+ <tag name="Reconstruction" tableView="0" type="ontology">
+ 	<child>Resource</child>
+ </tag>
+ <tag name="Resource" tableView="0" type="service"/>
+ <tag name="SeriesDescription" tableView="0" anValue="0" type="ontology"/>
+ <tag name="Series_Type" tableView="0" anValue="0" type="ontology"/>
+ <tag name="Date" type="ontology"/>
+ <tag name="Quality" type="ontology"/>
+
+ <tag name="PatientID" type="ontology" tableView="1"/>
+ <tag name="BirthDate" type="ontology" tableView="1"/>
+ <tag name="PatientSex" type="ontology" tableView="0"/>
+ <tag name="StudyTime" type="ontology" tableView="1"/>
+ <tag name="StudyDate" type="ontology" tableView="1"/>
+ <tag name="Modality" type="ontology" tableView="1">
+   <value>MR</value>
+   <value>CT</value>
+   <value>PET</value>
+   <value>US</value>
+   <value>OTHER</value>
+ </tag>
+ <tag name="Description" type="ontology" tableView="1"/>
+ <tag name="NumImages" type="ontology" tableView="1"/>
+ <tag name="AccessionNumber" type="ontology" tableView="1"/>
+ <tag name="Image" type="ontology" tableView="0"/>
+
+ <!-- Second, all service tags --> 
+ <tag name="ImageType" type="service"/>
+ <tag name="label" type="service"/>
+ <tag name="element_name" type="service"/>
+ <tag name="category" type="service"/>
+ <tag name="cat_id" type="service"/>
+ <tag name="ID" type="service"/>
+ <tag name="Name" type="service"/>
+ <tag name="Size" type="service"/>
+ <tag name="URI" type="service"/>
+ <tag name="cat_ID" type="service"/>
+ <tag name="coll_content" type="service"/>
+ <tag name="coll_format" type="service"/>
+ <tag name="coll_tags" type="service"/>
+ <tag name="collection" type="service"/>
+ <tag name="file_content" type="service"/>
+ <tag name="file_format" type="service"/>
+ <tag name="file_tags" type="service"/>
+ <tag name="XNATResource" type="service"/>
+</ontology>

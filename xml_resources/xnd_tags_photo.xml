@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ontology>
+<tag name="Category" treeRoot="1">
+  <value>Landscape</value> 
+  <value>Portrait</value> 
+  <value>Action</value> 
+  <value>Wildlife</value> 
+  <value>Architecture</value> 
+  <child>Album</child> 
+</tag>
+<tag name="Album" treeRoot="0">
+  <child>Lens</child> 
+</tag>
+<tag name="Location" /> 
+<tag name="Camera" treeRoot="0">
+  <child>Lens</child> 
+</tag>
+<tag name="Lens">
+  <child>LensManufacturer</child> 
+  <child>Aperture</child> 
+  <child>Focal_length</child> 
+</tag>
+<tag name="Date" /> 
+<tag name="LensManufacturer">
+  <value>Nikon</value> 
+  <value>Sigma</value> 
+  <value>Tokina</value> 
+</tag>
+<tag name="Aperture" />
+</ontology>

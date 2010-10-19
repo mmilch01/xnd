@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rule type="macro" id="macarthur_import_macro">
+  <operation type="manage"/>
+  <operation type="applyrule" ruleID="defaultdicom"/>
+  <operation type="applyrule" ruleID="naming_macarthur"/>
+  <operation type="applyrule" ruleID="modtag_macarthur"/>
+</rule>

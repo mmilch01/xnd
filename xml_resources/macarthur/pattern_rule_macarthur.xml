@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rule type="modtag" id="modtag_macarthur">
+	<tag name="Experiment">
+		<substring pattern="(.*)" value="{1}_MR1"/>
+	</tag>
+</rule>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rule type="naming" id="nameFreesurfer" special_recursion="1">
+ <folder ID="root_fold" pattern=".*" treeRoot="1">
+  <child>AnyFolder</child>
+  <child>label</child>
+ </folder>
+ <folder ID="AnyFolder" pattern=".*">
+  <tag name="FSDir" pattern=".*" recursive="pattern"/>
+  <child>AnyFolder</child>
+ </folder>
+ <folder ID="label">
+  <child>lh</child>
+  <child>rh</child>
+  <child>cortparc</child>
+  <child>cortparc2</child>
+  <child>cortlabel</child>
+ </folder>
+ <file ID="lh" pattern="lh\..*">
+  <tag name="Hemisphere" value="left"/>
+ </file>
+ <file ID="rh" pattern="rh\..*">
+  <tag name="Hemisphere" value="right"/>
+ </file>
+ <file ID="cortparc" pattern="[r|l]h\.aparc\.annot">
+  <tag name="Flag" value="-cortparc"/>
+  <tag name="Operation" value="cortical parcellation"/>
+ </file>
+ <file ID="cortparc2" pattern="[r|l]h\.aparc\.a2005s\.annot">
+  <tag name="Flag" value="-cortparc2"/>
+  <tag name="Operation" value="cortical parcellation"/>
+ </file>
+ <file ID="cortlabel" pattern="[r|l]h\.cortex\.label">
+  <tag name="Flag" value="-finalsurfs"/>
+  <tag name="Operation" value="final surfaces"/>
+ </file>
+</rule>

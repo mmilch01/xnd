@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rule type="naming" id="naming_gfc" special_recursion="1">
+<!--
+ <folder ID="root_fold" pattern=".*" treeRoot="1">
+  <child>session</child>
+  <tag name="Project" value="gfc" recursive="fixed"/>
+ </folder>
+-->
+ <folder ID="session" pattern=".*" treeRoot="1">
+   <tag name="Project" value="gfc" recursive="fixed"/>
+   <tag name="Subject" pattern="(.*)" recursive="fixed"/>
+   <tag name="Experiment" pattern="(.*)" recursive="fixed"/>
+   <child>method</child>
+ </folder>
+ <folder ID="method" pattern=".*">
+   <tag name="Reconstruction" pattern="(.*)" recursive="fixed"/>
+   <child>res</child>
+ </folder>
+ <file ID="res" pattern=".*"/>
+</rule>

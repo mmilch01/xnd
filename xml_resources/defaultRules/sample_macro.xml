@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rule type="macro" id="sampleMacro" special_recursion="1">
+	<operation type="manage"/>
+	<operation type="rule" ruleID="defaultdicom"/>
+	<operation type="settag" tagName="Project" tagValue="test"/>
+</rule>

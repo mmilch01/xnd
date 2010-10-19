@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rule type="naming" id="nameHypo" special_recursion="1">
+ <folder ID="subj_fold" pattern="sa.*" treeRoot="1">
+  <child>scan</child>
+ </folder>
+ <folder ID="scan" pattern="[S|s]can.*">
+  <child>raw_file</child>
+  <tag name="Experiment" pattern="(.*)" recursive="fixed"/>
+ </folder>
+ <file ID="raw_file" pattern=".*">  
+ </file>
+</rule>

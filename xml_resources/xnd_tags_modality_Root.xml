@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ontology id="xnat" descr="Default ontology with XNAT hierarchical tags.">
+ <tag name="Project" treeRoot="1" tableView="1" anValue="1" type="ontology">
+  <child>Subject</child>
+  <child>Resource</child>
+ </tag>
+ <tag name="Subject" tableView="1" anValue="1" type="ontology" context="1">
+   <child>Experiment</child>
+   <child>Resource</child>
+ </tag>
+ <tag name="Experiment" tableView="1" anValue="1" type="ontology">
+   <child>Scan</child>
+   <child>Assessor</child>
+   <child>Reconstruction</child>
+   <child>Resource</child>
+ </tag>
+ <tag name="Scan" tableView="1" anValue="1" type="ontology">
+ 	<child>Resource</child>
+ </tag>
+ <tag name="Assessor" tableView="0" type="ontology">
+ 	<child>Resource</child>
+ </tag>
+ <tag name="Reconstruction" tableView="0" type="ontology">
+ 	<child>Resource</child>
+ </tag>
+ <tag name="Resource" tableView="0" type="service"/>
+ <tag name="SeriesDescription" tableView="0" anValue="0" type="ontology"/>
+ <tag name="Scan_Type" tableView="0" anValue="0" type="ontology"/>
+ <tag name="Date" type="ontology"/>
+ <tag name="Quality" type="ontology"/>
+ <tag name="Modality" type="ontology" treeRoot="1">
+  <child>Subject</child>
+  <value>MR</value>
+  <value>CT</value>
+  <value>PET</value>
+  <value>US</value>
+  <value>OTHER</value>
+ </tag>
+ <tag name="ImageType" type="service"/>
+ <tag name="label" type="service"/>
+ <tag name="element_name" type="service"/>
+ <tag name="category" type="service"/>
+ <tag name="cat_id" type="service"/>
+ <tag name="ID" type="service"/>
+ <tag name="Name" type="service"/>
+ <tag name="Size" type="service"/>
+ <tag name="URI" type="service"/>
+ <tag name="cat_ID" type="service"/>
+ <tag name="coll_content" type="service"/>
+ <tag name="coll_format" type="service"/>
+ <tag name="coll_tags" type="service"/>
+ <tag name="collection" type="service"/>
+ <tag name="file_content" type="service"/>
+ <tag name="file_format" type="service"/>
+ <tag name="file_tags" type="service"/>
+ <tag name="XNATResource" type="service"/>
+</ontology>

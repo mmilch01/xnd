@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rule type="modtag" id="defaultModifyTag">
+	<tag name="Subject" pattern="(.*)" value="test_prefix_{1}_test_ending"/>
+</rule>

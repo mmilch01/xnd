@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rule type="modtag" id="modtag_hypo">
+	<tag name="Subject">
+		<substring pattern=".{4}(.{3}).*" value="0{1}"/>
+	</tag>
+</rule>

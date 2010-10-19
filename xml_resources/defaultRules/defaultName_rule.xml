@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rule type="naming" id="defaultName" special_recursion="1">
+ <folder ID="root_fold" pattern=".*" treeRoot="1">
+  <child>OAS1</child>
+ </folder>
+ <folder ID="OAS1" pattern="OAS1.*" treeRoot="1">
+  <tag name="Subject" pattern="(.{9}).*" recursive="fixed"/>
+  <tag name="Experiment" pattern="(.*)" recursive="fixed"/>
+  <tag name="Project" value="Oasis" recursive="fixed"/>
+  <child>FSL_SEG</child>
+  <child>PROCESSED</child>
+  <child>RAW</child>
+ </folder>
+ <folder ID="FSL_SEG">
+  <tag name="Assessment" value="SegmentationFast" recursive="none"/>
+ </folder>
+ <folder ID="RAW">  
+  <child>SCAN</child>
+ </folder>
+ <file ID="SCAN" pattern=".*">
+  <tag name="Scan" pattern=".*_mpr-(.)_anon.*" recursive="pattern"/>
+ </file>
+ <folder ID="PROCESSED">
+  <child>MPRAGE</child>
+ </folder>
+ <folder ID="MPRAGE">
+  <child>SUBJ_111</child>
+  <child>T88_111</child>
+ </folder>
+ <folder ID="SUBJ_111">
+  <tag name="Assessment" value="111" recursive="fixed"/>
+ </folder>
+ <folder ID="T88_111">
+  <child>t4_files</child>
+  <child>gfc_file</child>
+ </folder>
+ <file ID="gfc_file" pattern=".*(_gfc.|_gfc_).*">
+  <tag name="Reconstruction" value="GainFieldCorrected" recursive="none"/>
+ </file>
+ <folder ID="t4_files">
+ </folder> 
+</rule>

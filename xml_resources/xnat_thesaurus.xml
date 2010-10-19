@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groups>
+  <group name="projectData" number="0">
+  	<key xsiType="xnat:projectData/ID" varname="ID" xndtagname="Project"/>
+  	<entry xsiType="xnat:projectData/secondary_ID" varname="secondary_ID"/>
+  	<entry xsiType="xnat:projectData/name" varname="name"/>
+  	<entry xsiType="xnat:projectData/description" varname="description"/>
+  	<entry xsiType="xnat:projectData/keywords" varname="keywords"/>
+  	<entry xsiType="xnat:projectData/aliases/alias" varname="alias"/>
+  	<entry xsiType="xnat:projectData/PI/firstname" varname="pi_firstname"/>
+  	<entry xsiType="xnat:projectData/PI/lastname" varname="pi_lastname"/>
+  	<entry xsiType="xnat:projectData/fields/field[name=note]/field" varname="note"/>
+  </group>
+  <group name="subjectData" number="1">
+  	<key xsiType="xnat:subjectData/label" varname="label" xndtagname="Subject"/>
+  	<entry xsiType="xnat:subjectData/group" varname="group"/>
+  	<entry xsiType="xnat:subjectData/investigator/firstname" varname="pi_firstname"/>
+  	<entry xsiType="xnat:subjectData/investigator/lastname" varname="pi_lastname"/>
+  	<entry xsiType="xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/dob" varname="dob"/>  	
+  	<entry xsiType="xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/yob" varname="yob"/>
+  	<entry xsiType="xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/age" varname="age"/>
+  	<entry xsiType="xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/gender" varname="gender"/>
+  	<entry xsiType="xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/handedness" varname="handedness"/>
+  	<entry xsiType="xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/ses" varname="ses"/>
+  	<entry xsiType="xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/education" varname="education"/>
+  	<entry xsiType="xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/educationDesc" varname="educationDesc"/>
+  	<entry xsiType="xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/race" varname="race"/>
+  	<entry xsiType="xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/ethnicity" varname="ethnicity"/>
+  	<entry xsiType="xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/weight" varname="weight"/>
+  	<entry xsiType="xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/height" varname="height"/>
+  	<entry xsiType="xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/gestational_age" varname="gestational_age"/>  		
+  	<entry xsiType="xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/post_menstrual_age" varname="post_menstrual_age"/>
+  	<entry xsiType="xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/birth_weight" varname="birth_weight"/>	
+  </group>
+  <group name="experimentData" number="2">
+  	<entry xsiType="xnat:experimentdata/visit_id" varname="visit_id"/>
+	<entry xsiType="xnat:experimentdata/date" varname="date" xndtagname="Date"/>
+	<entry xsiType="xnat:experimentdata/ID" varname="ID"/>
+	<entry xsiType="xnat:experimentdata/project" varname="project"/>
+	<key xsiType="xnat:experimentdata/label" varname="label" xndtagname="Experiment"/>
+	<entry xsiType="xnat:experimentdata/time" varname="time"/>
+	<entry xsiType="xnat:experimentdata/note" varname="note"/>
+	<entry xsiType="xnat:experimentdata/investigator/firstname" varname="pi_firstname"/>
+	<entry xsiType="xnat:experimentdata/investigator/lastname" varname="pi_lastname"/>
+	<entry xsiType="xnat:experimentdata/validation/method" varname="validation_method"/>
+	<entry xsiType="xnat:experimentdata/validation/status" varname="validation_status"/>
+	<entry xsiType="xnat:experimentdata/validation/date" varname="validation_date"/>
+	<entry xsiType="xnat:experimentdata/validation/notes" varname="validation_notes"/>
+  	<entry xsiType="xnat:subjectData/ID" varname="subject_ID"/>
+  	<entry xsiType="xnat:subjectData/label" varname="subject_label"/>
+  	<entry xsiType="xnat:subjectData/project" varname="subject_project"/>
+  	<entry xsiType="xnat:imageSessionData/scanner" varname="scanner"/>
+  	<entry xsiType="xnat:imageSessionData/operator" varname="operator"/>
+  	<entry xsiType="xnat:imageSessionData/dcmAccessionNumber" varname="dcmAccessionNumber"/>
+  	<entry xsiType="xnat:imageSessionData/dcmPatientId" varname="dcmPatientId"/>
+	<entry xsiType="xnat:imageSessionData/dcmPatientName" varname="dcmPatientName"/>
+	<entry xsiType="xnat:imageSessionData/session_type" varname="session_type"/>
+	<entry xsiType="xnat:imageSessionData/modality" varname="modality" xndtagname="Modality"/>
+	<entry xsiType="xnat:imageSessionData/UID" varname="UID"/>
+	<entry xsiType="xnat:mrSessionData/coil" varname="coil"/>
+	<entry xsiType="xnat:mrSessionData/fieldStrength" varname="fieldStrength"/>
+	<entry xsiType="xnat:mrSessionData/marker" varname="marker"/>
+	<entry xsiType="xnat:mrSessionData/stabilization" varname="stabilization"/>
+	<entry xsiType="xnat:petSessionData/studyType" varname="studyType"/>
+	<entry xsiType="xnat:petSessionData/patientID" varname="patientID"/>
+	<entry xsiType="xnat:petSessionData/patientName" varname="patientName"/>
+	<entry xsiType="xnat:petSessionData/stabilization" varname="stabilization"/>
+	<entry xsiType="xnat:petSessionData/start_time/scan" varname="scan_start_time"/>
+	<entry xsiType="xnat:petSessionData/start_time/injection" varname="injection_start_time"/>
+	<entry xsiType="xnat:petSessionData/tracer/name" varname="tracer_name"/>
+	<entry xsiType="xnat:petSessionData/tracer/startTime" varname="tracer_startTime"/>
+	<entry xsiType="xnat:petSessionData/tracer/dose" varname="tracer_dose"/>
+	<entry xsiType="xnat:petSessionData/tracer/specificActivity" varname="tracer_sa"/>
+	<entry xsiType="xnat:petSessionData/tracer/totalMass" varname="tracer_totalmass"/>
+	<entry xsiType="xnat:petSessionData/tracer/intermediate" varname="tracer_intermediate"/>
+	<entry xsiType="xnat:petSessionData/tracer/isotope" varname="tracer_isotope"/>
+	<entry xsiType="xnat:petSessionData/tracer/isotope/half-life" varname="tracer_isotope"/>
+	<entry xsiType="xnat:petSessionData/tracer/transmissions" varname="tracer_transmissions"/>
+	<entry xsiType="xnat:petSessionData/tracer/transmissions/startTime" varname="tracer_transmissions_start"/>
+  </group>
+  <group name="imageScanData" number="3">
+	<key xsiType="xnat:imageScanData/ID" varname="ID" xndtagname="Scan"/>
+	<entry xsiType="xnat:imageScanData/type" varname="type" xndtagname="Scan_Type"/>
+	<entry xsiType="xnat:imageScanData/UID" varname="UID"/>
+	<entry xsiType="xnat:imageScanData/note" varname="note"/>
+	<entry xsiType="xnat:imageScanData/quality" varname="quality" xndtagname="Quality"/>
+	<entry xsiType="xnat:imageScanData/condition" varname="condition"/>
+	<entry xsiType="xnat:imageScanData/series_description" varname="series_description" xndtagname="SeriesDescription"/>
+	<entry xsiType="xnat:imageScanData/documentation" varname="documentation"/>
+	<entry xsiType="xnat:imageScanData/scanner" varname="scanner"/>
+	<entry xsiType="xnat:imageScanData/modality" varname="modality"/>
+	<entry xsiType="xnat:imageScanData/frames" varname="frames"/>
+	<entry xsiType="xnat:imageScanData/validation/method" varname="validation_method"/>
+	<entry xsiType="xnat:imageScanData/validation/status" varname="validation_status"/>
+	<entry xsiType="xnat:imageScanData/validation/date" varname="validation_date"/>
+	<entry xsiType="xnat:imageScanData/validation/notes" varname="validation_notes"/>
+	<entry xsiType="xnat:mrScanData/coil" varname="coil"/>
+	<entry xsiType="xnat:mrScanData/fieldStrength" varname="fieldStrength"/>
+	<entry xsiType="xnat:mrScanData/marker" varname="marker"/>
+	<entry xsiType="xnat:mrScanData/stabilization" varname="stabilization"/>
+	<entry xsiType="xnat:petScanData/parameters/orientation" varname="orientation"/>
+	<entry xsiType="xnat:petScanData/parameters/scanTime" varname="scanTime"/>
+	<entry xsiType="xnat:petScanData/parameters/originalFileName" varname="originalFileName"/>
+	<entry xsiType="xnat:petScanData/parameters/systemType" varname="systemType"/>
+	<entry xsiType="xnat:petScanData/parameters/fileType" varname="fileType"/>
+	<entry xsiType="xnat:petScanData/parameters/transaxialFOV" varname="transaxialFOV"/>
+	<entry xsiType="xnat:petScanData/parameters/acqType" varname="acqType"/>
+	<entry xsiType="xnat:petScanData/parameters/facility" varname="facility"/>
+	<entry xsiType="xnat:petScanData/parameters/numPlanes" varname="numPlanes"/>
+	<entry xsiType="xnat:petScanData/parameters/frames/numFrames" varname="numFrames"/>
+	<entry xsiType="xnat:petScanData/parameters/numGates" varname="numGates"/>
+	<entry xsiType="xnat:petScanData/parameters/planeSeparation" varname="planeSeparation"/>
+	<entry xsiType="xnat:petScanData/parameters/binSize" varname="visit_id"/>
+	<entry xsiType="xnat:petScanData/parameters/dataType" varname="dataType"/>
+  </group>
+  <group name="reconstructedImageData" number="4">
+	<key xsiType="xnat:reconstructedImageData/ID" varname="ID" xndtagname="Reconstruction"/>
+	<entry xsiType="xnat:reconstructedImageData/type" varname="type"/>
+	<entry xsiType="xnat:reconstructedImageData/baseScanType" varname="baseScanType"/>
+  </group>
+  <group name="imageAssessorData" number="5">
+  	<key   xsiType="xnat:experimentdata/visit_id" varname="ID" xndtagname="Assessor"/>
+	<entry xsiType="xnat:experimentdata/visit_id" varname="visit_id"/>
+	<entry xsiType="xnat:experimentdata/date" varname="date"/>
+	<entry xsiType="xnat:experimentdata/time" varname="time"/>
+	<entry xsiType="xnat:experimentdata/note" varname="note"/>
+	<entry xsiType="xnat:experimentdata/investigator/firstname" varname="pi_firstname"/>
+	<entry xsiType="xnat:experimentdata/investigator/lastname" varname="pi_lastname"/>
+	<entry xsiType="xnat:experimentdata/validation/method" varname="validation_method"/>
+	<entry xsiType="xnat:experimentdata/validation/status" varname="validation_status"/>
+	<entry xsiType="xnat:experimentdata/validation/date" varname="validation_date"/>
+	<entry xsiType="xnat:experimentdata/validation/notes" varname="validation_notes"/>
+  </group>
+ </groups>

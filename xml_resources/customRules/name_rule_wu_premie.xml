@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rule type="naming" id="naming_wu_premie" special_recursion="1">
+ <folder ID="sess_fold" pattern=".*" treeRoot="1">
+  <tag name="Subject" pattern="(.{6}).*" recursive="fixed"/>
+  <tag name="Experiment" pattern="(.*)" recursive="fixed"/>
+  <tag name="Project" value="wu_premie" recursive="fixed"/>
+  <child>AnyFolder</child>
+ </folder>
+ <folder ID="AnyFolder" pattern=".*">
+ 	<child>AnyFolder</child>
+ </folder>
+ </rule>
