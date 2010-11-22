@@ -453,6 +453,7 @@ public class FileView extends ViewBase
 		if (m_ttm.getTree() != null && m_ttm.getViewer() != null && !bTableOnly)
 			UpdateTree();
 		UpdateTable();
+		updateTagInfo();
 		XNDApp.EndWaitCursor();
 	}
 	public boolean Connect()
@@ -678,6 +679,7 @@ public class FileView extends ViewBase
 		else
 			return GetSelectedTreeElements();
 	}
+	
 	protected Collection<CElement> GetSelectedTreeElements()
 	{
 		LinkedList<CElement> llfi = new LinkedList<CElement>();

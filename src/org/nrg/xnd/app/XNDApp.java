@@ -363,8 +363,11 @@ public class XNDApp implements IApplication
 			Utils
 					.ShowMessageBox(
 							"",
-							"Error processing ontology XML. Custom ontology and tag-based view will not be available.",
+							"Error processing ontology XML. Will attempt to load default ontology.",
 							SWT.OK);
+			if(!DefaultOntologyManager.loadDefaultOntology())
+				Utils.ShowMessageBox("", "Could not load default ontology", SWT.OK);
+			app_Prefs.put("XMLDefaultOntology", DefaultOntologyManager.getDefaultLocation());
 		}
 
 		if (!XNATThesaurus.Load(new File(XNATThesaurus.getDefaultLocation())))

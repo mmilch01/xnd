@@ -1,5 +1,6 @@
 package org.nrg.xnd.app;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.TreeMap;
@@ -28,6 +29,8 @@ import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
+import org.nrg.xnd.model.CElement;
+import org.nrg.xnd.model.FSFolder;
 import org.nrg.xnd.tools.StoreXARManager;
 import org.nrg.xnd.ui.dialogs.ManageTagsDialog;
 import org.nrg.xnd.ui.dialogs.UploadToXNATDialog;
@@ -70,7 +73,8 @@ public class AppActions extends ActionBarAdvisor
 			ID_ONLINE_MANUAL = "org.nrg.xnat.destktop.OnlineManual",
 			ID_SHOW_XNAT_VIEW = "org.nrg.xnat.desktop.ShowXNATView",
 			ID_DATA_IMPORT_WIZARD = "org.nrg.xnat.desktop.DataImportWizard",
-			ID_DICOM_QR_WIZARD = "org.nrg.xnat.desktop.QRWizard";
+			ID_DICOM_QR_WIZARD = "org.nrg.xnat.desktop.QRWizard",
+			ID_CLEAR_DB="org.nrg.xnd.ClearDB";
 
 	public AppActions(IActionBarConfigurer configurer)
 	{
@@ -292,6 +296,42 @@ public class AppActions extends ActionBarAdvisor
 		}
 		RegisterAction(new AddManagedDir(window));
 
+		// Clear DB
+		class ClearDB extends Action
+				implements
+					ActionFactory.IWorkbenchAction
+		{
+			public final static String ID = AppActions.ID_CLEAR_DB;
+			IWorkbenchWindow m_wnd;
+			public ClearDB(IWorkbenchWindow wnd)
+			{
+				setId(ID);
+				setText("&Clear all");
+				setToolTipText("Clear all repository records and tags");
+				m_wnd = wnd;
+//				setImageDescriptor(IImageKeys.GetImDescr(IImageKeys.PLUS));
+			}
+			@Override
+			public void run()
+			{
+				String[] fld=XNDApp.app_localVM.GetManagedFolders();
+				for(int i=0; i<fld.length; i++)
+				{
+					FSFolder fold=new FSFolder(new File(fld[i]),XNDApp.app_localVM,null);
+					fold.ApplyOperation(null, CElement.UNMANAGEALL, null);
+					XNDApp.app_localVM.RemoveManagedFolder(fld[i]);
+//					fold.ApplyOperation(null, CElement.REMOVE_FROM_ROOTS, null);
+				}				
+				GetLocalFileView().Refresh(false);
+			}
+			public void dispose()
+			{
+			}
+		}
+		RegisterAction(new ClearDB(window));
+
+		
+		
 		// Switch to folder view
 		class SelectTagView extends Action
 				implements
@@ -854,6 +894,8 @@ public class AppActions extends ActionBarAdvisor
 		file_mgr.add(Action(ID_DATA_IMPORT_WIZARD));
 		file_mgr.add(Action(ID_ADD_MANAGED_DIR));
 		file_mgr.add(Action(ID_MANAGE_TAGS));
+		file_mgr.add(new Separator());
+		file_mgr.add(Action(ID_CLEAR_DB));
 		file_mgr.add(new Separator());
 		file_mgr.add(Action(ActionFactory.QUIT.getId()));
 
