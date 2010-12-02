@@ -2,8 +2,6 @@ package org.nrg.xnd.ui.wizards;
 
 import java.io.File;
 
-import org.eclipse.jface.preference.IPreferenceNode;
-import org.eclipse.jface.preference.PreferenceDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -19,24 +17,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.internal.Workbench;
 import org.nrg.xnd.app.XNDApp;
 import org.nrg.xnd.ui.MemoCombo;
 import org.nrg.xnd.ui.dialogs.AEPropertiesDialog;
 import org.nrg.xnd.utils.Utils;
-import org.nrg.xnd.utils.dicom.AEList;
 import org.nrg.xnd.utils.dicom.AEList.AE;
-
-import com.pixelmed.dicom.Attribute;
-import com.pixelmed.dicom.AttributeList;
-import com.pixelmed.dicom.AttributeTag;
-import com.pixelmed.dicom.CodeStringAttribute;
-import com.pixelmed.dicom.DateAttribute;
-import com.pixelmed.dicom.DicomException;
-import com.pixelmed.dicom.LongStringAttribute;
-import com.pixelmed.dicom.PersonNameAttribute;
-import com.pixelmed.dicom.ShortStringAttribute;
-import com.pixelmed.dicom.TagFromName;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI

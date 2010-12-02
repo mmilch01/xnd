@@ -1,20 +1,15 @@
 package org.nrg.xnd.tools.ImageViewer;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBuffer;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
-import javax.imageio.ImageTypeSpecifier;
-import javax.imageio.stream.ImageInputStream;
 
 import org.dcm4che2.data.DicomObject;
 import org.dcm4che2.data.Tag;
 import org.dcm4che2.imageio.plugins.dcm.DicomImageReadParam;
 import org.dcm4che2.imageioimpl.plugins.dcm.DicomImageReader;
 import org.nrg.xnd.utils.LightXML;
-import org.nrg.xnd.utils.dicom.DICOMRecord;
 
 public class DICOMImageInfo
 {

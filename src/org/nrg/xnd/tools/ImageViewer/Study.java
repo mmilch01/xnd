@@ -6,24 +6,15 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
-
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
 import java.util.Vector;
 
-import javax.swing.JPanel;
-import javax.swing.UIDefaults;
-import javax.swing.UIManager;
-
 import org.nrg.xnd.utils.LightXML;
-import org.nrg.xnd.utils.Utils;
 import org.nrg.xnd.utils.dicom.DICOMRecord;
 import org.nrg.xnd.utils.dicom.SeriesElementRecord;
 import org.nrg.xnd.utils.dicom.SeriesRecord;

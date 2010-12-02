@@ -3,6 +3,7 @@ package org.nrg.xnd.app;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;

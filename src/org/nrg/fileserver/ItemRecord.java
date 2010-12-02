@@ -2,7 +2,6 @@ package org.nrg.fileserver;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.TreeMap;
 
 import org.nrg.xnd.utils.FSObject;
 import org.nrg.xnd.utils.Utils;

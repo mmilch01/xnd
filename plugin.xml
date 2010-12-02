@@ -63,7 +63,7 @@
          </property>
          <property
                name="aboutImage"
-               value="icons/logo.gif">
+               value="/org.nrg.xnat.desktop/icons/logo.gif">
          </property>
          <property
                name="aboutText"
@@ -71,7 +71,7 @@
          </property>
          <property
                name="windowImages"
-               value="icons/xnd_16.gif,icons/xnd_32.gif,icons/xnd_48.gif,icons/xnd_64.gif,icons/xnd_128.gif">
+               value="/org.nrg.xnat.desktop/icons/xnd_16.gif,/org.nrg.xnat.desktop/icons/xnd_32.gif,/org.nrg.xnat.desktop/icons/xnd_48.gif,/org.nrg.xnat.desktop/icons/xnd_64.gif,/org.nrg.xnat.desktop/icons/xnd_128.gif">
          </property>
          <property
                name="preferenceCustomization"

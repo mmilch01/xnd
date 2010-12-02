@@ -1,8 +1,6 @@
 package org.nrg.xnd.tools.ImageViewer.ip;
 
 import java.awt.Component;
-import java.awt.image.DataBuffer;
-import java.awt.image.DataBufferUShort;
 import java.awt.image.IndexColorModel;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.Raster;

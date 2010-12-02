@@ -42,7 +42,6 @@ import com.pixelmed.dicom.PersonNameAttribute;
 import com.pixelmed.dicom.ShortStringAttribute;
 import com.pixelmed.dicom.TagFromName;
 import com.pixelmed.dicom.TimeAttribute;
-import com.pixelmed.query.QueryInformationModel;
 import com.pixelmed.query.QueryTreeModel;
 import com.pixelmed.query.QueryTreeRecord;
 import com.pixelmed.query.StudyRootQueryInformationModel;

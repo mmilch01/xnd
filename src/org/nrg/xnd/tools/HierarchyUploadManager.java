@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.TreeSet;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -124,7 +123,7 @@ public class HierarchyUploadManager extends Job
 				ExpProgress("Creating hierarchy failed");
 				return false;
 			}
-			method.releaseConnection();
+			if(method!=null) method.releaseConnection();
 		} while (contextToCreate.size() > 0);
 		return true;
 	}

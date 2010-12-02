@@ -2,13 +2,10 @@ package org.nrg.xnd.utils.dicom;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.TreeMap;
 
 import org.dcm4che2.data.DicomObject;
 import org.dcm4che2.data.Tag;
-import org.nrg.xnd.model.FSFile;
-import org.nrg.xnd.rules.dicom.DICOMReader;
 
 public class StudyRecord implements Comparable<StudyRecord>
 {

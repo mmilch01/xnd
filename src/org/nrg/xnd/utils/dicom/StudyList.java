@@ -4,12 +4,9 @@ import java.io.File;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
-import org.dcm4che2.data.DicomElement;
 import org.dcm4che2.data.DicomObject;
 import org.dcm4che2.data.Tag;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.nrg.fileserver.CollectionManager;
 import org.nrg.fileserver.FileCollection;
 import org.nrg.xnd.app.XNDApp;

@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.TreeMap;
@@ -27,7 +26,6 @@ import org.nrg.xnd.filetransfer.FileTransfer;
 import org.nrg.xnd.ontology.DefaultOntologyManager;
 import org.nrg.xnd.ontology.XNATTableParser;
 import org.nrg.xnd.ontology.XNATThesaurus;
-import org.nrg.xnd.utils.Utils;
 
 import sun.misc.BASE64Encoder;
 
@@ -95,7 +93,8 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 			}
 		} catch (Exception e)
 		{
-			Utils.logger.error("XNATRestAdapter.Get exception", e);
+			System.out.println("XNATRestAdapter.Get exception: "+ e.getMessage());
+//			Utils.logger.error("XNATRestAdapter.Get exception", e);
 			return false;
 		}
 		return true;
@@ -218,7 +217,7 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 			// System.out.println(method.getResponseBodyAsString());
 		} catch (Exception ex)
 		{
-			Utils.logger.error("XNAT Rest adapter: HTTP connection failed", ex);
+//			Utils.logger.error("XNAT Rest adapter: HTTP connection failed", ex);
 			System.out.println("REST HTTP connecton failed");
 			System.err.println(method.getName() + " (error): " + q);
 			if (is != null)
@@ -324,7 +323,8 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 		{
 			HttpMethodBase get = PerformConnection(GET, query + "/files", "");
 			if (get == null)
-				Utils.logger.error("DBInteFindEx: GET failed");
+				System.err.println("DBInteFindEx: GET failed");
+//				Utils.logger.error("DBInteFindEx: GET failed");
 			row_map = XNATTableParser.GetRows(new SAXReader().read(get
 					.getResponseBodyAsStream()));
 			get.releaseConnection();
@@ -338,13 +338,17 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 			}
 		} catch (DocumentException e)
 		{
-			Utils.logger
-					.error("DBTagValues: Document exception when reading input from "
-							+ m_root);
+			System.err.println("DBTagValues: Document exception when reading input from "
+					+ m_root);
+//			Utils.logger
+//					.error("DBTagValues: Document exception when reading input from "
+//							+ m_root);
 		} catch (IOException e)
 		{
-			Utils.logger.error("DBTagValues: IOException when connecting to "
+			System.err.println("DBTagValues: IOException when connecting to "
 					+ m_root);
+//			Utils.logger.error("DBTagValues: IOException when connecting to "
+//					+ m_root);
 		}
 		return res;
 	}
@@ -408,7 +412,13 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 			}
 			query_tags.clear();
 			query_tags.addAll(nqt);
-		} catch (DocumentException e)
+		}
+		catch(Exception e)
+		{
+			System.err.println(e.getMessage());			
+		}
+/*		
+		catch (DocumentException e)
 		{
 			Utils.logger
 					.error("DBTagValues: Document exception when reading input from "
@@ -423,6 +433,7 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 			Utils.logger.error("DBTagValues: IOException when reading from "
 					+ m_root);
 		}
+*/		
 		return aTags;
 	}
 

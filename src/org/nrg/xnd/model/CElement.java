@@ -1,7 +1,6 @@
 package org.nrg.xnd.model;
 
 import java.util.Collection;
-import java.util.LinkedList;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.PlatformObject;

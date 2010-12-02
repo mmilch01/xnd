@@ -3,23 +3,9 @@ package org.nrg.xnd.tools.ImageViewer;
 import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.util.Iterator;
-import java.util.LinkedList;
 
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-
-import org.dcm4che2.data.DicomObject;
-import org.dcm4che2.data.Tag;
-import org.dcm4che2.imageioimpl.plugins.dcm.DicomImageReader;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.nrg.fileserver.ItemRecord;
-import org.nrg.xnd.rules.dicom.DICOMReader;
-import org.nrg.xnd.utils.LightXML;
-import org.nrg.xnd.utils.dicom.DICOMPixelExtractor;
 import org.nrg.xnd.utils.dicom.DICOMRecord;
 import org.nrg.xnd.utils.dicom.SeriesRecord;
-import org.nrg.xnd.utils.dicom.StudyList;
 import org.nrg.xnd.utils.dicom.StudyRecord;
 
 public class ImageViewerManager implements WorklistManager

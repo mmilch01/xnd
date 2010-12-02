@@ -11,7 +11,6 @@ import org.eclipse.swt.graphics.Image;
 import org.nrg.xnd.app.IImageKeys;
 import org.nrg.xnd.rules.NameRule;
 import org.nrg.xnd.utils.FSObject;
-import org.nrg.xnd.utils.MilliTimer;
 
 /**
  * 

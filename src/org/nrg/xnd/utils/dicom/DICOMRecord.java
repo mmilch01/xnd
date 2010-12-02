@@ -1,12 +1,10 @@
 package org.nrg.xnd.utils.dicom;
 
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.Vector;
 
 import org.dcm4che2.data.DicomObject;
 import org.dcm4che2.data.Tag;
-import org.nrg.xnd.rules.dicom.Utils;
 import org.nrg.xnd.utils.DRTemplate;
 
 public class DICOMRecord

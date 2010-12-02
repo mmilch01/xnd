@@ -8,7 +8,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
-import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;
 import java.awt.image.Raster;
 import java.io.FileNotFoundException;
@@ -21,11 +20,8 @@ import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
-import javax.imageio.ImageTypeSpecifier;
 import javax.imageio.stream.ImageInputStream;
-import javax.xml.crypto.dsig.TransformException;
 
-import org.dcm4che2.imageio.plugins.dcm.DicomImageReadParam;
 import org.dcm4che2.imageioimpl.plugins.dcm.DicomImageReader;
 import org.nrg.xnd.tools.ImageViewer.ip.AbstractImage;
 import org.nrg.xnd.tools.ImageViewer.ip.ByteImage;

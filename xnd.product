@@ -20,7 +20,7 @@ Online user manual: http://www.xnat.org/xnd
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
-   <windowImages i16="/org.nrg.xnat.desktop/icons/xnd_16.gif" i32="/org.nrg.xnat.desktop/icons/xnd_32.gif" i48="/org.nrg.xnat.desktop/icons/xnd_48.gif" i64="/org.nrg.xnat.desktop/icons/xnd_64.gif" i128="/org.nrg.xnat.desktop/icons/xnd_128.gif"/>
+   <windowImages i16="/org.nrg.xnat.desktop/icons/xnd_16.gif" i32="/org.nrg.xnat.desktop/icons/xnd_16.gif" i48="/org.nrg.xnat.desktop/icons/xnd_16.gif" i64="/org.nrg.xnat.desktop/icons/xnd_16.gif" i128="/org.nrg.xnat.desktop/icons/xnd_16.gif"/>
 
    <splash
       location="org.nrg.xnat.desktop" />

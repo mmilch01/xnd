@@ -2,20 +2,15 @@ package org.nrg.xnd.utils.dicom;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Properties;
 
 import org.nrg.xnd.app.ConsoleView;
 import org.nrg.xnd.app.XNDApp;
 import org.nrg.xnd.utils.Utils;
 import org.nrg.xnd.utils.dicom.AEList.AE;
 
-import com.pixelmed.database.DatabaseApplicationProperties;
 import com.pixelmed.dicom.DicomException;
-import com.pixelmed.dicom.StoredFilePathStrategyComponentFolders;
 import com.pixelmed.dicom.StoredFilePathStrategyHashSubFolders;
 import com.pixelmed.network.DicomNetworkException;
-import com.pixelmed.network.NetworkApplicationInformationFederated;
-import com.pixelmed.network.NetworkApplicationProperties;
 import com.pixelmed.network.ReceivedObjectHandler;
 import com.pixelmed.network.StorageSOPClassSCPDispatcher;
 
