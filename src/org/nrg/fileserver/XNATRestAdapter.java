@@ -291,7 +291,7 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 	}
 
 	/**
-	 * Files from given hierarchical level.
+	 * Files from the given hierarchical level.
 	 * 
 	 * @param rel_path
 	 *            ignored
