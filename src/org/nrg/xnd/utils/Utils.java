@@ -566,7 +566,7 @@ public abstract class Utils
 	public static String GetIncomingFolder()
 	{
 		String def_fold = GetUserFolder() + "/Incoming";
-		def_fold = XNDApp.app_Prefs.get("IncomingFolder", def_fold);
+//		def_fold = XNDApp.app_Prefs.get("IncomingFolder", def_fold);
 		return new File(def_fold).getAbsolutePath();
 	}
 	public static File GetCollectionFolder()

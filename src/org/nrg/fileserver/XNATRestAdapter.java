@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.TreeMap;
@@ -117,15 +118,14 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 	{
 		final HttpMethodBase method;
 		boolean bParams = request.contains("?");
-
-		String q = m_root
-				+ ("/REST/" + request + (bParams ? "&" : "?") + (request
-						.contains("format=") ? "" : "format=xml")).replace(
-						"//", "/").replace("//", "/");
-
+		String q="";
 		InputStream is = null;
-		try
+		try		
 		{
+//			URLEncoder.encode(str,"UTF-8")
+			q = m_root + ("/REST/" + request + (bParams ? "&" : "?") + (request
+							.contains("format=") ? "" : "format=xml")).replace(
+							"//", "/").replace("//", "/").replace("/%2F", "/");
 			switch (type)
 			{
 				case GET :

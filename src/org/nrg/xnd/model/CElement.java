@@ -9,11 +9,24 @@ import org.eclipse.swt.graphics.Image;
 import org.nrg.fileserver.RepositoryManager;
 
 /**
- * @author mmilch CElement is a generic UI element to which all operations in a
+ * @author mmilch 
+ * 		   CElement is a generic UI element to which all operations in a
  *         tree or table browser are applied. Implementing classes: DBElement,
  *         EmptyElement, FSFile, FSFolder, FSRoot, Resource, RootElement,
  *         VirtualFolder.
+ *         
+			The hiearchy of CElement with regards to class main purposes in the interface is as follows (all classes are in org.nrg.xnd.model):
+			CElement: basically a tree node in the interface hierarchy. An important function is ApplyOperation() that propagates any operation to the subtree.
+			EmptyElement - somewhat fake non-existent element with label ".." that responds to double-click by going up a level in the table view.
+			FSRoot - (imaginary) tree root in the interface
+			FSFile - unmanaged file 
+			FSFolder - file system folder (note that folders are not 'managed' in XND)
+			DBElement - a record in XND's database that puts a set of tags in correspondence to one or more files (in the latter case it is called 'Collection' with a service infrastructure implemented in subclasses of org.nrg.fileserver.CollectionManager). 
+			Resource - element of a collection (i.e. file)
+			RootElement - this one is used internally when one element need to be supplied to any function that does anything on all children of some CElement. The difference with FSRoot is rather functional; FSRoot is used in interface refresh/browsing whereas RootElement is more of a utility class.
+			VirtualFolder - this one is used in tag view and replaces folder in the file view. It is the main element of the virtual hierarchy. Virtual folder is defined by a certain combination of <Tag-Value> pairs, specified in its m_Context member variable.
  */
+
 public abstract class CElement extends PlatformObject
 		implements
 			Comparable<CElement>
