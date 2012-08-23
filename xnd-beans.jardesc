@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
 <jardesc>
-    <jar path="../gatewaye/lib/xnd-beans.jar"/>
+    <jar path="C:/Workspace/xnd_stable/gatewaye/lib/xnd-beans.jar"/>
     <options buildIfNeeded="true" compress="true" descriptionLocation="/xnd/xnd-beans.jardesc" exportErrors="false" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>

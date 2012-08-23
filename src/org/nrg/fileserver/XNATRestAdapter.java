@@ -35,6 +35,8 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 	private final String m_root;
 	private final String m_usr;
 	private final String m_pass;
+	private final String m_RESTCharsProhibited[]={"[","]","@"};
+	private final String m_RESTCharsProhibitedCodes[]={"%5B", "%5D", "%40"};
 	private boolean m_bReportConnErrors = true;
 	public final static int GET = 0, PUT = 1, POST = 2, DELETE = 3;
 
@@ -112,7 +114,12 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 		}
 		return false;
 	}
-
+	private String AdaptRESTQuery(String q)
+	{
+		for (int i=0; i<m_RESTCharsProhibited.length; i++)
+			q=q.replace(m_RESTCharsProhibited[i], m_RESTCharsProhibitedCodes[i]);
+		return q;
+	}
 	public HttpMethodBase PerformConnection(int type, String request,
 			Object body)
 	{
@@ -123,9 +130,10 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 		try		
 		{
 //			URLEncoder.encode(str,"UTF-8")
-			q = m_root + ("/REST/" + request + (bParams ? "&" : "?") + (request
+			String req=AdaptRESTQuery(request);
+			q = m_root + ("/REST/" + req + (bParams ? "&" : "?") + (req
 							.contains("format=") ? "" : "format=xml")).replace(
-							"//", "/").replace("//", "/").replace("/%2F", "/");
+							"//", "/").replace("//", "/");
 			switch (type)
 			{
 				case GET :
