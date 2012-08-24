@@ -130,10 +130,13 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 		try		
 		{
 //			URLEncoder.encode(str,"UTF-8")
+//			q = m_root + ("/REST/" + request + (bParams ? "&" : "?") + 
+//					(request.contains("format=") ? "" : "format=xml")).replace("//", "/").replace("//", "/");
 			String req=AdaptRESTQuery(request);
 			q = m_root + ("/REST/" + req + (bParams ? "&" : "?") + (req
 							.contains("format=") ? "" : "format=xml")).replace(
 							"//", "/").replace("//", "/");
+					
 			switch (type)
 			{
 				case GET :
