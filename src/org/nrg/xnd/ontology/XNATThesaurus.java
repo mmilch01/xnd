@@ -75,6 +75,9 @@ public abstract class XNATThesaurus
 			return "";
 		String param = "", vname, val;
 		int i = 0;
+
+		param=XnatTypeManager.GetCompexTypeRestClauses(context.getLast().GetName(), tagRecord);
+		
 		for (ItemTag it : tagRecord.getAllTags())
 		{
 			vname = GetVarname(it.GetName(), context);
@@ -84,22 +87,12 @@ public abstract class XNATThesaurus
 			val = Utils.StrFormatURI(it.GetFirstValue());
 			if (val != null && val.length() > 0)
 			{
-				if (i > 0)
-					param += "&";
-				if (vname.toLowerCase().compareTo("modality") == 0)
-					param += "xsiType=xnat:" + val + "SessionData";
-				else
-					param += vname + "=" + val;
+				if(param.length()>0) param += "&";
+				param += vname + "=" + val;
 				i++;
 			}
 		}
-		return param;
-		/*
-		 * if(context.getLast().GetName().compareTo("Experiment")!=0) return
-		 * param; ItemTag t=tagRecord.GetTagByName("Modality"); if(t==null)
-		 * return param; val=t.GetFirstValue().toLowerCase(); if(val==null ||
-		 * val.length()<1) return ""; return "xsiType=xnat:"+val+"SessionData";
-		 */
+		return param;		
 	}
 
 	public static boolean Load(File f)
@@ -124,6 +117,7 @@ public abstract class XNATThesaurus
 			return true;
 		} catch (Exception e)
 		{
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -167,17 +161,20 @@ public abstract class XNATThesaurus
 			return "accessible=true";
 		return "";
 	}
-	public static String GetPostfix(ItemTag it)
+	public static String GetPostfix(ItemTag it,ItemRecord ir)
 	{
 		String nm = it.GetName();
 		if (nm.compareTo("Assessor") == 0
 				|| nm.compareTo("Reconstruction") == 0)
-			return "/out";
+		{
+			String dir="out";
+			if ( ir != null ) dir=ir.getTagValue("iostatus");
+			if ( dir != null ) return "/"+dir; else return "/out";
+		}
 		return "";
 	}
 	public final static class XNATObject
 	{
-		public int m_number;
 		public String m_name;
 		public Entry m_key = null;
 		private TreeMap<String, Entry> m_EntriesByXNDTag = new TreeMap<String, Entry>();
@@ -185,7 +182,6 @@ public abstract class XNATThesaurus
 		{
 			try
 			{
-				m_number = Integer.parseInt(el.attributeValue("number"));
 				m_name = el.attributeValue("name");
 				for (Iterator<Element> ie = el.elementIterator(); ie.hasNext();)
 				{

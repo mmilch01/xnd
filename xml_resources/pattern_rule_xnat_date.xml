@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rule type="modtag" id="modtag_xnat_date">
+	<tag name="Date">
+		<substring pattern="(.{2})(.{2})(.{2}).*" value="20{1}-{2}-{3}"/>
+	</tag>
+</rule>

@@ -16,6 +16,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.swt.custom.BusyIndicator;
+import org.eclipse.swt.widgets.Display;
 import org.nrg.fileserver.Context;
 import org.nrg.fileserver.FileCollection;
 import org.nrg.fileserver.ItemRecord;
@@ -53,6 +55,7 @@ public class HierarchyUploadManager extends Job
 			Collection<CElement> upl, RepositoryViewManager rvm)
 	{
 		super("Uploading files");
+		setUser(true);
 		m_uploads = upl;
 		m_usr = usr;
 		m_pass = pass;
@@ -79,7 +82,7 @@ public class HierarchyUploadManager extends Job
 		do
 		{
 			bAmbiguousContext = XNATThesaurus.isAmbiguousContext(newContext);
-			q = XNATRestAdapter.FormSubQuery(newContext);
+			q = XNATRestAdapter.FormSubQuery(newContext,null,true);
 			method = m_xra.PerformConnection(XNATRestAdapter.GET, q,
 					(Object) null);
 			if (method != null)
@@ -131,7 +134,7 @@ public class HierarchyUploadManager extends Job
 			String params)
 	{
 		HttpMethodBase method;
-		String q = XNATRestAdapter.FormSubQuery(newContext);
+		String q = XNATRestAdapter.FormSubQuery(newContext,null,false);
 		// get additional query parameters.
 		if (params == null)
 			params = XNATThesaurus.getQueryParams(newContext, tags);
@@ -145,7 +148,7 @@ public class HierarchyUploadManager extends Job
 		}
 		return null;
 	}
-	public boolean uploadVirtualFolder(VirtualFolder vf)
+	public boolean uploadVirtualFolder(VirtualFolder vf,IProgressMonitor ipm)
 	{
 		// here, we need to find all sub-experiment level entries, separate them
 		// and send to the server each one separately.
@@ -171,8 +174,12 @@ public class HierarchyUploadManager extends Job
 		{
 			if (createHierarchy(vf))
 			{
+				ipm.subTask("Creating hierarchy for "+vf.GetLabel());
+				if (ipm.isCanceled()) return false;
 				iRes = uploadFileColAsResource(files);
 				bRes &= iRes;
+				if (ipm.isCanceled()) return false;
+				ipm.subTask("Uploading "+vf.GetLabel());
 				iRes &= uploadCollectionsAsResources(collections);
 				bRes &= iRes;
 				if (iRes)
@@ -185,7 +192,11 @@ public class HierarchyUploadManager extends Job
 		for (CElement ce : cch)
 		{
 			if (ce instanceof VirtualFolder)
-				bRes &= uploadVirtualFolder((VirtualFolder) ce);
+			{
+				ipm.subTask("Uploading "+ce.GetLabel());
+				bRes &= uploadVirtualFolder((VirtualFolder) ce,ipm);
+			}
+			if (ipm.isCanceled()) return false;
 		}
 		return bRes;
 	}
@@ -249,7 +260,7 @@ public class HierarchyUploadManager extends Job
 			}
 		}
 
-		String sub_query = XNATRestAdapter.FormSubQuery(context);
+		String sub_query = XNATRestAdapter.FormSubQuery(context,ir,true);
 		String param;
 		sub_query += "files/" + "files.zip" + "?inbody=true&extract=true";
 		if (col_format != null & col_content != null)
@@ -366,6 +377,7 @@ public class HierarchyUploadManager extends Job
 	protected IStatus run(IProgressMonitor ipm)
 	{
 		// verify user
+//		BusyIndicator.showWhile(Display.getCurrent(), this.getThread());
 		m_ipm = ipm;
 		ipm.beginTask("Uploading", 0);
 		ConsoleView.AppendMessage("upload: verifying user");
@@ -384,10 +396,13 @@ public class HierarchyUploadManager extends Job
 		{
 			if (el instanceof VirtualFolder)
 			{
-				if (!uploadVirtualFolder((VirtualFolder) el))
-				{
+				if (!uploadVirtualFolder((VirtualFolder) el,ipm))
+				{					
 					nErrors++;
-					ExpProgress("upload failed");
+					if(!ipm.isCanceled())
+						ExpProgress("upload failed");
+					else 
+						ExpProgress("upload canceled");
 				} else
 				// extract experiment context from this virtual folder.
 				{
@@ -401,8 +416,9 @@ public class HierarchyUploadManager extends Job
 		// run the snapshot generation+dicom tag extraction cycle
 		for (String s : exps)
 		{
+			if (ipm.isCanceled()) return Status.CANCEL_STATUS;
 			Context cx = Context.fromString(s);
-			String q = XNATRestAdapter.FormSubQuery(cx), q1, q2;
+			String q = XNATRestAdapter.FormSubQuery(cx,null,false), q1, q2;
 			q1 = q + "?triggerPipelines=true";
 			q2 = q + "?pullDataFromHeaders=true";
 			HttpMethodBase method;
@@ -419,6 +435,7 @@ public class HierarchyUploadManager extends Job
 				} else
 					method.releaseConnection();
 			}
+			if (ipm.isCanceled()) return Status.CANCEL_STATUS;			
 			if (XNDApp.app_Prefs.getBoolean(
 					"PrefsFileTransfer.RunPipelinesCheck", false))
 			{
@@ -433,12 +450,24 @@ public class HierarchyUploadManager extends Job
 					method.releaseConnection();
 			}
 		}
+		if(ipm.isCanceled())
+		{
+			ConsoleView.AppendMessage("Uploading canceled");
+			return Status.CANCEL_STATUS;
+		}
+
 		if (nErrors == 0)
+		{
 			ConsoleView.AppendMessage("Uploading finished successfully");
+			return Status.OK_STATUS;
+		}
 		else
+		{
 			ConsoleView.AppendMessage("Uploading finished with " + nErrors
 					+ " errors.");
-		return Status.OK_STATUS;
+			return Status.CANCEL_STATUS;
+		}
+		
 	}
 	private class Archiver extends Thread
 	{

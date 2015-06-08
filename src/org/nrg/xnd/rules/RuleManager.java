@@ -30,11 +30,12 @@ public abstract class RuleManager
 			loadRule(f, bMacro, false);
 
 		// pre-existing custom rules.
+/*		
 		rf = new File(Utils.GetPluginPath() + "/xml_resources/customRules");
 		files = rf.listFiles();
 		for (File f : files)
 			loadRule(f, bMacro, false);
-
+*/
 		// pre-existing default rules.
 		for (int i = 0; i < Rule.DEFAULT_RULES.length; i++)
 		{
@@ -75,8 +76,7 @@ public abstract class RuleManager
 	{
 		Rule r = m_rules.get(name);
 		File f = r.getFile();
-		if (f != null)
-			f.delete();
+		if (f != null) f.delete();
 		m_rules.remove(name);
 	}
 	public static TreeMap<String, Rule> getRules()

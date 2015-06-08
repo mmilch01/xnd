@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rule type="naming" id="naming_ois">
+
+<!-- root folder: the level at which the rule can be applied: either on multiple subject folders,
+or on a single subject folder.
+ -->
+  
+ <folder ID="root_fold" pattern=".*" treeRoot="1">
+  <child>subj_dir</child>
+ </folder>
+ <folder ID="subj_dir" pattern="CONV.*" treeRoot="1">
+  <tag name="Subject" pattern=".*" recursive="fixed"/>
+  <tag name="Project" value="default" recursive="fixed"/>
+  <tag name="Modality" value="CT" recursive="fixed"/>
+  <child>auxiliary_file</child>
+  <child>tiff_file</child>
+ </folder>
+ <file ID="auxiliary_file" pattern=".*\.mat">
+  <tag name="Experiment" pattern="(?i)([0-9]+-CONV[0-9]+)-.*" recursive="none"/>
+  <tag name="ExperimentResource" value="AUXILIARY" recursive="none"/>
+ </file>
+ <!-- .tiff files ignoring case (?i) modifier -->
+ <file ID="tiff_file" pattern="(?i).*\.tiff">
+  	<tag name="Experiment" pattern="(?i)([0-9]+-CONV[0-9]+)-.*" recursive="none"/>
+	<tag name="Scan"  pattern="(?i).*-[a-z]+([0-9]+).tiff" recursive="none"/>
+ 	<tag name="ScanResource" value="TIFF"/>
+ 	<!-- Scan_Type is bound to xnat:imageScanData/type (see xnat_thesaurus.xml) -->
+ 	<tag name="Scan_Type" pattern="(?i).*-([a-z]+)[0-9]+.TIFF"/>
+ </file>
+</rule>
+

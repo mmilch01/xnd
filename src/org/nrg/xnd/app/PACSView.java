@@ -777,7 +777,7 @@ public class PACSView extends ViewBase
 					{
 						EditTagValueDialog dlg = new EditTagValueDialog(m_tv
 								.getTree().getShell(), EditTagValueDialog.ADD,
-								m_rvm);
+								m_rvm,null);
 						int res = dlg.open();
 						ItemTag[] tags = {dlg.GetSelectedTag()};
 						if (res == Window.OK)
@@ -812,7 +812,7 @@ public class PACSView extends ViewBase
 					{
 						EditTagValueDialog dlg1 = new EditTagValueDialog(m_tv
 								.getTree().getShell(),
-								EditTagValueDialog.REMOVE, m_rvm);
+								EditTagValueDialog.REMOVE, m_rvm,null);
 						if (dlg1.open() == org.eclipse.jface.window.Window.OK)
 						{
 							ItemTag[] tags1 = {dlg1.GetSelectedTag()};

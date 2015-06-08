@@ -25,14 +25,16 @@ public class EditTagValueDialog extends Dialog
 	private Label m_LabelValue;
 	private int m_DlgType = -1;
 	private TagDescr[] m_tags;
+	private String m_defaultTagName=null;
 	public static final int ADD = 0, REMOVE = 1, EDIT = 2;
 
 	public EditTagValueDialog(Shell parentShell, int type,
-			RepositoryViewManager rvm)
+			RepositoryViewManager rvm, String defaultTagName)
 	{
 		super(parentShell);
 		m_DlgType = type;
 		m_rvm = rvm;
+		m_defaultTagName=defaultTagName;
 	}
 
 	@Override
@@ -65,18 +67,24 @@ public class EditTagValueDialog extends Dialog
 		GridData m_TaglistComboLData = new GridData();
 		m_TaglistCombo = new Combo(composite, SWT.READ_ONLY);
 		m_TaglistCombo.setLayoutData(m_TaglistComboLData);
-		m_tags = m_rvm.GetVisibleTagList();
+		m_tags = m_rvm.GetTagList(0);
+		String t;
+		int selection=0;
 		for (int i = 0; i < m_tags.length; i++)
 		{
-			m_TaglistCombo.add(m_tags[i].GetName());
+			t=m_tags[i].GetName();
+			m_TaglistCombo.add(t);
+			if(m_defaultTagName!=null)
+			{
+				if(t.compareTo(m_defaultTagName)==0) selection=i;
+			}
 		}
 		try
 		{
-			m_TaglistCombo.select(0);
+			m_TaglistCombo.select(selection);
 		} catch (Exception e)
 		{
 		}
-
 		// }
 		{
 			m_LabelValue = new Label(composite, SWT.NONE);
@@ -95,6 +103,8 @@ public class EditTagValueDialog extends Dialog
 			m_Value.setLayoutData(m_ValueTextAreaLData);
 			if (m_DlgType == REMOVE)
 				m_Value.setEnabled(false);
+			else
+				m_Value.setFocus();
 		}
 		m_TaglistCombo.addSelectionListener(new SelectionListener()
 		{

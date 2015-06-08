@@ -37,6 +37,7 @@ import org.nrg.xnd.model.SimpleRepositoryManager;
 import org.nrg.xnd.model.ViewFilter;
 import org.nrg.xnd.ontology.DefaultOntologyManager;
 import org.nrg.xnd.ontology.XNATThesaurus;
+import org.nrg.xnd.ontology.XnatTypeManager;
 import org.nrg.xnd.rules.Rule;
 import org.nrg.xnd.rules.RuleManager;
 import org.nrg.xnd.tools.ClipboardManager;
@@ -361,8 +362,7 @@ public class XNDApp implements IApplication
 				"XMLDefaultOntology", DefaultOntologyManager
 						.getDefaultLocation())))
 		{
-			Utils
-					.ShowMessageBox(
+			Utils					.ShowMessageBox(
 							"",
 							"Error processing ontology XML. Will attempt to load default ontology.",
 							SWT.OK);
@@ -370,7 +370,13 @@ public class XNDApp implements IApplication
 				Utils.ShowMessageBox("", "Could not load default ontology", SWT.OK);
 			app_Prefs.put("XMLDefaultOntology", DefaultOntologyManager.getDefaultLocation());
 		}
-
+		try
+		{
+			XnatTypeManager.LoadFromXML(new File(XnatTypeManager.GetDefaultLocation()));
+		}catch(Exception e)
+		{
+			Utils.ShowMessageBox("", "Error loading the XNAT-XND tag mapper", SWT.OK);
+		}
 		if (!XNATThesaurus.Load(new File(XNATThesaurus.getDefaultLocation())))
 		{
 			Utils
@@ -379,7 +385,6 @@ public class XNDApp implements IApplication
 							"Error loading XNAT tag description XML. Upload to XNAT will not be available.",
 							SWT.OK);
 		}
-
 		/*
 		 * if(!LoadDefaultRule(Rule.RULE_DICOM)) Utils.ShowMessageBox("",
 		 * "Error loading default DICOM rule.", SWT.OK);

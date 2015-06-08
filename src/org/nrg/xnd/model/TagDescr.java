@@ -56,6 +56,10 @@ public class TagDescr implements Comparable
 	{
 		return ((m_Attribs & attribs) == attribs);
 	}
+	public boolean AttribsDefined(int attribs)
+	{
+		return ((m_Attribs & attribs) != 0 );
+	}
 	public void AddValue(String s)
 	{
 		if (m_Values == null)

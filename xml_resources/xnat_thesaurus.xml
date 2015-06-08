@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- group: XNAT/XND hiearchy level.
+key: record that identifies the hierarchy level of the group. 
+entry: non-key record in the group. 
+xsiType: XNAT type.
+varname: XNAT type alias used in REST parameter string.
+xndtagname: tag name defined in xnd_tags_default that matches this entry. 
+	If there is no xndtagname, this type will not be set by XND when uploading
+	to XNAT.
+-->
+
 <groups>
-  <group name="projectData" number="0">
+  <group name="projectData">
   	<key xsiType="xnat:projectData/ID" varname="ID" xndtagname="Project"/>
   	<entry xsiType="xnat:projectData/secondary_ID" varname="secondary_ID"/>
   	<entry xsiType="xnat:projectData/name" varname="name"/>
@@ -11,7 +22,7 @@
   	<entry xsiType="xnat:projectData/PI/lastname" varname="pi_lastname"/>
   	<entry xsiType="xnat:projectData/fields/field[name=note]/field" varname="note"/>
   </group>
-  <group name="subjectData" number="1">
+  <group name="subjectData">
   	<key xsiType="xnat:subjectData/label" varname="label" xndtagname="Subject"/>
   	<entry xsiType="xnat:subjectData/group" varname="group"/>
   	<entry xsiType="xnat:subjectData/investigator/firstname" varname="pi_firstname"/>
@@ -32,7 +43,7 @@
   	<entry xsiType="xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/post_menstrual_age" varname="post_menstrual_age"/>
   	<entry xsiType="xnat:subjectData/demographics[@xsi:type=xnat:demographicData]/birth_weight" varname="birth_weight"/>	
   </group>
-  <group name="experimentData" number="2">
+  <group name="experimentData">
   	<entry xsiType="xnat:experimentdata/visit_id" varname="visit_id"/>
 	<entry xsiType="xnat:experimentdata/date" varname="date" xndtagname="Date"/>
 	<entry xsiType="xnat:experimentdata/ID" varname="ID"/>
@@ -55,7 +66,7 @@
   	<entry xsiType="xnat:imageSessionData/dcmPatientId" varname="dcmPatientId"/>
 	<entry xsiType="xnat:imageSessionData/dcmPatientName" varname="dcmPatientName"/>
 	<entry xsiType="xnat:imageSessionData/session_type" varname="session_type"/>
-	<entry xsiType="xnat:imageSessionData/modality" varname="modality" xndtagname="Modality"/>
+	<entry xsiType="xnat:imageSessionData/modality" varname="modality"/>
 	<entry xsiType="xnat:imageSessionData/UID" varname="UID"/>
 	<entry xsiType="xnat:mrSessionData/coil" varname="coil"/>
 	<entry xsiType="xnat:mrSessionData/fieldStrength" varname="fieldStrength"/>
@@ -78,7 +89,7 @@
 	<entry xsiType="xnat:petSessionData/tracer/transmissions" varname="tracer_transmissions"/>
 	<entry xsiType="xnat:petSessionData/tracer/transmissions/startTime" varname="tracer_transmissions_start"/>
   </group>
-  <group name="imageScanData" number="3">
+  <group name="imageScanData">
 	<key xsiType="xnat:imageScanData/ID" varname="ID" xndtagname="Scan"/>
 	<entry xsiType="xnat:imageScanData/type" varname="type" xndtagname="Scan_Type"/>
 	<entry xsiType="xnat:imageScanData/UID" varname="UID"/>
@@ -113,12 +124,12 @@
 	<entry xsiType="xnat:petScanData/parameters/binSize" varname="visit_id"/>
 	<entry xsiType="xnat:petScanData/parameters/dataType" varname="dataType"/>
   </group>
-  <group name="reconstructedImageData" number="4">
+  <group name="reconstructedImageData">
 	<key xsiType="xnat:reconstructedImageData/ID" varname="ID" xndtagname="Reconstruction"/>
 	<entry xsiType="xnat:reconstructedImageData/type" varname="type"/>
 	<entry xsiType="xnat:reconstructedImageData/baseScanType" varname="baseScanType"/>
   </group>
-  <group name="imageAssessorData" number="5">
+  <group name="imageAssessorData">
   	<key   xsiType="xnat:experimentdata/visit_id" varname="ID" xndtagname="Assessor"/>
 	<entry xsiType="xnat:experimentdata/visit_id" varname="visit_id"/>
 	<entry xsiType="xnat:experimentdata/date" varname="date"/>

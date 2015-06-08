@@ -145,12 +145,19 @@ public class ModifyTagValueRule extends Rule
 			Matcher matcher = m_substring.matcher(src);
 			if (!matcher.matches())
 				return null;
-			String match = matcher.group(matcher.groupCount());
-			if (match.length() > 0)
+			String match;
+			String res=m_Value,token;
+			for (int i=1; i<=matcher.groupCount(); i++)
 			{
-				return m_Value.replaceFirst("\\{1\\}", match);
-			} else
-				return null;
+				match=matcher.group(i);
+				if (match.length()>0)
+				{
+					token="\\{"+i+"\\}";
+					res=res.replaceAll(token,match);
+				}
+				else return null;
+			}
+			return res;
 		}
 	}
 }

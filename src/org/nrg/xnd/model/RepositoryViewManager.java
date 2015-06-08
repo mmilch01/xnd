@@ -361,6 +361,16 @@ public class RepositoryViewManager extends RepositoryManager
 	{
 		m_ManagedFolders.remove(s);
 	}
+	public TagDescr[] GetTagList(int tagDescrExclude)
+	{
+		LinkedList<TagDescr> res = new LinkedList<TagDescr>();
+		for (TagDescr td : m_TagDescrs.values())
+		{
+			if (td.AttribsDefined(tagDescrExclude)) continue;
+			res.add(td);
+		}
+		return res.toArray(new TagDescr[0]);		
+	}
 	public TagDescr[] GetVisibleTagList()
 	{
 		LinkedList<TagDescr> res = new LinkedList<TagDescr>();

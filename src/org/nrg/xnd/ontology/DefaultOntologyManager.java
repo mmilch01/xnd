@@ -176,6 +176,27 @@ public final class DefaultOntologyManager
 			return false;
 		return ct.IsAttrSet(attrib);
 	}
+	public static String GetTagRestAlias(String name) throws NullPointerException
+	{
+		return GetTag(name).m_RestAlias;
+	}
+	public static ItemTag[] GetOntologyTags()
+	{
+		if (m_tags == null)
+			return new ItemTag[0];
+		int otcount=0;
+		for (SystemTag ct : m_tags)
+		{			
+			if (ct.GetTagDescr().IsSet(TagDescr.SYSTEM)) otcount++;
+		}
+
+		ItemTag[] tags = new ItemTag[otcount];
+		int i = 0;
+		for (SystemTag ct : m_tags)
+		{	if(ct.GetTagDescr().IsSet(TagDescr.SYSTEM))	tags[i++] = new ItemTag(ct.m_Name);
+		}
+		return tags;
+	}
 	public static ItemTag[] GetDefaultTags()
 	{
 		if (m_tags == null)
@@ -254,7 +275,7 @@ public final class DefaultOntologyManager
 	private final static class SystemTag
 	{
 		public String m_Name;
-		public String m_XNATAlias = null;
+		public String m_RestAlias = null;
 		private Collection<SystemTag> m_Children = null;
 		private TagDescr m_TagDescr;
 		private int m_order = 0;
@@ -303,7 +324,9 @@ public final class DefaultOntologyManager
 					descr |= TagDescr.INVISIBLE;
 				}
 			}
-
+			// REST alias
+			m_RestAlias = el.attributeValue("rest_alias");
+			
 			m_TagDescr = new TagDescr(m_Name, descr);
 			Element sub_el;
 			for (Iterator<Element> iter = el.elementIterator(); iter.hasNext();)

@@ -8,6 +8,7 @@ import java.util.Vector;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -62,6 +63,7 @@ import org.nrg.xnd.model.FSRoot;
 import org.nrg.xnd.model.RepositoryViewManager;
 import org.nrg.xnd.model.Resource;
 import org.nrg.xnd.model.RootElement;
+import org.nrg.xnd.model.TagDescr;
 import org.nrg.xnd.model.VirtualFolder;
 import org.nrg.xnd.ontology.DefaultOntologyManager;
 import org.nrg.xnd.rules.Rule;
@@ -759,6 +761,38 @@ public class FileView extends ViewBase
 			}
 		}
 	}
+	protected void SetTag(String tagName, boolean bTree)
+	{
+		EditTagValueDialog dlg = new EditTagValueDialog(
+				m_TableViewer.getTable().getShell(),
+				EditTagValueDialog.ADD, m_rvm,tagName);
+		int res = dlg.open();
+		ItemTag[] tags = {dlg.GetSelectedTag()};
+		if (res == Window.OK)
+			ProcessSelectionWithProgress(tags, CElement.SETTAGS,
+					bTree);
+	}
+	protected void RemoveTag(String tagName, boolean bTree)
+	{
+		if (tagName!=null)
+		{
+			ItemTag[] tags={new ItemTag(tagName)};
+			ProcessSelectionWithProgress(tags, CElement.REMOVETAGS, bTree);
+		}
+		else
+		{
+			EditTagValueDialog dlg1 = new EditTagValueDialog(
+					m_TableViewer.getTable().getShell(),
+					EditTagValueDialog.REMOVE, m_rvm, tagName);
+			
+			if (dlg1.open() == org.eclipse.jface.window.Window.OK)
+			{
+				ItemTag[] tags = {dlg1.GetSelectedTag()};
+				ProcessSelectionWithProgress(tags, CElement.REMOVETAGS, bTree);
+			}
+		}
+
+	}
 	protected Menu CreateContextMenu(Control parent)
 	{
 		final boolean bTree;
@@ -779,14 +813,6 @@ public class FileView extends ViewBase
 				{
 					case SETTAG : // add tag
 					{
-						EditTagValueDialog dlg = new EditTagValueDialog(
-								m_TableViewer.getTable().getShell(),
-								EditTagValueDialog.ADD, m_rvm);
-						int res = dlg.open();
-						ItemTag[] tags = {dlg.GetSelectedTag()};
-						if (res == Window.OK)
-							ProcessSelectionWithProgress(tags, CElement.SETTAGS,
-									bTree);
 						break;
 					}
 					case SETDEFAULTTAGS : // add default tags
@@ -811,16 +837,7 @@ public class FileView extends ViewBase
 						}
 						break;
 					case REMOVETAG : // remove tag
-					{
-						EditTagValueDialog dlg1 = new EditTagValueDialog(
-								m_TableViewer.getTable().getShell(),
-								EditTagValueDialog.REMOVE, m_rvm);
-						if (dlg1.open() == org.eclipse.jface.window.Window.OK)
-						{
-							ItemTag[] tags1 = {dlg1.GetSelectedTag()};
-							ProcessSelectionWithProgress(tags1,
-									CElement.REMOVETAGS, bTree);
-						}
+					{						
 						break;
 					}
 					case COPY_TAGS:
@@ -883,7 +900,9 @@ public class FileView extends ViewBase
 														+ err, Window.OK);
 								break;
 							}
+							hum.setUser(true);
 							hum.schedule();
+							
 							/*
 							 * Collection<FileView>
 							 * actViews=AppActions.GetFileViewList(); //for now,
@@ -900,9 +919,11 @@ public class FileView extends ViewBase
 			}
 		};
 		Menu popup = new Menu(parent);
-		CreateMenuItem(popup, ml, "Set tag", true, 0);
+		//set ontology tags.
+		MenuItem setTagItem=CreateMenuItem(popup, ml, "Set tag", true, SWT.CASCADE);
+		
 		CreateMenuItem(popup, ml, "Set default tags", true, 0);
-		CreateMenuItem(popup, ml, "Remove tag", true, 0);
+		MenuItem removeTagItem=CreateMenuItem(popup, ml, "Remove tag", true, SWT.CASCADE);
 		CreateMenuItem(popup, ml, "Copy tags", true, 0);
 		CreateMenuItem(popup, ml, "Paste tags", true, 0);		
 		CreateMenuItem(popup, ml, "", true, SWT.SEPARATOR);
@@ -911,7 +932,51 @@ public class FileView extends ViewBase
 		CreateMenuItem(popup, ml, "Unmanage root directory", true, 0);
 		CreateMenuItem(popup, ml, "", true, SWT.SEPARATOR);
 
-		// default rule menu
+/////////////// set tag submenu 
+		Listener setTagListener = new Listener()
+		{
+			public void handleEvent(Event event)
+			{
+				if (!(event.widget instanceof MenuItem))
+					return;
+				MenuItem item = (MenuItem) event.widget;
+				SetTag(item.getText(),bTree);
+			}			
+		};
+		Menu tlmenu=new Menu (setTagItem);
+		setTagItem.setMenu(tlmenu);
+		TagDescr[] tags=m_rvm.GetVisibleTagList();
+		//first item in set tag submenu: set arbitrary tag.
+		for (TagDescr tag : tags)
+		{
+			CreateMenuItem(tlmenu, setTagListener, tag.GetName(), true, 0);
+		}
+		CreateMenuItem(tlmenu,setTagListener,"Other tag...", true, 0);		
+/////////////	
+		
+/////////////// remove tag submenu 
+		Listener removeTagListener = new Listener()
+		{
+			public void handleEvent(Event event)
+			{
+				if (!(event.widget instanceof MenuItem))
+					return;
+				MenuItem item = (MenuItem) event.widget;
+				RemoveTag(item.getText(),bTree);
+			}
+		};
+		Menu rtmenu=new Menu (removeTagItem);
+		removeTagItem.setMenu(rtmenu);
+		//first item in set tag submenu: set arbitrary tag.
+		for (TagDescr tag : tags)
+		{
+			CreateMenuItem(rtmenu, removeTagListener, tag.GetName(), true, 0);
+		}
+		CreateMenuItem(rtmenu,removeTagListener,"Other tag...", true, 0);		
+/////////////			
+		
+			
+/////// default rule menu
 		Listener pl = new Listener()
 		{
 			public void handleEvent(Event event)
@@ -969,8 +1034,9 @@ public class FileView extends ViewBase
 			{
 			}
 		});
-
-		// custom rule submenu.
+////////////////////
+		
+/////////////////// custom rule submenu.
 		MenuItem custRuleItem = CreateMenuItem(popup, ml, "Apply custom rule",
 				true, SWT.CASCADE);
 		rsmenu = new Menu(custRuleItem);
@@ -1008,7 +1074,7 @@ public class FileView extends ViewBase
 			{
 			}
 		});
-
+//////////////////////////////
 		CreateMenuItem(popup, ml, "", true, SWT.SEPARATOR);
 		CreateMenuItem(popup, ml, m_rvm.IsLocal() ? "Upload" : "Download",
 				true, 0);
@@ -1063,11 +1129,14 @@ public class FileView extends ViewBase
 						{
 							items[MANAGE].setEnabled(true);
 						}
+						if (ce instanceof DBElement || ce instanceof VirtualFolder)
+						{
+							items[SENDTO].setEnabled(true);							
+						}
 						if (ce instanceof DBElement
 								|| ce instanceof VirtualFolder
 								|| ce instanceof FSFolder)
 						{
-							items[SENDTO].setEnabled(true);
 							items[SETTAG].setEnabled(true);
 							items[SETDEFAULTTAGS].setEnabled(true);
 							items[REMOVETAG].setEnabled(true);

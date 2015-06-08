@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -59,7 +60,7 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 		if (local.getTag("Project") == null
 				|| local.getTag("Project").GetFirstValue().length() < 1)
 			return false;
-		s = FormSubQuery(DefaultOntologyManager.GetContext(local));
+		s = FormSubQuery(DefaultOntologyManager.GetContext(local),local,false);
 		s += "/files/" + local.getFile().getName() + "?inbody=true";
 		File f = local.getFile();
 		if (f == null || !f.exists())
@@ -102,6 +103,8 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 		}
 		return true;
 	}
+	
+//deprecated.	
 	public boolean CreateSubject(ItemRecord ir)
 	{
 		String request = "/projects/" + ir.getTagValue("Project")
@@ -133,10 +136,17 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 //			q = m_root + ("/REST/" + request + (bParams ? "&" : "?") + 
 //					(request.contains("format=") ? "" : "format=xml")).replace("//", "/").replace("//", "/");
 			String req=AdaptRESTQuery(request);
-			q = m_root + ("/REST/" + req + (bParams ? "&" : "?") + (req
-							.contains("format=") ? "" : "format=xml")).replace(
-							"//", "/").replace("//", "/");
-					
+			if(type==GET)
+			{
+				q = m_root + ("/data/archive/" + req + (bParams ? "&" : "?") + (req
+						.contains("format=") ? "" : "format=xml")).replace(
+								"//", "/").replace("//", "/");
+			}
+			else
+			{
+				q = m_root + ("/data/archive/" + req + (bParams ? "&" : "?")).replace(
+								"//", "/").replace("//", "/");
+			}
 			switch (type)
 			{
 				case GET :
@@ -210,12 +220,21 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 
 			System.out.println(method.getName() + " " + q);
 			int status = client.executeMethod(method);
-			if (HttpStatus.SC_OK != status)
-			{
+			if ( status >= 300 )			{
 				if (m_bReportConnErrors)
 					System.err
 							.println("XNAT Rest adapter.PerformConnection: HTTP response "
 									+ status);
+				InputStream eis = method.getResponseBodyAsStream();
+				int bytesRead;
+				byte[] buff = new byte[256];
+				OutputStream os=System.err;
+				
+				while (-1 != (bytesRead = eis.read(buff, 0, buff.length))) {
+		            os.write(buff, 0, bytesRead);
+		            os.flush();
+		        }
+				
 				if (is != null)
 					is.close();
 				// Utils.logger.error("XNAT Rest adapter.PerformConnection: HTTP response "+status);
@@ -268,15 +287,24 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 		m_usr = usr;
 		m_pass = pass;
 	}
-	public static String FormSubQuery(Collection<ItemTag> context)
+	public static String FormSubQuery(Collection<ItemTag> context,ItemRecord ir, boolean bPostfix)
 	{
 		String name, label;
 		String result = "/";
 		for (ItemTag it : context)
 		{
-			name = it.GetName().toLowerCase() + "s";
+			try
+			{
+				name = DefaultOntologyManager.GetTagRestAlias(it.GetName());
+			}
+			catch (Exception ex)
+			{			
+				name = it.GetName().toLowerCase() + "s";
+			}
 			label = it.GetFirstValue();
-			result += name + "/" + label + XNATThesaurus.GetPostfix(it) + "/";
+			result += name + "/" + label + "/";
+			if (bPostfix)
+				result += XNATThesaurus.GetPostfix(it,ir) + "/";
 		}
 
 		return result;
@@ -327,7 +355,7 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 				// if(tagsMatching getLast().GetName().compareTo("Resource")!=0)
 				return new LinkedList<ItemRecord>();
 		}
-		String query = FormSubQuery(tagsMatching);
+		String query = FormSubQuery(tagsMatching,null,true);
 		LinkedList<TreeMap<String, String>> row_map;
 		LinkedList<ItemRecord> res = new LinkedList<ItemRecord>();
 		try
@@ -379,7 +407,7 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 	public TreeMap<ItemTag, TagMap> DBTagValues(final Context path,
 			final TagMap query_tags)
 	{
-		String query = FormSubQuery(path);
+		String query = FormSubQuery(path,null,true);
 		String q1;
 		LinkedList<TreeMap<String, String>> row_map;
 		TreeMap<ItemTag, TagMap> aTags = new TreeMap<ItemTag, TagMap>();

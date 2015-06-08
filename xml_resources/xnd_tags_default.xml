@@ -1,32 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+TAG TYPES:
+
+ontology: Represent a hierarchy level. Easy to modify.
+service: Harder to modify (not shown on default modify menus)
+
+TAG properties: 
+treeRoot: shown as root in the left tag view hierarchy.
+tableView: value shown in the right table
+anValue: force alphanumeric value (no spaces or other special symbols)  
+rest_alias: REST path part, /data/archive/<alias>/...
+	for "Project" tag useful alias would be "projects". 
+	for "ProjectResource" because the resource is associated with project, the alias should be "resources".
+	for "Reconstruction", REST alias can be "reconstructions/in" or "reconstructions/out" (when uploading or downloading files). 
+
+-->
+
 <ontology id="xnat" descr="Default ontology with XNAT hierarchical tags.">
- <tag name="Project" treeRoot="1" tableView="1" anValue="1" type="ontology">
+ <tag name="Project" treeRoot="1" tableView="1" anValue="1" type="ontology" rest_alias="projects">
   <child>Subject</child>
-  <child>Resource</child>
+  <child>ProjectResource</child>
  </tag>
- <tag name="Subject" tableView="1" anValue="1" type="ontology" context="1">
+ <tag name="Subject" tableView="1" anValue="1" type="ontology" context="1" rest_alias="subjects">
    <child>Experiment</child>
-   <child>Resource</child>
+   <child>SubjectResource</child>
  </tag>
- <tag name="Experiment" tableView="1" anValue="1" type="ontology">
+ <tag name="Experiment" tableView="1" anValue="1" type="ontology" rest_alias="experiments">
    <child>Scan</child>
    <child>Assessor</child>
    <child>Reconstruction</child>
-   <child>Resource</child>
+   <child>ExperimentResource</child>
  </tag>
- <tag name="Scan" tableView="1" anValue="1" type="ontology">
- 	<child>Resource</child>
+ <tag name="Scan" tableView="1" anValue="1" type="ontology" rest_alias="scans">
+ 	<child>ScanResource</child>
  </tag>
- <tag name="Assessor" tableView="0" type="ontology">
- 	<child>Resource</child>
+ <tag name="Assessor" tableView="0" type="ontology" rest_alias="assessors">
+ 	<child>AssessorResource</child>
  </tag>
- <tag name="Reconstruction" tableView="0" type="ontology">
- 	<child>Resource</child>
+ <tag name="Reconstruction" tableView="0" type="ontology" rest_alias="reconstructions">
+ 	<child>ReconstructionResource</child>
  </tag>
- <tag name="Resource" tableView="0" type="service"/>
- <tag name="SeriesDescription" tableView="0" anValue="0" type="ontology"/>
- <tag name="Scan_Type" tableView="0" anValue="0" type="ontology"/>
- <tag name="Date" type="ontology"/>
+ 
+ <!-- iostatus is a special tag used with Assessor and Reconstruction in REST calls -->
+  <tag name="iostatus" tableView="0" type="service">
+  <value>in</value>
+  <value>out</value>
+ </tag>
+ 
+ <tag name="ProjectResource" tableView="0" type="ontology" anValue="1" rest_alias="resources"/>
+ <tag name="SubjectResource" tableView="0" type="ontology" anValue="1" rest_alias="resources"/>
+ <tag name="ExperimentResource" tableView="0" type="ontology" anValue="1" rest_alias="resources"/>
+ <tag name="ScanResource" tableView="0" type="ontology" anValue="1" rest_alias="resources"/>
+ <tag name="AssessorResource" tableView="0" type="ontology" anValue="1" rest_alias="resources"/>
+ <tag name="ReconstructionResource" tableView="0" type="ontology" anValue="1" rest_alias="resources"/>
+ 
+ <tag name="SeriesDescription" tableView="0" anValue="0" type="service"/>
+ <tag name="Scan_Type" tableView="0" anValue="0" type="service"/>
+ <tag name="ExperimentDate" type="service"/>
  <tag name="Quality" type="ontology"/>
  <tag name="Modality" type="ontology">
   <value>MR</value>
@@ -52,5 +83,4 @@
  <tag name="file_content" type="service"/>
  <tag name="file_format" type="service"/>
  <tag name="file_tags" type="service"/>
- <tag name="XNATResource" type="service"/>
 </ontology>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- This document describes binding of ontology+modality tag values to XNAT rest_clause.
+ 
+This binding is used when uploading/creating resources in XNAT using xnd tags.
++text specifies schema name used in XNAT for a field.
++property_group key specifies the key that describes the discriminating property of this type. Specifying modality property group is critical for correct creation of XNAT experiment and scan; other property groups may include any XNAT variable updatable via REST.
+
++property_type specifies value which has to be associated with this key to be considered matching to children XNAT types.
++ontology_key specifies the tag name used to determine hierachy level used to match to XNAT entity (e.g. xnd Experiment 
+for XNAT experiments, xnd Scan for XNAT scans, etc. 
+
+Experiment level or below ontology keys may require rest_clause defined (this is XNAT specifics). 
+Otherwise, any xnd key (tag) can have rest_clause associated, for entering into XNAT, but this is not currently (4/7/2015) supported.
+
+NB: see xnd_tags_default.xml for defined keys and their values. 
+ 
+ -->
+<property_groups>
+	<property_group key="Modality">
+		<property_type name="MR">
+			<rest_clause text="xsiType=xnat:mrSessionData" ontology_key="Experiment"/>
+			<rest_clause text="xsiType=xnat:mrScanData" ontology_key="Scan"/>
+		</property_type>
+		<property_type name="CT">
+			<rest_clause text="xsiType=xnat:ctSessionData" ontology_key="Experiment"/>
+			<rest_clause text="xsiType=xnat:ctScanData" ontology_key="Scan"/>
+		</property_type>
+		<property_type name="US">
+			<rest_clause text="xsiType=xnat:usSessionData" ontology_key="Experiment"/>
+			<rest_clause text="xsiType=xnat:usScanData" ontology_key="Scan"/>
+		</property_type>
+		<property_type name="PET">
+			<rest_clause text="xsiType=xnat:petSessionData" ontology_key="Experiment"/>
+			<rest_clause text="xsiType=xnat:petScanData" ontology_key="Scan"/>
+		</property_type>
+		<property_type name="OTHER">
+			<rest_clause text="xsiType=xnat:imageSessionData" ontology_key="Experiment"/>
+			<rest_clause text="xsiType=xnat:imageScanData" ontology_key="Scan"/>
+		</property_type>
+	</property_group>
+</property_groups>
