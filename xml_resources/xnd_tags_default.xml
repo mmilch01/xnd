@@ -66,6 +66,8 @@ rest_alias: REST path part, /data/archive/<alias>/...
   <value>US</value>
   <value>OTHER</value>
  </tag>
+ <tag name="Format" type="ontology"/>
+ 
  <tag name="ImageType" type="service"/>
  <tag name="label" type="service"/>
  <tag name="element_name" type="service"/>

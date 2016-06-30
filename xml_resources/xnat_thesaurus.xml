@@ -91,6 +91,7 @@ xndtagname: tag name defined in xnd_tags_default that matches this entry.
   </group>
   <group name="imageScanData">
 	<key xsiType="xnat:imageScanData/ID" varname="ID" xndtagname="Scan"/>
+	<entry xsiType="xnat:imageScanData/format" varname="format" xndtagname="Format"/>
 	<entry xsiType="xnat:imageScanData/type" varname="type" xndtagname="Scan_Type"/>
 	<entry xsiType="xnat:imageScanData/UID" varname="UID"/>
 	<entry xsiType="xnat:imageScanData/note" varname="note"/>
