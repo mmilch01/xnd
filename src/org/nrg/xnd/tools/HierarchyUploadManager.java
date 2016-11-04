@@ -1,5 +1,6 @@
 package org.nrg.xnd.tools;
 import java.io.BufferedInputStream;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -228,8 +229,77 @@ public class HierarchyUploadManager extends Job
 		}
 		return uploadFileCollection(tagRecord, lfe);
 	}
+	private String getFileExtension(File file) {
+	    String name = file.getName();
+	    try {
+	        return name.substring(name.lastIndexOf(".") + 1);
+	    } catch (Exception e) {
+	        return "";
+	    }
+	}	
+	private boolean uploadFileCollectionRaw(ItemRecord ir, FileCollection fc)
+	{
+		System.out.println("uploading files individually");
+		Context context = new Context(m_vf.getContext());		
+		String col_format = null, col_content = null;
+		if (context.getLast().GetName().compareTo("Scan") == 0)
+		{
+			col_format = ir.getTagValue("coll_format");
+			col_content = ir.getTagValue("coll_content");
+			if (col_format != null && col_content != null) // create a resource.
+			{
+				context.addLast(new ItemTag("resource", col_format));
+				String params = XNATThesaurus.getQueryParams(context, ir);
+				if (params != null && params.length() > 0)
+					params += "&content=" + col_content + "&format="
+							+ col_format;
+				else
+					params = "content=" + col_content + "&format=" + col_format;
+				if (null == createHierarchyLevel(context, ir, params))
+					return false;
+			}
+		}
+		String qb = XNATRestAdapter.FormSubQuery(context,ir,true), sub_query;
+		String param;
+		File fil;
+		for (String f : fc.GetAllFiles())
+		{
+			sub_query = qb;
+//			sub_query += "files/" + "files.zip" + "?inbody=true&extract=true";
+			fil=new File(m_rvm.GetAbsolutePath(f));
+			sub_query += "files/" + fil.getName() + "?inbody=true";
+			if (getFileExtension(fil).toLowerCase().compareTo("zip")==0)
+				sub_query += "files/" + fil.getName() + "?inbody=true&extract=true";
+			if (col_format != null & col_content != null)
+			{
+				sub_query += "&format=" + col_format + "&content=" + col_content;
+			}
+			for (ItemTag it : ir.getAllTags())
+			{
+				param = XNATThesaurus.GetVarname(it.GetName(), context);
+				if (param != null && param.length() > 0)
+					sub_query += "&" + param + "="
+							+ Utils.StrFormatURI(it.GetFirstValue());
+			}
+			m_ipm.subTask(fil.getName());
+			HttpMethodBase hmb = m_xra.PerformConnection(XNATRestAdapter.PUT,
+					sub_query, new File(m_rvm.GetAbsolutePath(f)));
+			// m_xra.PerformConnection(XNATRestAdapter.PUT, sub_query, is);
+			if (hmb == null) return false;
+			hmb.releaseConnection();
+		}		
+		return true;		
+	}
 	private boolean uploadFileCollection(ItemRecord ir, FileCollection fc)
 	{
+//		try{
+//			if (!XNDApp.app_Prefs.nodeExists("PrefsFileTransfer.PreZipUploads")) return false;
+//		}
+//		catch(Exception e){}
+		if (!XNDApp.app_Prefs.getBoolean("PrefsFileTransfer.PreZipUploads", true))
+			return uploadFileCollectionRaw(ir,fc);
+		System.err.println("zipping files...");
+		m_ipm.subTask("zipping files...");
 		if (!PrepareArchive(fc))
 			return false;
 		// start an archiving thread, get an input stream from it.
@@ -259,7 +329,6 @@ public class HierarchyUploadManager extends Job
 					return false;
 			}
 		}
-
 		String sub_query = XNATRestAdapter.FormSubQuery(context,ir,true);
 		String param;
 		sub_query += "files/" + "files.zip" + "?inbody=true&extract=true";
@@ -274,6 +343,7 @@ public class HierarchyUploadManager extends Job
 				sub_query += "&" + param + "="
 						+ Utils.StrFormatURI(it.GetFirstValue());
 		}
+		m_ipm.subTask("uploading" + ir.getCollectionName());
 		HttpMethodBase hmb = m_xra.PerformConnection(XNATRestAdapter.PUT,
 				sub_query, m_Archive);
 		// m_xra.PerformConnection(XNATRestAdapter.PUT, sub_query, is);

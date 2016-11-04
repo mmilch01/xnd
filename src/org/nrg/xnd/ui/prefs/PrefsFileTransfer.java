@@ -27,6 +27,8 @@ public class PrefsFileTransfer extends PreferencePage
 		implements
 			IWorkbenchPreferencePage
 {
+	public PrefsFileTransfer() {
+	}
 	private Button m_BrowseButton;
 	private Combo m_IncomingFolderText;
 	private MemoCombo m_IncomingFolderTextM;
@@ -34,6 +36,8 @@ public class PrefsFileTransfer extends PreferencePage
 	private MemoCheckBox m_ExtractDataFromDICOMHeadersM;
 	private Button m_ExtractDataFromDICOMHeaders;
 	private Button m_RunPipelinesCheck;
+	private Button m_PreZipCheck;
+	private	MemoCheckBox m_PreZipCheckM;	
 	private MemoCheckBox m_RunPipelinesCheckM;
 	private Group group2;
 	private Group group1;
@@ -72,12 +76,21 @@ public class PrefsFileTransfer extends PreferencePage
 						| SWT.LEFT);
 				m_ExtractDataFromDICOMHeadersM = new MemoCheckBox(
 						m_ExtractDataFromDICOMHeaders,
-						"PrefsFileTransfer.ExtractDataFromDICOMHeaders", true);
+						"PrefsFileTransfer.ExtractDataFromDICOMHeaders", true);								
 				GridData m_ExtractDataFromDICOMHeadersLData = new GridData();
 				m_ExtractDataFromDICOMHeaders
 						.setLayoutData(m_ExtractDataFromDICOMHeadersLData);
 				m_ExtractDataFromDICOMHeaders
 						.setText("Request XNAT server to extract additional metadata (DICOM only)");
+			}
+			{
+				m_PreZipCheck = new Button(group2, SWT.CHECK
+						| SWT.LEFT);
+				m_PreZipCheckM = new MemoCheckBox(
+						m_PreZipCheck,
+						"PrefsFileTransfer.PreZipUploads", true);
+				m_PreZipCheck.setLayoutData(new GridData());
+				m_PreZipCheck.setText("Zip files before uploading");
 			}
 		}
 		{
@@ -155,6 +168,7 @@ public class PrefsFileTransfer extends PreferencePage
 		m_ExtractDataFromDICOMHeadersM.Save();
 		m_RunPipelinesCheckM.Save();
 		m_IncomingFolderTextM.Save();
+		m_PreZipCheckM.Save();
 		return true;
 	}
 	public void init(IWorkbench workbench)

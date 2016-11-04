@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="XNAT Desktop" id="org.nrg.xnat.desktop.xnd_product" application="org.nrg.xnat.desktop.application" version="0.95" useFeatures="false" includeLaunchers="true">
+<product name="XNAT Desktop" id="org.nrg.xnat.desktop.xnd_product" application="org.nrg.xnat.desktop.application" version="0.96" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/org.nrg.xnat.desktop/icons/logo.gif"/>
       <text>
-         XNAT Desktop ver. 0.95
+         XNAT Desktop ver. 0.96
 Neuroinformatics Research Group, Washington University in St Louis
 https://wiki.xnat.org/display/XNAT16/XNAT+Desktop
       </text>
