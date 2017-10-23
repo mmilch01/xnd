@@ -36,6 +36,7 @@ public class SocketItemManager implements FileTransfer
 		}
 
 	}
+	@Override
 	public boolean Put(ItemRecord dest, ItemRecord src)
 	{
 		/*
@@ -63,6 +64,7 @@ public class SocketItemManager implements FileTransfer
 		 */
 		return false;
 	}
+	@Override
 	public boolean Get(ItemRecord src, ItemRecord dest)
 	{
 		return false;
@@ -103,8 +105,11 @@ public class SocketItemManager implements FileTransfer
 	}
 	public File SuggestLocalPath(ItemRecord remote_ir)
 	{
-		return new File(Utils.GetIncomingFolder() + "/"
+//		return new File(Utils.GetIncomingFolder() + "/"
+//				+ (remote_ir).getFileName());
+		return new File(Utils.GetUserFolder() + "/"
 				+ (remote_ir).getFileName());
+		
 	}
 	public File GetLocalPath(ItemRecord ir)
 	{

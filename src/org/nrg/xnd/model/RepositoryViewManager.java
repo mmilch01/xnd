@@ -234,9 +234,13 @@ public class RepositoryViewManager extends RepositoryManager
 	{
 		if (!IsLocal())
 			return new String[0];
+		/*
 		String[] arr = new String[m_ManagedFolders.size() + 1];
 		m_ManagedFolders.toArray(arr);
 		arr[arr.length - 1] = Utils.GetIncomingFolder();
+		*/
+		String[] arr = new String[m_ManagedFolders.size()];
+		m_ManagedFolders.toArray(arr);
 		return arr;
 	}
 
@@ -285,14 +289,14 @@ public class RepositoryViewManager extends RepositoryManager
 	public String GetRelativePath(String abs_path)
 	{
 		String res;
-		final String uplFold = new File(Utils.GetIncomingFolder() + "/uploads")
-				.getAbsolutePath();
+//		final String uplFold = new File(Utils.GetIncomingFolder() + "/uploads")
+//				.getAbsolutePath();
 		for (final String fold : GetManagedFolders())
 		{
 			if (fold == null || fold.length() < 1)
 				continue;
-			res = ItemRecord.relativeFromAbsolute(abs_path, fold, uplFold
-					.compareTo(fold) != 0);
+//			res = ItemRecord.relativeFromAbsolute(abs_path, fold, uplFold.compareTo(fold) != 0);
+			res = ItemRecord.relativeFromAbsolute(abs_path, fold, true);
 			if (res != null)
 				return res;
 		}

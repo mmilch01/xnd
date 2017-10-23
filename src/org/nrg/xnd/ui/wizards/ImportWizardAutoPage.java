@@ -39,6 +39,7 @@ public class ImportWizardAutoPage extends WizardPage
 		return true;
 	}
 
+	@Override
 	public void createControl(Composite parent)
 	{
 		Composite topLevel = new Composite(parent, SWT.NONE);

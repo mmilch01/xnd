@@ -1,21 +1,15 @@
 package org.nrg.xnd.ontology;
 
 import java.io.File;
-import java.io.InputStream;
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Set;
 import java.util.TreeMap;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.nrg.fileserver.Context;
 import org.nrg.fileserver.ItemRecord;
 import org.nrg.fileserver.ItemTag;
-import org.nrg.xnd.model.TagDescr;
 import org.nrg.xnd.utils.Utils;
 
 /**
@@ -69,7 +63,8 @@ public final class XnatTypeManager
 			
 			try
 			{
-				xtype=m_property_groups.get(pr_gr).GetXnatName(dividingTag.GetFirstValue(), ontology_key);
+				m_property_groups.get(pr_gr);
+				xtype=property_group.GetXnatName(dividingTag.GetFirstValue(), ontology_key);
 				if (xtype!=null)
 				{
 					if(xnames.length()>0)

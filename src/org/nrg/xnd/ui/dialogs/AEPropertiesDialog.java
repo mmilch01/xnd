@@ -87,6 +87,7 @@ public class AEPropertiesDialog extends Dialog
 				m_AENameComboM.setSelection(m_defSel);
 			m_AENameCombo.addSelectionListener(new SelectionAdapter()
 			{
+				@Override
 				public void widgetSelected(SelectionEvent evt)
 				{
 					updateData(false);
@@ -101,6 +102,7 @@ public class AEPropertiesDialog extends Dialog
 			m_delAE.setText("Delete");
 			m_delAE.addSelectionListener(new SelectionAdapter()
 			{
+				@Override
 				public void widgetSelected(SelectionEvent evt)
 				{
 					if (m_AENameCombo.getText().compareTo("local") == 0)
@@ -187,12 +189,14 @@ public class AEPropertiesDialog extends Dialog
 			m_newAEButton.setText("New AE...");
 			m_newAEButton.addSelectionListener(new SelectionAdapter()
 			{
+				@Override
 				public void widgetSelected(SelectionEvent evt)
 				{
 					InputDialog id = new InputDialog(getShell(),
 							"Remote destination name", "Enter remote AE name:",
 							"", new IInputValidator()
 							{
+								@Override
 								public String isValid(String newText)
 								{
 									if (newText.length() < 1)
@@ -223,6 +227,7 @@ public class AEPropertiesDialog extends Dialog
 			m_applyChanges.setText("Apply changes");
 			m_applyChanges.addSelectionListener(new SelectionAdapter()
 			{
+				@Override
 				public void widgetSelected(SelectionEvent evt)
 				{
 					updateData(true);

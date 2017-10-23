@@ -84,6 +84,7 @@ public class ImportWizard extends Wizard implements IRunnableWithProgress
 		boolean bDicomFormat = false, bNameRule = false, bCol = false,
 				bExtractModFromDicom = true;
 
+		@Override
 		public void run()
 		{
 			ffs = m_mainP.getSelectedFolders();
@@ -195,6 +196,7 @@ public class ImportWizard extends Wizard implements IRunnableWithProgress
 		{
 			Display.getDefault().syncExec(new Runnable()
 			{
+				@Override
 				public void run()
 				{
 					Utils.ShowMessageBox("Import failed",
@@ -205,6 +207,7 @@ public class ImportWizard extends Wizard implements IRunnableWithProgress
 
 		}
 	}
+	@Override
 	public void run(IProgressMonitor monitor)
 	{
 		// final IProgressMonitor mon = monitor;

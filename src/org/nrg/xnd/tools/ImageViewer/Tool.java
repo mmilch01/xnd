@@ -120,6 +120,7 @@ public class Tool extends Canvas implements ActionListener
 			return -1;
 		}
 
+		@Override
 		public void itemStateChanged(ItemEvent e)
 		{
 			Object src = e.getSource();
@@ -178,6 +179,7 @@ public class Tool extends Canvas implements ActionListener
 			canFilterIndexColorModel = true;
 		}
 
+		@Override
 		public int filterRGB(int x, int y, int rgb)
 		{			
 			if (m_type == UP || m_type == DISABLE)
@@ -281,6 +283,7 @@ public class Tool extends Canvas implements ActionListener
 		addMouseListener(new ToolMouseListener());
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e)
 	{
 		if (m_SideMenu == null)
@@ -454,6 +457,7 @@ public class Tool extends Canvas implements ActionListener
 		return menu;
 	}
 
+	@Override
 	public void paint(Graphics g)
 	{
 		if (g == null)
@@ -614,7 +618,7 @@ public class Tool extends Canvas implements ActionListener
 		int x = event.getX(), y = event.getY();
 		int diffX = dicomViewBase.m_DragXPos - x, diffY = dicomViewBase.m_DragYPos
 				- y;
-		double sh = (double) (dicomViewBase.getStudy().GetCurrentSeries()
+		double sh = (dicomViewBase.getStudy().GetCurrentSeries()
 				.GetScreenHeight());
 		int MinDiff = (int) Math.max(1, sh / 100.0);
 		switch (m_ToolID)
@@ -897,6 +901,7 @@ public class Tool extends Canvas implements ActionListener
 
 	public class ToolMouseListener extends MouseAdapter
 	{
+		@Override
 		public void mousePressed(MouseEvent e)
 		{
 			Point p = e.getPoint();
@@ -946,6 +951,7 @@ public class Tool extends Canvas implements ActionListener
 				}
 			}
 		}
+		@Override
 		public void mouseReleased(MouseEvent e)
 		{
 			if (Contains(e.getPoint()) == IN_MAIN)
@@ -994,6 +1000,7 @@ public class Tool extends Canvas implements ActionListener
 			}
 		}
 
+		@Override
 		public void run()
 		{
 			m_bRunning = true;

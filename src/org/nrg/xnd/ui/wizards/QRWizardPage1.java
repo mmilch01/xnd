@@ -71,6 +71,7 @@ public class QRWizardPage1 extends WizardPage
 		return true;
 	}
 
+	@Override
 	public void createControl(Composite parent)
 	{
 		Composite topLevel = new Composite(parent, SWT.NONE);
@@ -100,6 +101,7 @@ public class QRWizardPage1 extends WizardPage
 				m_FolderCombo.setLayoutData(m_FolderComboLData);
 				m_FolderCombo.addModifyListener(new ModifyListener()
 				{
+					@Override
 					public void modifyText(ModifyEvent evt)
 					{
 						setPageComplete(isPageComplete());
@@ -107,6 +109,7 @@ public class QRWizardPage1 extends WizardPage
 				});
 				m_FolderCombo.addSelectionListener(new SelectionAdapter()
 				{
+					@Override
 					public void widgetSelected(SelectionEvent evt)
 					{
 						setPageComplete(isPageComplete());
@@ -129,6 +132,7 @@ public class QRWizardPage1 extends WizardPage
 				m_BrowseButton.setText("Browse...");
 				m_BrowseButton.addSelectionListener(new SelectionAdapter()
 				{
+					@Override
 					public void widgetSelected(SelectionEvent evt)
 					{
 						String fold = Utils.SelectFolder("Folder selection",
@@ -167,6 +171,7 @@ public class QRWizardPage1 extends WizardPage
 				m_AESetupButton.setText("AE setup...");
 				m_AESetupButton.addSelectionListener(new SelectionAdapter()
 				{
+					@Override
 					public void widgetSelected(SelectionEvent evt)
 					{
 						AEPropertiesDialog aepd = new AEPropertiesDialog(

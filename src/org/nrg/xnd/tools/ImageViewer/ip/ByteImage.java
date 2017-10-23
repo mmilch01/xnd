@@ -55,7 +55,7 @@ public class ByteImage extends AbstractImage
 		int val;
 		for (int i = 0; i < m_pix.length; i += 5)
 		{
-			val = (int) (m_pix[i] & 0xff);
+			val = (m_pix[i] & 0xff);
 			if (min > val)
 				min = val;
 			if (max < val)
@@ -206,7 +206,7 @@ public class ByteImage extends AbstractImage
 	@Override
 	public long GetPix(int x, int y)
 	{
-		return (long) (m_pix[m_wid * y + x] & 0xff);
+		return (m_pix[m_wid * y + x] & 0xff);
 	}
 
 	@Override
@@ -484,6 +484,7 @@ public class ByteImage extends AbstractImage
 		UpdateImageFromBuffer(false);
 	}
 
+	@Override
 	protected void UpdateImageFromBuffer(boolean bLight)
 			throws OutOfMemoryError
 	{

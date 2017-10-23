@@ -607,6 +607,7 @@ public abstract class Utils
 			InputDialog d = new InputDialog(new Shell(), title, msg, "~/",
 					new IInputValidator()
 					{
+						@Override
 						public String isValid(String newText)
 						{
 							File f = new File(newText);

@@ -25,6 +25,7 @@ public class ConsoleView extends ViewPart
 		System.out.println(s);
 		Display.getDefault().syncExec(new Runnable()
 		{
+			@Override
 			public void run()
 			{
 				m_this.Refresh();

@@ -76,6 +76,7 @@ public class PrefsFilter extends PreferencePage
 					m_AddButton.setText("Add");
 					m_AddButton.addSelectionListener(new SelectionListener()
 					{
+						@Override
 						public void widgetSelected(SelectionEvent evt)
 						{
 							ViewFilter vf = new ViewFilter();
@@ -87,6 +88,7 @@ public class PrefsFilter extends PreferencePage
 								AddRow(mfd.GetName(), vf);
 							}
 						}
+						@Override
 						public void widgetDefaultSelected(SelectionEvent evt)
 						{
 						}
@@ -101,6 +103,7 @@ public class PrefsFilter extends PreferencePage
 					m_EditButton.setText("Edit");
 					m_EditButton.addSelectionListener(new SelectionListener()
 					{
+						@Override
 						public void widgetSelected(SelectionEvent evt)
 						{
 							TableItem[] ti = m_filters.getSelection();
@@ -118,6 +121,7 @@ public class PrefsFilter extends PreferencePage
 								m_filters.redraw();
 							}
 						}
+						@Override
 						public void widgetDefaultSelected(SelectionEvent evt)
 						{
 						}
@@ -133,6 +137,7 @@ public class PrefsFilter extends PreferencePage
 					m_DeleteButton.setText("Delete");
 					m_DeleteButton.addSelectionListener(new SelectionListener()
 					{
+						@Override
 						public void widgetSelected(SelectionEvent evt)
 						{
 							TableItem[] items = m_filters.getSelection();
@@ -152,6 +157,7 @@ public class PrefsFilter extends PreferencePage
 								m_filters.redraw();
 							}
 						}
+						@Override
 						public void widgetDefaultSelected(SelectionEvent evt)
 						{
 						}
@@ -177,6 +183,7 @@ public class PrefsFilter extends PreferencePage
 		ti.setText(1, vf.GetDescription(false));
 	}
 
+	@Override
 	public void init(IWorkbench workbench)
 	{
 

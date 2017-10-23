@@ -14,6 +14,7 @@ import java.awt.TextArea;
 import java.awt.event.InputEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileFilter;
 import java.net.URL;
@@ -99,6 +100,7 @@ public class ImageViewer
 			// delete temp files
 			FileFilter ff = new FileFilter()
 			{
+				@Override
 				public boolean accept(File f)
 				{
 					return (f.getName().startsWith("wpimg") && f.getName()
@@ -373,14 +375,14 @@ public class ImageViewer
 		String tmp;
 		boolean bHidePHI = m_DBManager.IsGuestMode();
 		m_PatInfo.setText("");
-		m_PatInfo.append(Util.Trans("PatID") + " : " + dr.GetString(dr.iPatID)
+		m_PatInfo.append(Util.Trans("PatID") + " : " + dr.GetString(DICOMRecord.iPatID)
 				+ "\n");
 		if (bHidePHI)
 		{
 			m_PatInfo.append(Util.Trans("PatName") + ": <<Hidden>>\n");
 		} else
 		{
-			tmp = Util.Trans("PatName") + " : " + dr.GetString(dr.iPatName)
+			tmp = Util.Trans("PatName") + " : " + dr.GetString(DICOMRecord.iPatName)
 					+ "\n";
 			tmp = tmp.replace('^', ' ');
 			m_PatInfo.append(tmp);
@@ -402,9 +404,9 @@ public class ImageViewer
 		} catch (Exception e)
 		{
 		}
-		m_Study.m_StudyNote = dr.GetString(dr.iStDescr);
+		m_Study.m_StudyNote = dr.GetString(DICOMRecord.iStDescr);
 		m_ExPatInfo.setText("");
-		tmp = dr.GetString(dr.iPatID);
+		tmp = dr.GetString(DICOMRecord.iPatID);
 		tmp = tmp.replace('^', ' ');
 		m_ExPatInfo.append(Util.Trans("PatID") + " : " + tmp);
 		if (bHidePHI)
@@ -413,7 +415,7 @@ public class ImageViewer
 					+ Util.Trans("Hidden") + ">>");
 		} else
 		{
-			tmp = dr.GetString(dr.iPatName);
+			tmp = dr.GetString(DICOMRecord.iPatName);
 			tmp = tmp.replace('^', ' ');
 			m_ExPatInfo.append("\n" + Util.Trans("PatName") + " : " + tmp);
 		}
@@ -446,27 +448,27 @@ public class ImageViewer
 		}
 		m_ExPatInfo.append("\n" + Util.Trans("Year of birth") + " : " + tmp);
 		m_ExPatInfo.append("\n" + Util.Trans("PatSex") + " : "
-				+ dr.GetString(dr.iPatSex));
-		if (dr.GetString(dr.iPatComments) != null)
+				+ dr.GetString(DICOMRecord.iPatSex));
+		if (dr.GetString(DICOMRecord.iPatComments) != null)
 			m_ExPatInfo.append("\n" + Util.Trans("Patient comments") + ": "
-					+ dr.GetString(dr.iPatComments));
-		m_ExPatInfo.append("\n\nStInstUID : " + dr.GetString(dr.iStInstUID));
-		m_ExPatInfo.append("\nStID : " + dr.GetString(dr.iStID));
+					+ dr.GetString(DICOMRecord.iPatComments));
+		m_ExPatInfo.append("\n\nStInstUID : " + dr.GetString(DICOMRecord.iStInstUID));
+		m_ExPatInfo.append("\nStID : " + dr.GetString(DICOMRecord.iStID));
 		m_ExPatInfo.append("\n" + Util.Trans("StModalities") + " : "
-				+ dr.GetString(dr.iStModalities));
-		m_ExPatInfo.append("\n\nSerInstUID : " + dr.GetString(dr.iSerInstUID));
+				+ dr.GetString(DICOMRecord.iStModalities));
+		m_ExPatInfo.append("\n\nSerInstUID : " + dr.GetString(DICOMRecord.iSerInstUID));
 		m_ExPatInfo.append("\n" + Util.Trans("SerModality") + " : "
-				+ dr.GetString(dr.iSerModality));
+				+ dr.GetString(DICOMRecord.iSerModality));
 		m_ExPatInfo.append("\n" + Util.Trans("SerNumber") + " : "
-				+ dr.GetString(dr.iSerNumber));
+				+ dr.GetString(DICOMRecord.iSerNumber));
 		m_ExPatInfo.append("\n\nImgSOPInstUID : "
-				+ dr.GetString(dr.iImgSOPInstUID));
+				+ dr.GetString(DICOMRecord.iImgSOPInstUID));
 		m_ExPatInfo.append("\n" + Util.Trans("ImgNumber") + " : "
-				+ dr.GetString(dr.iImgNumber));
+				+ dr.GetString(DICOMRecord.iImgNumber));
 		if (!bHidePHI)
 		{
 			m_ExPatInfo.append("\n" + Util.Trans("ImgInstit") + " : "
-					+ dr.GetString(dr.iImgInstit));
+					+ dr.GetString(DICOMRecord.iImgInstit));
 		}
 		try
 		{
@@ -624,54 +626,55 @@ public class ImageViewer
 
 	class UniKey extends java.awt.event.KeyAdapter
 	{
+		@Override
 		public void keyPressed(java.awt.event.KeyEvent event)
 		{
 			int c = event.getKeyCode();
-			if (c == event.VK_F1 && m_WList.IsEnabled())
+			if (c == KeyEvent.VK_F1 && m_WList.IsEnabled())
 			{
 				m_WList.RunTool();
 				m_WList.Release();
-			} else if (c == event.VK_F2 && m_WL.IsEnabled())
+			} else if (c == KeyEvent.VK_F2 && m_WL.IsEnabled())
 			{
 				m_WL.RunTool();
 				m_WL.Release();
-			} else if (c == event.VK_F3 && m_Cine.IsEnabled())
+			} else if (c == KeyEvent.VK_F3 && m_Cine.IsEnabled())
 			{
 				m_Cine.RunTool();
 				m_Cine.Release();
-			} else if (c == event.VK_F4 && m_Info.IsEnabled())
+			} else if (c == KeyEvent.VK_F4 && m_Info.IsEnabled())
 			{
 				m_Info.RunTool();
 				m_Info.Release();
-			} else if (c == event.VK_F5 && m_Layout.IsEnabled())
+			} else if (c == KeyEvent.VK_F5 && m_Layout.IsEnabled())
 			{
 				m_Layout.RunTool();
 				m_Layout.Release();
-			} else if (c == event.VK_F6 && m_Zoom.IsEnabled())
+			} else if (c == KeyEvent.VK_F6 && m_Zoom.IsEnabled())
 			{
 				m_Zoom.RunTool();
 				m_Zoom.Release();
-			} else if (c == event.VK_F7 && m_Flip.IsEnabled())
+			} else if (c == KeyEvent.VK_F7 && m_Flip.IsEnabled())
 			{
 				m_Flip.RunTool();
 				m_Flip.Release();
-			} else if (c == event.VK_F8 && m_ROI.IsEnabled())
+			} else if (c == KeyEvent.VK_F8 && m_ROI.IsEnabled())
 			{
 				m_ROI.RunTool();
 				m_ROI.Release();
-			} else if (c == event.VK_F9 && m_Ruler.IsEnabled())
+			} else if (c == KeyEvent.VK_F9 && m_Ruler.IsEnabled())
 			{
 				m_Ruler.RunTool();
 				m_Ruler.Release();
-			} else if (c == event.VK_F10 && m_Ref.IsEnabled())
+			} else if (c == KeyEvent.VK_F10 && m_Ref.IsEnabled())
 			{
 				m_Ref.RunTool();
 				m_Ref.Release();
-			} else if (c == event.VK_F11 && m_Notes.IsEnabled())
+			} else if (c == KeyEvent.VK_F11 && m_Notes.IsEnabled())
 			{
 				m_Notes.RunTool();
 				m_Notes.Release();
-			} else if (c == event.VK_F12 && m_Reset.IsEnabled())
+			} else if (c == KeyEvent.VK_F12 && m_Reset.IsEnabled())
 			{
 				m_Reset.RunTool();
 				m_Reset.Release();
@@ -689,6 +692,7 @@ public class ImageViewer
 		 * instanceof MenuItem) { if(((MenuItem)o).getLabel().compareTo("Reload
 		 * lossless")==0) m_Study.ReloadSeries(); } }
 		 */
+		@Override
 		public void itemStateChanged(ItemEvent e)
 		{
 			Object o = e.getSource();
@@ -714,6 +718,7 @@ public class ImageViewer
 
 	class UniMouseMotion extends java.awt.event.MouseMotionAdapter
 	{
+		@Override
 		public void mouseDragged(java.awt.event.MouseEvent event)
 		{
 			Object object = event.getSource();
@@ -734,6 +739,7 @@ public class ImageViewer
 
 	class UniMouse extends java.awt.event.MouseAdapter
 	{
+		@Override
 		public void mousePressed(java.awt.event.MouseEvent event)
 		{
 			Object object = event.getSource();
@@ -782,6 +788,7 @@ public class ImageViewer
 			}
 		}
 
+		@Override
 		public void mouseExited(java.awt.event.MouseEvent event)
 		{
 			Object object = event.getSource();
@@ -792,6 +799,7 @@ public class ImageViewer
 			}
 		}
 
+		@Override
 		public void mouseReleased(java.awt.event.MouseEvent event)
 		{
 			if (event.getSource() == m_ExPatInfo)

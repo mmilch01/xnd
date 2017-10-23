@@ -47,6 +47,7 @@ public class FormattedTagExtractor implements TagExtractor
 	 * 
 	 * @see org.nrg.xnat.importer.dicom.TagExtractor#getName()
 	 */
+	@Override
 	public String getName()
 	{
 		return name;
@@ -57,6 +58,7 @@ public class FormattedTagExtractor implements TagExtractor
 	 * 
 	 * @see org.nrg.xnat.importer.dicom.TagExtractor#getMaxAttr()
 	 */
+	@Override
 	public int getMaxAttr()
 	{
 		return maxAttr;
@@ -72,6 +74,7 @@ public class FormattedTagExtractor implements TagExtractor
 	 * First pass: just return formatted string from first value for each
 	 * attribute
 	 */
+	@Override
 	public Collection getValues(final DicomObject o)
 	{
 		final Object[] vals = new Object[attrs.length];

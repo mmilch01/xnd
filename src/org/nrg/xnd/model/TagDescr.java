@@ -129,6 +129,7 @@ public class TagDescr implements Comparable
 			return false;
 		}
 	}
+	@Override
 	public int compareTo(Object o)
 	{
 		return m_TagName.compareTo(((TagDescr) o).m_TagName);

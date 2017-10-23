@@ -16,6 +16,7 @@ class CineThread extends Thread
 		this.study = study;
 	}
 
+	@Override
 	public void run()
 	{
 		int cur_dir = 1;

@@ -365,7 +365,7 @@ public abstract class WSTool
 	{
 		loadProperties(); // gets user, host and password from properties
 		loadCertificateProperties();
-		Object q = (String) arguments.get(QUIET_FLAG);
+		Object q = arguments.get(QUIET_FLAG);
 		if (q != null)
 		{
 			if (q instanceof ArrayList)
@@ -1069,6 +1069,7 @@ public abstract class WSTool
 		/**
 		 * Begin masking until asked to stop.
 		 */
+		@Override
 		public void run()
 		{
 

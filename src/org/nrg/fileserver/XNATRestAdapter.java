@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.TreeMap;
@@ -15,7 +14,6 @@ import java.util.Vector;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
-import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.DeleteMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
@@ -54,6 +52,7 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 	{
 		return m_root;
 	}
+	@Override
 	public boolean Put(ItemRecord remote, ItemRecord local)
 	{
 		String s;
@@ -71,6 +70,7 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 		method.releaseConnection();
 		return true;
 	}
+	@Override
 	public boolean Get(ItemRecord remote, ItemRecord local)
 	{
 		String path = remote.getRelativePath();

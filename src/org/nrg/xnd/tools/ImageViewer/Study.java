@@ -684,7 +684,7 @@ public class Study extends Canvas
 			{
 				for (int i = 0; i < m_SeriesVector.size(); i++)
 				{
-					m_Series[i] = (Series) m_SeriesVector.elementAt(i);
+					m_Series[i] = m_SeriesVector.elementAt(i);
 				}
 			}
 			if (lastSeries != null)
@@ -742,7 +742,7 @@ public class Study extends Canvas
 		Vector newSerVect = new Vector(sz);
 		for (i = 0; i < sz; i++)
 		{
-			newSerVect.addElement((Series) m_SeriesVector.elementAt(perm[i]));
+			newSerVect.addElement(m_SeriesVector.elementAt(perm[i]));
 		}
 		m_SeriesVector.removeAllElements();
 		m_SeriesVector = newSerVect;
@@ -1141,12 +1141,12 @@ public class Study extends Canvas
 		{
 			m_StLayType = codeStudy;
 		}
-		double count = (double) m_Series.length;
+		double count = m_Series.length;
 		double icount;
 		double shift = 5;
 		Dimension thisSize = getSize();
-		double width = (double) thisSize.width;
-		double height = (double) thisSize.height;
+		double width = thisSize.width;
+		double height = thisSize.height;
 		if (m_StClip == null)
 		{
 			m_StClip = new Rectangle(thisSize);
@@ -1518,6 +1518,7 @@ public class Study extends Canvas
 	 * background by default.
 	 * ********************************************************************
 	 */
+	@Override
 	public void update(Graphics g)
 	{
 		if (m_bUpdateBackground)
@@ -1533,6 +1534,7 @@ public class Study extends Canvas
 	 * borders and adequate frames.
 	 * ********************************************************************
 	 */
+	@Override
 	public void paint(Graphics g)
 	{
 		if (m_Series == null || g == null)

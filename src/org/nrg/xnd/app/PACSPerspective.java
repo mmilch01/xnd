@@ -8,6 +8,7 @@ import org.eclipse.ui.IWorkbenchPart;
 
 public class PACSPerspective implements IPerspectiveFactory
 {
+	@Override
 	public void createInitialLayout(IPageLayout layout)
 	{
 		layout.setEditorAreaVisible(false);

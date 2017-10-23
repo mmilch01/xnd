@@ -31,6 +31,7 @@ public class StoreXARWS extends WSTool
 		super();
 	}
 
+	@Override
 	public boolean process()
 	{
 		// OUTPUT DIRECTORY
@@ -253,12 +254,14 @@ public class StoreXARWS extends WSTool
 
 	}
 
+	@Override
 	public void loadHelpText()
 	{
 		super.loadHelpText();
 		helpText.put(FILE_FLAG, "File to upload.");
 	}
 
+	@Override
 	public void displayHelp()
 	{
 		System.out.println("\nStoreXAR Web Service\n");

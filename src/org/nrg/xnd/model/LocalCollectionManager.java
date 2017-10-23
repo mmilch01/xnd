@@ -23,6 +23,7 @@ public class LocalCollectionManager implements CollectionManager
 		m_rvm = rvm;
 		Refresh();
 	}
+	@Override
 	public void Refresh()
 	{
 		if (bNeedRefresh)
@@ -41,12 +42,14 @@ public class LocalCollectionManager implements CollectionManager
 			bNeedRefresh = false;
 		}
 	}
+	@Override
 	public void AddCollection(FileCollection fc)
 	{
 		m_cols.add(fc.GetID());
 		fc.Serialize(false);
 		// bNeedRefresh=true;
 	}
+	@Override
 	public void RemoveCollection(String col_id)
 	{
 		FileCollection fc = GetCollection(col_id);
@@ -59,6 +62,7 @@ public class LocalCollectionManager implements CollectionManager
 			bNeedRefresh = true;
 		}
 	}
+	@Override
 	public boolean Contains(String col_id)
 	{
 		return m_cols.contains(col_id);
@@ -69,6 +73,7 @@ public class LocalCollectionManager implements CollectionManager
 			m_ColCache.clear();
 		m_ColCache.put(cf.GetID(), cf);
 	}
+	@Override
 	public FileCollection FindCollection(File f)
 	{
 		try
@@ -111,11 +116,13 @@ public class LocalCollectionManager implements CollectionManager
 		return null;
 	}
 
+	@Override
 	public LocalFileCollection CreateCollection(String prefix,
 			boolean bGenerateColUID)
 	{
 		return new LocalFileCollection(prefix, bGenerateColUID);
 	}
+	@Override
 	public FileCollection GetCollection(String col_id)
 	{
 		if (!Contains(col_id))

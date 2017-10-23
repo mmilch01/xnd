@@ -128,6 +128,7 @@ public class DownloadDialog extends Dialog
 				m_downBtn.setText("...");
 				m_downBtn.addSelectionListener(new SelectionListener()
 				{
+					@Override
 					public void widgetSelected(SelectionEvent evt)
 					{
 						m_downFolder = Utils.SelectFolder("Download folder",
@@ -135,6 +136,7 @@ public class DownloadDialog extends Dialog
 						if (m_downFolder != null)
 							m_downFold.setText(m_downFolder);
 					}
+					@Override
 					public void widgetDefaultSelected(SelectionEvent evt)
 					{
 					}
@@ -150,10 +152,12 @@ public class DownloadDialog extends Dialog
 						"PrefsFileTransferAutoDownload", false));
 				m_chkDownManual.addSelectionListener(new SelectionListener()
 				{
+					@Override
 					public void widgetSelected(SelectionEvent evt)
 					{
 						UpdateBtns();
 					}
+					@Override
 					public void widgetDefaultSelected(SelectionEvent evt)
 					{
 					}
@@ -173,10 +177,12 @@ public class DownloadDialog extends Dialog
 				m_filterCombo.setLayoutData(m_filterComboLData);
 				m_filterCombo.addSelectionListener(new SelectionListener()
 				{
+					@Override
 					public void widgetSelected(SelectionEvent evt)
 					{
 						UpdateBtns();
 					}
+					@Override
 					public void widgetDefaultSelected(SelectionEvent evt)
 					{
 					}

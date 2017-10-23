@@ -122,6 +122,7 @@ public class FilterClauseDialog extends Dialog
 			m_FilterCombo.select(0);
 			m_FilterCombo.addSelectionListener(new SelectionListener()
 			{
+				@Override
 				public void widgetSelected(SelectionEvent e)
 				{
 					int sel;
@@ -129,6 +130,7 @@ public class FilterClauseDialog extends Dialog
 						return;
 					m_RegexpText.setEnabled(sel == 0);
 				}
+				@Override
 				public void widgetDefaultSelected(SelectionEvent e)
 				{
 				}

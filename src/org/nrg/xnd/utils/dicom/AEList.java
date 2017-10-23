@@ -119,6 +119,7 @@ public class AEList
 			init(from.m_name, from.m_netName, from.m_title, from.m_sendPort,
 					from.m_recvPort);
 		}
+		@Override
 		public int compareTo(AE ae)
 		{
 			int res = ae.m_name.compareTo(m_name);

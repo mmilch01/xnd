@@ -157,6 +157,7 @@ public class ItemTag implements Comparable<ItemTag>
 			return res;
 		return GetFirstValue().compareTo(lbl.GetFirstValue());
 	}
+	@Override
 	public int compareTo(ItemTag lbl)
 	{
 		// if(m_Name.compareTo(lbl.GetName())==0 &&

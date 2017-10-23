@@ -128,6 +128,7 @@ public abstract class CElement extends PlatformObject
 	}
 	protected abstract void UpdateParent();
 	public abstract String GetLabel();
+	@Override
 	public abstract int compareTo(CElement ce);
 	public abstract void ApplyOperation(Object operation, int how,
 			IProgressMonitor monitor);

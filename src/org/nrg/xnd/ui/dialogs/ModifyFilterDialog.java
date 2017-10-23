@@ -86,10 +86,12 @@ public class ModifyFilterDialog extends Dialog
 				m_Clauses.setItems(m_vf.GetClauseList(false));
 				m_Clauses.addSelectionListener(new SelectionListener()
 				{
+					@Override
 					public void widgetSelected(SelectionEvent evt)
 					{
 						UpdateButtons();
 					}
+					@Override
 					public void widgetDefaultSelected(SelectionEvent evt)
 					{
 					}
@@ -104,11 +106,13 @@ public class ModifyFilterDialog extends Dialog
 				m_AndButton.setText("Add");
 				m_AndButton.addSelectionListener(new SelectionListener()
 				{
+					@Override
 					public void widgetSelected(SelectionEvent evt)
 					{
 						AddClause(true);
 						UpdateButtons();
 					}
+					@Override
 					public void widgetDefaultSelected(SelectionEvent evt)
 					{
 					}
@@ -124,11 +128,13 @@ public class ModifyFilterDialog extends Dialog
 				m_RemoveButton.setText("Remove");
 				m_RemoveButton.addSelectionListener(new SelectionListener()
 				{
+					@Override
 					public void widgetSelected(SelectionEvent evt)
 					{
 						RemoveClause();
 						UpdateButtons();
 					}
+					@Override
 					public void widgetDefaultSelected(SelectionEvent evt)
 					{
 					}

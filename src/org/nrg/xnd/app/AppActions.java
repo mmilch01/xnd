@@ -59,15 +59,15 @@ public class AppActions extends ActionBarAdvisor
 	public static final String ID_MANAGE_TAGS = "org.nrg.xnat.desktop.ManageTagsAction",
 			ID_ADD_MANAGED_DIR = "org.nrg.xnat.desktop.AddManagedDir",
 			ID_SELECT_TAG_VIEW = "org.nrg.xnat.desktop.SelectFolderView",
-			ID_SHOW_LOCAL_VIEW = "org.nrg.xnat.desktop.ShowLocalView",
-			ID_SHOW_REMOTE_VIEW = "org.nrg.xnat.desktop.ShowRemoteView",
-			ID_SHOW_CONSOLE_VIEW = "org.nrg.xnat.desktop.ShowConsoleView",
+//			ID_SHOW_LOCAL_VIEW = "org.nrg.xnat.desktop.ShowLocalView",
+//			ID_SHOW_REMOTE_VIEW = "org.nrg.xnat.desktop.ShowRemoteView",
+//			ID_SHOW_CONSOLE_VIEW = "org.nrg.xnat.desktop.ShowConsoleView",
 			ID_REFRESH_VIEW = "org.nrg.xnat.desktop.RefreshView",
 			ID_EXPORT_TO_XNAT = "org.nrg.xnat.desktop.UploadToXNAT",
 			ID_IMPORT_FROM_XNAT = "org.nrg.xnat.desktop.DownloadFromXNAT",
 			ID_CONNECT_TO_REMOTE = "org.nrg.xnat.desktop.ConnectRemote",
-			ID_CLOSE_ACTIVE_VIEW = "org.nrg.xnat.desktop.CloseActiveView",
-			ID_IMAGE_VIEWER = "org.nrg.xnat.desktop.ImageViewer",
+//			ID_CLOSE_ACTIVE_VIEW = "org.nrg.xnat.desktop.CloseActiveView",
+//			ID_IMAGE_VIEWER = "org.nrg.xnat.desktop.ImageViewer",
 			ID_FILTER = "org.nrg.xnat.destktop.DataFilter",
 			ID_ONLINE_MANUAL = "org.nrg.xnat.destktop.OnlineManual",
 			ID_SHOW_XNAT_VIEW = "org.nrg.xnat.desktop.ShowXNATView",
@@ -150,6 +150,7 @@ public class AppActions extends ActionBarAdvisor
 					}
 				}
 			}
+			@Override
 			public void dispose()
 			{
 			}
@@ -197,6 +198,7 @@ public class AppActions extends ActionBarAdvisor
 					e.printStackTrace();
 				}
 			}
+			@Override
 			public void dispose()
 			{
 			}
@@ -243,6 +245,7 @@ public class AppActions extends ActionBarAdvisor
 					e.printStackTrace();
 				}
 			}
+			@Override
 			public void dispose()
 			{
 			}
@@ -289,6 +292,7 @@ public class AppActions extends ActionBarAdvisor
 					fv.UpdateTree();
 				}
 			}
+			@Override
 			public void dispose()
 			{
 			}
@@ -323,6 +327,7 @@ public class AppActions extends ActionBarAdvisor
 				}				
 				GetLocalFileView().Refresh(false);
 			}
+			@Override
 			public void dispose()
 			{
 			}
@@ -356,12 +361,13 @@ public class AppActions extends ActionBarAdvisor
 				fv.GetRepositoryViewManager().ToggleTagView();
 				fv.Refresh(false);
 			}
+			@Override
 			public void dispose()
 			{
 			}
 		}
 		RegisterAction(new SelectTagView(window));
-
+/*
 		class CloseActiveView extends Action
 				implements
 					ActionFactory.IWorkbenchAction
@@ -390,13 +396,15 @@ public class AppActions extends ActionBarAdvisor
 				{
 				}
 			}
+			@Override
 			public void dispose()
 			{
 			}
 		}
 		RegisterAction(new CloseActiveView(window));
-
+*/
 		// Show remote view
+/*		
 		class ShowRemoteView extends Action
 				implements
 					ActionFactory.IWorkbenchAction
@@ -432,13 +440,15 @@ public class AppActions extends ActionBarAdvisor
 					}
 				}
 			}
+			@Override
 			public void dispose()
 			{
 			}
 		}
 		RegisterAction(new ShowRemoteView(window));
-
+*/
 		// Show local view
+		/*
 		class ShowLocalView extends Action
 				implements
 					ActionFactory.IWorkbenchAction
@@ -468,12 +478,13 @@ public class AppActions extends ActionBarAdvisor
 					}
 				}
 			}
+			@Override
 			public void dispose()
 			{
 			}
 		}
 		RegisterAction(new ShowLocalView(window));
-
+*/
 		// connect to remote
 		class ConnectRemote extends Action implements IWorkbenchAction
 		{
@@ -485,6 +496,7 @@ public class AppActions extends ActionBarAdvisor
 				setToolTipText("Connect to remote repository");
 				setImageDescriptor(IImageKeys.GetImDescr(IImageKeys.CONNECT));
 			}
+			@Override
 			public void run()
 			{
 				FileView fv = GetActiveFileView();
@@ -493,6 +505,7 @@ public class AppActions extends ActionBarAdvisor
 				if (fv.Connect())
 					fv.Refresh(false);
 			}
+			@Override
 			public void dispose()
 			{
 			}
@@ -512,6 +525,7 @@ public class AppActions extends ActionBarAdvisor
 				setToolTipText("Browse remote XNAT archive");
 				setImageDescriptor(IImageKeys.GetImDescr(IImageKeys.XNAT16));
 			}
+			@Override
 			public void run()
 			{
 				if (PlatformUI.getWorkbench().getActiveWorkbenchWindow()
@@ -534,6 +548,7 @@ public class AppActions extends ActionBarAdvisor
 					}
 				}
 			}
+			@Override
 			public void dispose()
 			{
 			}
@@ -541,6 +556,7 @@ public class AppActions extends ActionBarAdvisor
 		RegisterAction(new ShowXNATView(window));
 
 		// Show console view
+/*		
 		class ShowConsoleView extends Action
 				implements
 					ActionFactory.IWorkbenchAction
@@ -555,6 +571,7 @@ public class AppActions extends ActionBarAdvisor
 				// AbstractUIPlugin.imageDescriptorFromPlugin("org.nrg.xnat.desktop",
 				// IImageKeys.LOCAL));
 			}
+			@Override
 			public void run()
 			{
 				if (PlatformUI.getWorkbench().getActiveWorkbenchWindow()
@@ -571,12 +588,13 @@ public class AppActions extends ActionBarAdvisor
 					}
 				}
 			}
+			@Override
 			public void dispose()
 			{
 			}
 		}
 		RegisterAction(new ShowConsoleView(window));
-
+*/
 		// refresh view
 		class RefreshView extends Action
 				implements
@@ -590,6 +608,7 @@ public class AppActions extends ActionBarAdvisor
 				setToolTipText("Refresh view");
 				setImageDescriptor(IImageKeys.GetImDescr(IImageKeys.REFRESH));
 			}
+			@Override
 			public void run()
 			{
 				IWorkbenchPart part = PlatformUI.getWorkbench()
@@ -607,6 +626,7 @@ public class AppActions extends ActionBarAdvisor
 				}
 
 			}
+			@Override
 			public void dispose()
 			{
 			}
@@ -630,6 +650,7 @@ public class AppActions extends ActionBarAdvisor
 				setImageDescriptor(IImageKeys.GetImDescr(IImageKeys.UPLOAD));
 				m_wnd.getSelectionService().addSelectionListener(this);
 			}
+			@Override
 			public void selectionChanged(IWorkbenchPart part, ISelection sel)
 			{
 				boolean bEnable = false;
@@ -643,6 +664,7 @@ public class AppActions extends ActionBarAdvisor
 				}
 				setEnabled(bEnable);
 			}
+			@Override
 			public void run()
 			{
 				if (StoreXARManager.IsRunning())
@@ -674,6 +696,7 @@ public class AppActions extends ActionBarAdvisor
 				}
 				d.open();
 			}
+			@Override
 			public void dispose()
 			{
 				m_wnd.getSelectionService().removeSelectionListener(this);
@@ -698,6 +721,7 @@ public class AppActions extends ActionBarAdvisor
 				setImageDescriptor(IImageKeys.GetImDescr(IImageKeys.DOWNLOAD));
 				m_wnd.getSelectionService().addSelectionListener(this);
 			}
+			@Override
 			public void selectionChanged(IWorkbenchPart part, ISelection sel)
 			{
 				/*
@@ -711,6 +735,7 @@ public class AppActions extends ActionBarAdvisor
 				 * setEnabled(bEnable);
 				 */
 			}
+			@Override
 			public void run()
 			{
 				FileView fv;
@@ -729,6 +754,7 @@ public class AppActions extends ActionBarAdvisor
 				// Shell(),fv.GetSelectedFolder());
 				// ?? d.open();
 			}
+			@Override
 			public void dispose()
 			{
 				m_wnd.getSelectionService().removeSelectionListener(this);
@@ -737,6 +763,7 @@ public class AppActions extends ActionBarAdvisor
 		RegisterAction(new DownloadAction(window), false);
 
 		// Image view action
+/*		
 		class ImageViewAction extends Action
 				implements
 					ActionFactory.IWorkbenchAction,
@@ -753,6 +780,7 @@ public class AppActions extends ActionBarAdvisor
 				setImageDescriptor(IImageKeys.GetImDescr(IImageKeys.IMVIEWER));
 				m_wnd.getSelectionService().addSelectionListener(this);
 			}
+			@Override
 			public void selectionChanged(IWorkbenchPart part, ISelection sel)
 			{
 				boolean bEnable = false;
@@ -766,6 +794,7 @@ public class AppActions extends ActionBarAdvisor
 				}
 				setEnabled(bEnable);
 			}
+			@Override
 			public void run()
 			{
 				IViewPart ivp = GetActiveViewPart();
@@ -790,12 +819,14 @@ public class AppActions extends ActionBarAdvisor
 				}
 				
 			}
+			@Override
 			public void dispose()
 			{
 				m_wnd.getSelectionService().removeSelectionListener(this);
 			}
 		};
 		RegisterAction(new ImageViewAction(window), true);
+*/		
 		// end of image viewer action
 
 		// View filter action
@@ -818,6 +849,7 @@ public class AppActions extends ActionBarAdvisor
 				setImageDescriptor(IImageKeys.GetImDescr(IImageKeys.FILTER));
 				m_wnd.getSelectionService().addSelectionListener(this);
 			}
+			@Override
 			public void selectionChanged(IWorkbenchPart part, ISelection sel)
 			{
 				/*
@@ -826,6 +858,7 @@ public class AppActions extends ActionBarAdvisor
 				 * } } setEnabled(bEnable);
 				 */
 			}
+			@Override
 			public void run()
 			{
 				FileView fv = GetActiveFileView();
@@ -840,6 +873,7 @@ public class AppActions extends ActionBarAdvisor
 				// XNDApp.app_vf.SetEnabled(isChecked());
 				fv.Refresh(true);
 			}
+			@Override
 			public void dispose()
 			{
 				m_wnd.getSelectionService().removeSelectionListener(this);
@@ -861,6 +895,7 @@ public class AppActions extends ActionBarAdvisor
 				setText("&Online user manual");
 				m_wnd = wnd;
 			}
+			@Override
 			public void run()
 			{
 				try
@@ -876,6 +911,7 @@ public class AppActions extends ActionBarAdvisor
 									Window.OK);
 				}
 			}
+			@Override
 			public void dispose()
 			{
 			}
@@ -887,6 +923,7 @@ public class AppActions extends ActionBarAdvisor
 	{
 		return m_actions.get(id);
 	}
+	@Override
 	protected void fillMenuBar(IMenuManager menuBar)
 	{
 		MenuManager file_mgr = new MenuManager("&Repository", "Repository");
@@ -903,20 +940,21 @@ public class AppActions extends ActionBarAdvisor
 		// view_mgr.add(new Separator());
 		view_mgr.add(Action(ID_REFRESH_VIEW));
 		view_mgr.add(Action(ID_FILTER));
-		view_mgr.add(Action(ID_SHOW_LOCAL_VIEW));
-		view_mgr.add(Action(ID_SHOW_REMOTE_VIEW));
-		view_mgr.add(Action(ID_SHOW_XNAT_VIEW));
-		view_mgr.add(Action(ID_SHOW_CONSOLE_VIEW));
+//		view_mgr.add(Action(ID_SHOW_LOCAL_VIEW));
+//		view_mgr.add(Action(ID_SHOW_REMOTE_VIEW));
+//		view_mgr.add(Action(ID_SHOW_XNAT_VIEW));
+//		view_mgr.add(Action(ID_SHOW_CONSOLE_VIEW));
+//		view_mgr.add(new Separator());
+//		view_mgr.add(Action(ID_CLOSE_ACTIVE_VIEW));
 		view_mgr.add(new Separator());
-		view_mgr.add(Action(ID_CLOSE_ACTIVE_VIEW));
-		view_mgr.add(new Separator());
-		view_mgr.add(Action(ActionFactory.OPEN_PERSPECTIVE_DIALOG.getId()));
+//		view_mgr.add(Action(ActionFactory.OPEN_PERSPECTIVE_DIALOG.getId()));
 		// view_mgr.add(Action("org.eclipse.ui.perspectives.showPerspective"));
 		view_mgr.add(Action(ActionFactory.PREFERENCES.getId()));
-
+/*
 		MenuManager tools_mgr = new MenuManager("&Tools", "Tools");
 		tools_mgr.add(Action(ID_EXPORT_TO_XNAT));
 		tools_mgr.add(Action(ID_DICOM_QR_WIZARD));
+*/		
 		// tools_mgr.add(Action(ID_IMAGE_VIEWER));
 		// tools_mgr.add(m_importFromXNATAction);
 
@@ -925,9 +963,10 @@ public class AppActions extends ActionBarAdvisor
 		help_mgr.add(Action(ActionFactory.ABOUT.getId()));
 		menuBar.add(file_mgr);
 		menuBar.add(view_mgr);
-		menuBar.add(tools_mgr);
+//		menuBar.add(tools_mgr);
 		menuBar.add(help_mgr);
 	}
+	@Override
 	protected void fillCoolBar(ICoolBarManager mgr)
 	{
 		IToolBarManager toolbar = new ToolBarManager(mgr.getStyle());
@@ -940,10 +979,10 @@ public class AppActions extends ActionBarAdvisor
 		toolbar.add(Action(ID_FILTER));
 		toolbar.add(new Separator());
 		// toolbar.add(m_connectAction);
-		toolbar.add(Action(ID_SHOW_LOCAL_VIEW));
+//		toolbar.add(Action(ID_SHOW_LOCAL_VIEW));
 		// toolbar.add(Action(ID_SHOW_REMOTE_VIEW));
-		toolbar.add(new Separator());
-		toolbar.add(Action(ID_IMAGE_VIEWER));
+//		toolbar.add(new Separator());
+//		toolbar.add(Action(ID_IMAGE_VIEWER));
 		// toolbar.add(Action(ID_EXPORT_TO_XNAT));
 		// toolbar.add(m_importFromXNATAction);
 	}

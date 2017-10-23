@@ -201,6 +201,7 @@ public abstract class ViewBase extends ViewPart implements IRunnableWithProgress
 			Display.getDefault().syncExec(new Runnable()
 			{
 				Collection<CElement> ccce;
+				@Override
 				public void run()
 				{
 					ccce = GetSelectedElements();
@@ -216,6 +217,7 @@ public abstract class ViewBase extends ViewPart implements IRunnableWithProgress
 			{
 				Display.getDefault().syncExec(new Runnable()
 				{
+					@Override
 					public void run()
 					{
 						Utils.ShowMessageBox("",
@@ -230,6 +232,7 @@ public abstract class ViewBase extends ViewPart implements IRunnableWithProgress
 			{
 				Display.getDefault().syncExec(new Runnable()
 				{
+					@Override
 					public void run()
 					{
 						DontShowAgainDialog dlg = new DontShowAgainDialog(
@@ -248,6 +251,7 @@ public abstract class ViewBase extends ViewPart implements IRunnableWithProgress
 				if(monitor.isCanceled()) return;
 				Display.getDefault().syncExec(new Runnable()
 				{
+					@Override
 					public void run()
 					{						
 						Utils.ShowMessageBox("", "Could not open some images!",
@@ -262,10 +266,12 @@ public abstract class ViewBase extends ViewPart implements IRunnableWithProgress
 	}
 	class TableLabelProvider extends LabelProvider implements ITableLabelProvider
 	{
+		@Override
 		public Image getImage(Object element)
 		{
 			return ((CElement) element).GetImage();
 		}
+		@Override
 		public Image getColumnImage(Object element, int columnIndex)
 		{
 			if (columnIndex == 0)
@@ -273,6 +279,7 @@ public abstract class ViewBase extends ViewPart implements IRunnableWithProgress
 			else
 				return null;
 		}
+		@Override
 		public String getColumnText(Object element, int columnIndex)
 		{
 			if (columnIndex == 0)
@@ -373,10 +380,12 @@ public abstract class ViewBase extends ViewPart implements IRunnableWithProgress
 			
 			m_tf.addSelectionListener(new SelectionListener()
 			{
+					@Override
 					public void widgetDefaultSelected(SelectionEvent e)
 					{
 						// TODO Auto-generated method stub
 					}
+					@Override
 					public void widgetSelected(SelectionEvent e)
 					{
 						boolean bTagView=GetRepositoryViewManager().IsTagView();

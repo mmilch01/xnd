@@ -64,6 +64,7 @@ public class QRWizard extends Wizard implements IRunnableWithProgress
 		String m_storeFolder;
 		AE m_localAE;
 		AE m_remoteAE;
+		@Override
 		public void run()
 		{
 			m_qim = m_page2.m_qim;
@@ -99,6 +100,7 @@ public class QRWizard extends Wizard implements IRunnableWithProgress
 		{
 			Display.getDefault().syncExec(new Runnable()
 			{
+				@Override
 				public void run()
 				{
 					Utils.ShowMessageBox("Import failed",
@@ -143,6 +145,7 @@ public class QRWizard extends Wizard implements IRunnableWithProgress
 					final String fn = fileName;
 					Display.getDefault().syncExec(new Runnable()
 					{
+						@Override
 						public void run()
 						{
 							ConsoleView.AppendMessage("DICOM file received: "
@@ -173,6 +176,7 @@ public class QRWizard extends Wizard implements IRunnableWithProgress
 				{
 					Display.getDefault().syncExec(new Runnable()
 					{
+						@Override
 						public void run()
 						{
 							Utils.ShowMessageBox("Import failed",
@@ -227,6 +231,7 @@ public class QRWizard extends Wizard implements IRunnableWithProgress
 		 * mon); } fl.Invalidate();
 		 */
 	}
+	@Override
 	public void run(IProgressMonitor monitor) throws InvocationTargetException,
 			InterruptedException
 	{

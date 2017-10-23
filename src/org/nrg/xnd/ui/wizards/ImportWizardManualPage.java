@@ -84,6 +84,7 @@ public class ImportWizardManualPage extends WizardPage
 		m_StatusLabel.setText("");
 		return true;
 	}
+	@Override
 	public void createControl(Composite parent)
 	{
 		Composite topLevel = new Composite(parent, SWT.NONE);
@@ -124,6 +125,7 @@ public class ImportWizardManualPage extends WizardPage
 						+ td.GetName(), 10);
 				c.addModifyListener(new ModifyListener()
 				{
+					@Override
 					public void modifyText(ModifyEvent evt)
 					{
 						getWizard().getContainer().updateButtons();
@@ -207,6 +209,7 @@ public class ImportWizardManualPage extends WizardPage
 		te.minimumWidth = 50;
 		m_TagsTable.addListener(SWT.MouseDown, new Listener()
 		{
+			@Override
 			public void handleEvent(Event e)
 			{
 				m_TagsTable.setFocus();
@@ -228,6 +231,7 @@ public class ImportWizardManualPage extends WizardPage
 				newEd.setText(ti.getText(col));
 				newEd.addModifyListener(new ModifyListener()
 				{
+					@Override
 					public void modifyText(ModifyEvent e)
 					{
 						Text text = (Text) te.getEditor();

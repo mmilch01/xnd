@@ -161,7 +161,7 @@ public class ShortImage extends AbstractImage
 	@Override
 	public long GetPix(int x, int y)
 	{
-		return (long) (m_pix[m_wid * y + x] & 0xffff);
+		return (m_pix[m_wid * y + x] & 0xffff);
 	}
 
 	@Override
@@ -268,7 +268,7 @@ public class ShortImage extends AbstractImage
 			// if (value<0) value = 0;
 			// value = (int)(value*scale+0.5);
 			// if (value>255) value = 255;
-			value = (int) (lt[ind] & 0xff);
+			value = (lt[ind] & 0xff);
 			if (src[i] > max)
 				value = 255;
 			// if(value>255) value=255;

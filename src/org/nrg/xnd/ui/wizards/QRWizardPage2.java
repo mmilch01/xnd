@@ -202,6 +202,7 @@ public class QRWizardPage2 extends WizardPage
 		return filter;
 	}
 
+	@Override
 	public void createControl(Composite parent)
 	{
 		Composite topLevel = new Composite(parent, SWT.NONE);
@@ -233,6 +234,7 @@ public class QRWizardPage2 extends WizardPage
 				m_PatID.setLayoutData(m_PatIDLData);
 				m_PatID.addModifyListener(new ModifyListener()
 				{
+					@Override
 					public void modifyText(ModifyEvent evt)
 					{
 						setPageComplete(isPageComplete());
@@ -254,6 +256,7 @@ public class QRWizardPage2 extends WizardPage
 				m_PatName.setLayoutData(m_PatNameLData);
 				m_PatName.addModifyListener(new ModifyListener()
 				{
+					@Override
 					public void modifyText(ModifyEvent evt)
 					{
 						setPageComplete(isPageComplete());
@@ -275,6 +278,7 @@ public class QRWizardPage2 extends WizardPage
 				m_StBeginDate.setLayoutData(m_StBeginDateLData);
 				m_StBeginDate.addModifyListener(new ModifyListener()
 				{
+					@Override
 					public void modifyText(ModifyEvent evt)
 					{
 						setPageComplete(isPageComplete());
@@ -299,6 +303,7 @@ public class QRWizardPage2 extends WizardPage
 				m_StEndDate.setLayoutData(combo1LData);
 				m_StEndDate.addModifyListener(new ModifyListener()
 				{
+					@Override
 					public void modifyText(ModifyEvent evt)
 					{
 						setPageComplete(isPageComplete());
@@ -322,6 +327,7 @@ public class QRWizardPage2 extends WizardPage
 				m_AccNumText.setLayoutData(m_AccNumTextLData);
 				m_AccNumText.addModifyListener(new ModifyListener()
 				{
+					@Override
 					public void modifyText(ModifyEvent evt)
 					{
 						setPageComplete(isPageComplete());
@@ -343,6 +349,7 @@ public class QRWizardPage2 extends WizardPage
 				m_ModalityCombo.setLayoutData(m_ModalityComboLData);
 				m_ModalityCombo.addModifyListener(new ModifyListener()
 				{
+					@Override
 					public void modifyText(ModifyEvent evt)
 					{
 						setPageComplete(isPageComplete());
@@ -360,6 +367,7 @@ public class QRWizardPage2 extends WizardPage
 			m_QueryButton.setText("Search for studies");
 			m_QueryButton.addSelectionListener(new SelectionAdapter()
 			{
+				@Override
 				public void widgetSelected(SelectionEvent evt)
 				{
 					performQuery();
@@ -388,6 +396,7 @@ public class QRWizardPage2 extends WizardPage
 				m_StudyTable.setBounds(7, 17, 820, 200);
 				m_StudyTable.addMouseListener(new MouseAdapter()
 				{
+					@Override
 					public void mouseUp(MouseEvent evt)
 					{
 						setPageComplete(isPageComplete());
@@ -415,6 +424,7 @@ public class QRWizardPage2 extends WizardPage
 		setControl(topLevel);
 		topLevel.addFocusListener(new FocusAdapter()
 		{
+			@Override
 			public void focusGained(FocusEvent evt)
 			{
 				// InitTable();

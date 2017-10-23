@@ -29,20 +29,20 @@ public class PrefsFileTransfer extends PreferencePage
 {
 	public PrefsFileTransfer() {
 	}
-	private Button m_BrowseButton;
-	private Combo m_IncomingFolderText;
-	private MemoCombo m_IncomingFolderTextM;
-	private Label m_IncomingFolderLabel;
+//	private Button m_BrowseButton;
+//	private Combo m_IncomingFolderText;
+//	private MemoCombo m_IncomingFolderTextM;
+//	private Label m_IncomingFolderLabel;
 	private MemoCheckBox m_ExtractDataFromDICOMHeadersM;
 	private Button m_ExtractDataFromDICOMHeaders;
 	private Button m_RunPipelinesCheck;
 	private Button m_PreZipCheck;
-	private	MemoCheckBox m_PreZipCheckM;	
+	private	MemoCheckBox m_PreZipCheckM;
 	private MemoCheckBox m_RunPipelinesCheckM;
 	private Group group2;
-	private Group group1;
-	private Button m_FilteredDownloadCheck;
-	private String m_IncomingFolder;
+//	private Group group1;
+//	private Button m_FilteredDownloadCheck;
+//	private String m_IncomingFolder;
 
 	@Override
 	protected Control createContents(Composite parent)
@@ -51,11 +51,13 @@ public class PrefsFileTransfer extends PreferencePage
 		GridLayout parentLayout = new GridLayout();
 		parent.setLayout(parentLayout);
 		{
+/*			
 			group1 = new Group(parent, SWT.NONE);
 			GridLayout group1Layout = new GridLayout();
 			group1Layout.numColumns = 3;
 			group1.setLayout(group1Layout);
 			group1.setText("Download options");
+*/			
 		}
 		{
 			group2 = new Group(parent, SWT.NONE);
@@ -93,18 +95,22 @@ public class PrefsFileTransfer extends PreferencePage
 				m_PreZipCheck.setText("Zip files before uploading");
 			}
 		}
+/*		
 		{
+			
 			m_IncomingFolderLabel = new Label(group1, SWT.NONE);
 			m_IncomingFolderLabel.setText("Incoming folder:");
+			
 		}
 		{
+			
 			GridData m_IncomingFolderTextLData = new GridData();
 			m_IncomingFolderTextLData.horizontalAlignment = GridData.FILL;
 			m_IncomingFolderTextLData.grabExcessHorizontalSpace = true;
 			m_IncomingFolderText = new Combo(group1, SWT.BORDER);
 			m_IncomingFolderText.setLayoutData(m_IncomingFolderTextLData);
 			m_IncomingFolderTextM = new MemoCombo(m_IncomingFolderText,
-					"PrefsFileTransfer.IncomingFolder", 10);
+					"PrefsFileTransfer.IncomingFolder", 10);					
 		}
 		{
 			m_BrowseButton = new Button(group1, SWT.PUSH | SWT.CENTER);
@@ -133,12 +139,14 @@ public class PrefsFileTransfer extends PreferencePage
 			m_FilteredDownloadCheck.setSelection(XNDApp.app_Prefs.getBoolean(
 					"PrefsFileTransferFilterDownload", true));
 		}
+*/		
 
 		UpdateData(false);
 		return null;
 	}
 	private void UpdateData(boolean bStore)
 	{
+/*		
 		if (!bStore)
 		{
 			m_IncomingFolderText.setText(m_IncomingFolder);
@@ -146,18 +154,20 @@ public class PrefsFileTransfer extends PreferencePage
 		{
 			m_IncomingFolder = m_IncomingFolderText.getText();
 		}
+*/		
 	}
 	@Override
 	public boolean performOk()
 	{
 		UpdateData(true);
+		/*
 		if (!(new File(m_IncomingFolder)).exists())
 		{
 			if (Utils.ShowMessageBox("",
 					"Incoming folder does not exist, proceed?", SWT.OK
 							| SWT.CANCEL) == SWT.CANCEL)
 				return false;
-		}
+		}		
 		XNDApp.app_Prefs.put("IncomingFolder", m_IncomingFolder);
 		try
 		{
@@ -165,14 +175,16 @@ public class PrefsFileTransfer extends PreferencePage
 		} catch (Exception e)
 		{
 		}
+		*/
 		m_ExtractDataFromDICOMHeadersM.Save();
 		m_RunPipelinesCheckM.Save();
-		m_IncomingFolderTextM.Save();
+//		m_IncomingFolderTextM.Save();
 		m_PreZipCheckM.Save();
 		return true;
 	}
+	@Override
 	public void init(IWorkbench workbench)
 	{
-		m_IncomingFolder = Utils.GetIncomingFolder();
+		//m_IncomingFolder = Utils.GetIncomingFolder();
 	}
 }

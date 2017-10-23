@@ -14,6 +14,7 @@ public class SWTProgressReporter implements IProgressReporter
 	{
 		m_mon.done();
 	}
+	@Override
 	public boolean isCanceled()
 	{
 		return m_mon.isCanceled();

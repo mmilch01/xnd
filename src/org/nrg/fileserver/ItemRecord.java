@@ -37,6 +37,7 @@ public class ItemRecord implements Comparable
 	{
 		return getTagValue("Collection_ID");
 	}
+	@Override
 	public int compareTo(Object o)
 	{
 		if (m_AbsolutePath != null)

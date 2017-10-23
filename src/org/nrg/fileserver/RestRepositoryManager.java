@@ -844,6 +844,7 @@ public final class RestRepositoryManager extends RepositoryManager
 	 */
 	// public boolean Put(final ItemRecord dest, final ItemRecord src, boolean
 	// isClient)
+	@Override
 	public boolean Put(final ItemRecord dest, final ItemRecord src)
 	{
 		final URI uri;
@@ -931,6 +932,7 @@ public final class RestRepositoryManager extends RepositoryManager
 	 * org.nrg.xnat.fileserver.ItemManager#Get(org.nrg.xnat.repository.ItemRecord
 	 * , org.nrg.xnat.repository.ItemRecord)
 	 */
+	@Override
 	public boolean Get(final ItemRecord src, final ItemRecord dest)
 	{
 

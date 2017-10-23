@@ -70,6 +70,7 @@ public class PrefsView extends PreferencePage
 		XNDApp.app_maxRecords = (lim) ? Utils.MAX_TABLE_RECORDS : -1;
 		return true;
 	}
+	@Override
 	public void init(IWorkbench workbench)
 	{
 	}

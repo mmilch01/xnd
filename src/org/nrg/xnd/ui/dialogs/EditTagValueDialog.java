@@ -108,6 +108,7 @@ public class EditTagValueDialog extends Dialog
 		}
 		m_TaglistCombo.addSelectionListener(new SelectionListener()
 		{
+			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
 				if (m_DlgType == EDIT)
@@ -124,6 +125,7 @@ public class EditTagValueDialog extends Dialog
 				} else
 					m_Value.removeAll();
 			}
+			@Override
 			public void widgetDefaultSelected(SelectionEvent e)
 			{
 			}

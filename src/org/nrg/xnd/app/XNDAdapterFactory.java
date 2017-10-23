@@ -13,27 +13,33 @@ public class XNDAdapterFactory implements IAdapterFactory
 {
 	private IWorkbenchAdapter adapter = new IWorkbenchAdapter()
 	{
+		@Override
 		public Object getParent(Object o)
 		{
 			return ((CElement) o).GetParent();
 		}
+		@Override
 		public String getLabel(Object o)
 		{
 			CElement ce = (CElement) o;
+			/*
 			if (ce instanceof FSFolder)
 			{
-				FSObject fso = ((FSFolder) ce).GetFSObject();
+				FSObject fso = ((FSFolder) ce).GetFSObject();				
 				if ((fso != null)
 						&& (fso.getAbsolutePath().compareTo(
 								Utils.GetIncomingFolder()) == 0))
 					return "<Incoming>";
 			}
+			*/
 			return ((CElement) o).GetLabel();
 		}
+		@Override
 		public ImageDescriptor getImageDescriptor(Object object)
 		{
 			return ((CElement) object).GetImageDescriptor();
 		}
+		@Override
 		public Object[] getChildren(Object o)
 		{
 			final CElement[] fi = new CElement[0];
@@ -41,6 +47,7 @@ public class XNDAdapterFactory implements IAdapterFactory
 					.toArray(fi);
 		}
 	};
+	@Override
 	public Object getAdapter(Object adaptableObject, Class adapterType)
 	{
 		return adapter;
@@ -55,6 +62,7 @@ public class XNDAdapterFactory implements IAdapterFactory
 		 * return entryAdapter;
 		 */
 	}
+	@Override
 	public Class[] getAdapterList()
 	{
 		return new Class[]{IWorkbenchAdapter.class};

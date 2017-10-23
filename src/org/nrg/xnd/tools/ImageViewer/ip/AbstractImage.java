@@ -227,6 +227,7 @@ public abstract class AbstractImage
 		m_ci.SetDefaultLookupTable();
 	}
 
+	@Override
 	public void finalize()
 	{
 		if (m_serFile != null)

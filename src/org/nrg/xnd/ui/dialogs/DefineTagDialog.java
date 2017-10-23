@@ -111,6 +111,7 @@ public class DefineTagDialog extends Dialog
 				m_Predef_vals.setEnabled(true);
 				m_Predef_vals.addSelectionListener(new SelectionListener()
 				{
+					@Override
 					public void widgetSelected(SelectionEvent evt)
 					{
 						boolean bSel = m_Predef_vals.getSelection();
@@ -118,6 +119,7 @@ public class DefineTagDialog extends Dialog
 						m_addVal.setEnabled(bSel);
 						m_RemoveVal.setEnabled(bSel);
 					}
+					@Override
 					public void widgetDefaultSelected(SelectionEvent evt)
 					{
 					}
@@ -139,12 +141,14 @@ public class DefineTagDialog extends Dialog
 				m_addVal.setText("Add");
 				m_addVal.addSelectionListener(new SelectionListener()
 				{
+					@Override
 					public void widgetSelected(SelectionEvent evt)
 					{
 						InputDialog d = new InputDialog(new Shell(),
 								"Add tag value", "Value:", "",
 								new IInputValidator()
 								{
+									@Override
 									public String isValid(String txt)
 									{
 										if (txt == null || txt.length() < 1)
@@ -161,6 +165,7 @@ public class DefineTagDialog extends Dialog
 						if (d.open() == Window.OK)
 							list1.add(d.getValue());
 					}
+					@Override
 					public void widgetDefaultSelected(SelectionEvent evt)
 					{
 					}
@@ -175,10 +180,12 @@ public class DefineTagDialog extends Dialog
 				m_RemoveVal.setText("Remove");
 				m_RemoveVal.addSelectionListener(new SelectionListener()
 				{
+					@Override
 					public void widgetSelected(SelectionEvent evt)
 					{
 						list1.remove(list1.getSelectionIndices());
 					}
+					@Override
 					public void widgetDefaultSelected(SelectionEvent evt)
 					{
 					}

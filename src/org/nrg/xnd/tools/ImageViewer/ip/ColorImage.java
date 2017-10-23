@@ -111,13 +111,13 @@ public class ColorImage extends AbstractImage
 
 	private int GetGrayValue(int rgb)
 	{
-		return (int) ((rgb & 0xff) + ((rgb & 0xff00) >> 8) + ((rgb & 0xff0000) >> 16)) / 3;
+		return ((rgb & 0xff) + ((rgb & 0xff00) >> 8) + ((rgb & 0xff0000) >> 16)) / 3;
 	}
 
 	@Override
 	public long GetPix(int x, int y)
 	{
-		return (long) GetGrayValue(m_pix[m_wid * y + x]);
+		return GetGrayValue(m_pix[m_wid * y + x]);
 	}
 
 	@Override
@@ -148,15 +148,15 @@ public class ColorImage extends AbstractImage
 		// source bytes
 		{
 			oldPixel = src[i];
-			byte1 = (int) (oldPixel & 0x0000ff);
+			byte1 = (oldPixel & 0x0000ff);
 			byte1 = lookup[byte1 & 0xff];
-			byte2 = (int) ((oldPixel & 0x00ff00) >> 8);
+			byte2 = ((oldPixel & 0x00ff00) >> 8);
 			byte2 = lookup[byte2 & 0xff];
-			byte3 = (int) ((oldPixel & 0xff0000) >> 16);
+			byte3 = ((oldPixel & 0xff0000) >> 16);
 			byte3 = lookup[byte3 & 0xff];
 			newPixels[i] = 0xff000000 | (byte1 & 0xff)
-					| (((int) byte2 << 8) & 0xff00)
-					| (((int) byte3 << 16) & 0xff0000);
+					| ((byte2 << 8) & 0xff00)
+					| ((byte3 << 16) & 0xff0000);
 		}
 		return newPixels;
 	}
@@ -277,10 +277,10 @@ public class ColorImage extends AbstractImage
 		int[] oldSrc = m_pix;
 		for (int y = 0; y < newH; y++)
 		{
-			oldY = Math.min(m_ht - 1, (int) (((double) y) * rY + 0.5));
+			oldY = Math.min(m_ht - 1, (int) (y * rY + 0.5));
 			for (int x = 0; x < newW; x++)
 			{
-				oldX = Math.min(m_wid - 1, (int) (((double) x) * rX + 0.5));
+				oldX = Math.min(m_wid - 1, (int) (x * rX + 0.5));
 				newSrc[newW * y + x] = oldSrc[m_wid * oldY + oldX];
 			}
 		}
@@ -306,8 +306,8 @@ public class ColorImage extends AbstractImage
 				byte[] pixels = Utils.UnzipBuf((byte[]) pic);
 				m_pix = new int[(m_wid) * (m_ht + hdiff)];
 				int start_pix = 0xff000000 | (pixels[2] & 0xff)
-						| (((int) pixels[1] << 8) & 0xff00)
-						| (((int) pixels[0] << 16) & 0xff0000);
+						| ((pixels[1] << 8) & 0xff00)
+						| ((pixels[0] << 16) & 0xff0000);
 
 				int tmp, tmp1;
 				for (int i = 0; i < m_ht + hdiff; i++)
@@ -319,8 +319,8 @@ public class ColorImage extends AbstractImage
 						if (i < m_ht)
 							m_pix[tmp + j] = 0xff000000
 									| (pixels[tmp1 + 3 * j + 2] & 0xff)
-									| (((int) pixels[tmp1 + 3 * j + 1] << 8) & 0xff00)
-									| (((int) pixels[tmp1 + 3 * j] << 16) & 0xff0000);
+									| ((pixels[tmp1 + 3 * j + 1] << 8) & 0xff00)
+									| ((pixels[tmp1 + 3 * j] << 16) & 0xff0000);
 						else
 							m_pix[tmp + j] = start_pix;
 					}
@@ -358,8 +358,8 @@ public class ColorImage extends AbstractImage
 				m_pix = new int[m_wid * (m_ht + hdiff)];
 				int tmp;
 				int start_pix = 0xff000000 | (src[2] & 0xff)
-						| (((int) src[1] << 8) & 0xff00)
-						| (((int) src[0] << 16) & 0xff0000);
+						| ((src[1] << 8) & 0xff00)
+						| ((src[0] << 16) & 0xff0000);
 				for (int i = 0; i < m_ht + hdiff; i++)
 				{
 					tmp = i * (m_wid);

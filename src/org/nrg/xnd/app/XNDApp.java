@@ -216,6 +216,7 @@ public class XNDApp implements IApplication
 	{
 		return true;
 	}
+	@Override
 	public Object start(IApplicationContext context) throws Exception
 	{
 		if (!TestFunction1())
@@ -283,6 +284,7 @@ public class XNDApp implements IApplication
 		{
 			// String
 			// basepath=Platform.getStateLocation(Platform.getBundle("org.nrg.xnat.desktop")).toString();
+			/*
 			File in_folder = new File(Utils.GetIncomingFolder());
 			if (!in_folder.exists())
 			{
@@ -297,6 +299,7 @@ public class XNDApp implements IApplication
 									+ user_dir, SWT.OK);
 				}
 			}
+			*/
 			boolean bStart = false;
 			int nTries = 0;
 			while (nTries < 20 && !bStart)
@@ -304,8 +307,9 @@ public class XNDApp implements IApplication
 				try
 				{
 					m_engine = Engine.getEngine(new File(userPath + "/db.dat"),
-							new File(Utils.GetIncomingFolder() + "/"
-									+ "uploads"));
+							new File(Utils.GetUserFolder() + "/" + "uploads"));
+//							new File(Utils.GetIncomingFolder() + "/"+ "uploads"));
+					
 					bStart = true;
 				} catch (Exception e)
 				{
@@ -418,6 +422,7 @@ public class XNDApp implements IApplication
 	 * 
 	 * @see org.eclipse.equinox.app.IApplication#stop()
 	 */
+	@Override
 	public void stop()
 	{
 		ControlServer(SERVER_REPOSITORY, false);
@@ -428,6 +433,7 @@ public class XNDApp implements IApplication
 		final Display display = workbench.getDisplay();
 		display.syncExec(new Runnable()
 		{
+			@Override
 			public void run()
 			{
 				if (!display.isDisposed())

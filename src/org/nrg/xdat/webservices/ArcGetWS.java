@@ -53,6 +53,7 @@ public class ArcGetWS extends WSTool
 		super();
 	}
 
+	@Override
 	public boolean process()
 	{
 		// OUTPUT DIRECTORY
@@ -490,7 +491,7 @@ public class ArcGetWS extends WSTool
 			} else
 			{
 				urlString += "/raw/";
-				Iterator iter = ((ArrayList) raw).iterator();
+				Iterator iter = raw.iterator();
 				int counter2 = 0;
 				while (iter.hasNext())
 				{
@@ -514,7 +515,7 @@ public class ArcGetWS extends WSTool
 			} else
 			{
 				urlString += "/proc/";
-				Iterator iter = ((ArrayList) tScans).iterator();
+				Iterator iter = tScans.iterator();
 				int counter2 = 0;
 				while (iter.hasNext())
 				{
@@ -543,7 +544,7 @@ public class ArcGetWS extends WSTool
 			} else
 			{
 				urlString += "/quality/";
-				Iterator iter = ((ArrayList) quality).iterator();
+				Iterator iter = quality.iterator();
 				int counter2 = 0;
 				while (iter.hasNext())
 				{
@@ -694,6 +695,7 @@ public class ArcGetWS extends WSTool
 		return bRes;
 	}
 
+	@Override
 	public void loadHelpText()
 	{
 		super.loadHelpText();
@@ -719,6 +721,7 @@ public class ArcGetWS extends WSTool
 						"Qualities of scans to include (usable,questionable, unusable) defaults to all.");
 	}
 
+	@Override
 	public void displayHelp()
 	{
 		System.out.println("\nArc-Get Web Service\n");

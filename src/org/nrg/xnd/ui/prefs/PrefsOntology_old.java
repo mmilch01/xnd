@@ -299,6 +299,7 @@ public class PrefsOntology_old extends PreferencePage
 		m_trTextM.Save();
 		return true;
 	}
+	@Override
 	public void init(IWorkbench workbench)
 	{
 		/*

@@ -470,6 +470,7 @@ public class StoreXARManager extends Job
 	{
 		ConsoleView.AppendMessage("Experiment " + m_experiment + ": " + s);
 	}
+	@Override
 	protected IStatus run(IProgressMonitor ipm)
 	{
 		m_bRunning = true;
@@ -703,6 +704,7 @@ public class StoreXARManager extends Job
 			 * ie.hasNext();) m_ScanEntries.remove(ie.next());
 			 */
 		}
+		@Override
 		public int compareTo(Object o)
 		{
 			return m_ID.compareTo((String) o);

@@ -95,6 +95,7 @@ public class DicomImage
 		m_Image.SetDefaultWL();
 	}
 
+	@Override
 	protected void finalize()
 	{
 		m_Image.finalize();
@@ -107,8 +108,8 @@ public class DicomImage
 
 	public void Resample(double factor) throws OutOfMemoryError
 	{
-		int newW = (int) (((double) m_Image.getWid()) * factor + 0.5), newH = (int) (((double) m_Image
-				.getWid())
+		int newW = (int) (m_Image.getWid() * factor + 0.5), newH = (int) (m_Image
+				.getWid()
 				* factor + 0.5);
 		Resample(newW, newH);
 	}
@@ -760,7 +761,7 @@ public class DicomImage
 
 	public double RulerDistance()
 	{
-		return Math.sqrt((double) Dist2(m_RPoint0, m_RPoint1));
+		return Math.sqrt(Dist2(m_RPoint0, m_RPoint1));
 	}
 
 	private double Dist2(Point p0, Point p1)
@@ -1048,7 +1049,7 @@ public class DicomImage
 	public void WindowLevel(int shiftX, int shiftY, boolean bLight)
 			throws OutOfMemoryError
 	{
-		GetImage().WindowLevel((double) shiftX, (double) shiftY,
+		GetImage().WindowLevel(shiftX, shiftY,
 				Math.max(scrMap.m_rScreen.width, scrMap.m_rScreen.height),
 				bLight);
 		m_bNeedRedraw = true;

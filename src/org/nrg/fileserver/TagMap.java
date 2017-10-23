@@ -8,6 +8,7 @@ import java.util.TreeMap;
 public class TagMap implements TagSet
 {
 	private TreeMap<String, ItemTag> m_tags = new TreeMap<String, ItemTag>();
+	@Override
 	public void clear()
 	{
 		m_tags.clear();
@@ -25,16 +26,19 @@ public class TagMap implements TagSet
 	{
 		return m_tags.get(tag);
 	}
+	@Override
 	public boolean isEmpty()
 	{
 		return m_tags.isEmpty();
 	}
 
+	@Override
 	public int size()
 	{
 		return m_tags.size();
 	}
 
+	@Override
 	public boolean remove(Object o)
 	{
 		Object res = null;
@@ -47,6 +51,7 @@ public class TagMap implements TagSet
 		return (res != null);
 	}
 
+	@Override
 	public boolean removeAll(Collection<?> c)
 	{
 		Collection<ItemTag> new_values = new LinkedList<ItemTag>();
@@ -62,10 +67,12 @@ public class TagMap implements TagSet
 		} else
 			add(o);
 	}
+	@Override
 	public boolean add(ItemTag o)
 	{
 		return m_tags.put(o.GetName(), o) != null;
 	}
+	@Override
 	public boolean addAll(Collection<? extends ItemTag> c)
 	{
 		boolean bRes = true;
@@ -84,6 +91,7 @@ public class TagMap implements TagSet
 		}
 		return true;
 	}
+	@Override
 	public boolean contains(Object o)
 	{
 		if (o instanceof String)
@@ -96,14 +104,17 @@ public class TagMap implements TagSet
 		}
 		return false;
 	}
+	@Override
 	public boolean containsAll(Collection<?> c)
 	{
 		return m_tags.values().containsAll(c);
 	}
+	@Override
 	public Iterator<ItemTag> iterator()
 	{
 		return m_tags.values().iterator();
 	}
+	@Override
 	public boolean retainAll(Collection<?> c)
 	{
 		Collection<ItemTag> new_values = new LinkedList<ItemTag>();
@@ -143,10 +154,12 @@ public class TagMap implements TagSet
 		}
 		return this;
 	}
+	@Override
 	public Object[] toArray()
 	{
 		return m_tags.values().toArray();
 	}
+	@Override
 	public <T> T[] toArray(T[] a)
 	{
 		return m_tags.values().toArray(a);

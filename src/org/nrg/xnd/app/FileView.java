@@ -8,7 +8,6 @@ import java.util.Vector;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -91,6 +90,7 @@ public class FileView extends ViewBase
 	private Table m_Table = null;
 	private Menu m_TableContextMenu;
 
+	@Override
 	protected TreeViewer InitializeTree(boolean bFS)
 	{
 //		m_TreeViewer = new TreeViewer(m_SashForm, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL);
@@ -104,6 +104,7 @@ public class FileView extends ViewBase
 		Tree tree = tv.getTree();
 		tree.addListener(SWT.Selection, new Listener()
 		{
+			@Override
 			public void handleEvent(Event evt)
 			{
 				if (evt.item instanceof TreeItem)
@@ -198,10 +199,12 @@ public class FileView extends ViewBase
 		}
 		m_TableViewer.addDoubleClickListener(new IDoubleClickListener()
 		{
+			@Override
 			public void doubleClick(final DoubleClickEvent e)
 			{
 				BusyIndicator.showWhile(Display.getCurrent(), new Runnable()
 				{
+					@Override
 					public void run()
 					{
 						TableDoubleClick(e, null);
@@ -219,6 +222,7 @@ public class FileView extends ViewBase
 		m_TableViewer
 				.addSelectionChangedListener(new ISelectionChangedListener()
 				{
+					@Override
 					public void selectionChanged(SelectionChangedEvent e)
 					{
 						ISelection sel = e.getSelection();
@@ -270,10 +274,12 @@ public class FileView extends ViewBase
 		MakeDropTarget(FileView.this);
 	}
 		
+	@Override
 	protected void TableDoubleClick(DoubleClickEvent e, IProgressMonitor ipm)
 	{
 		Display.getDefault().syncExec(new Runnable()
 		{
+			@Override
 			public void run()
 			{
 				try
@@ -360,15 +366,18 @@ public class FileView extends ViewBase
 		ds.setTransfer(types);
 		ds.addDragListener(new DragSourceAdapter()
 		{
+			@Override
 			public void dragStart(DragSourceEvent e)
 			{
 			}
+			@Override
 			public void dragSetData(DragSourceEvent e)
 			{
 				TableItem[] ti = m_Table.getSelection();
 				if (ti.length > 0)
 					e.data = ti;
 			}
+			@Override
 			public void dragFinished(DragSourceEvent dte)
 			{
 			}
@@ -384,6 +393,7 @@ public class FileView extends ViewBase
 
 		dt.addDropListener(new DropTargetAdapter()
 		{
+			@Override
 			public void dragEnter(DropTargetEvent dte)
 			{
 				if (dte.detail == DND.DROP_DEFAULT)
@@ -391,20 +401,25 @@ public class FileView extends ViewBase
 					dte.detail = DND.DROP_COPY;
 				}
 			}
+			@Override
 			public void dragOver(DropTargetEvent dte)
 			{
 			}
+			@Override
 			public void dragOperationChanged(DropTargetEvent dte)
 			{
 				if (dte.detail == DND.DROP_DEFAULT)
 					dte.detail = DND.DROP_COPY;
 			}
+			@Override
 			public void dragLeave(DropTargetEvent dte)
 			{
 			}
+			@Override
 			public void dropAccept(DropTargetEvent dte)
 			{
 			}
+			@Override
 			public void drop(DropTargetEvent dte)
 			{
 				/*
@@ -426,6 +441,7 @@ public class FileView extends ViewBase
 		m_SashFileView.setLayoutData(gd);
 		m_SashFileView.setOrientation(SWT.VERTICAL);
 	}
+	@Override
 	public void Refresh(boolean bTableOnly)
 	{
 		XNDApp.StartWaitCursor();
@@ -563,6 +579,7 @@ public class FileView extends ViewBase
 		}
 		return true;
 	}	
+	@Override
 	public void createPartControl(Composite parent)
 	{
 
@@ -625,7 +642,7 @@ public class FileView extends ViewBase
 		if (!IsLocal())
 		{
 			// Connect to remote
-			itm.add(AppActions.GetAction(AppActions.ID_CONNECT_TO_REMOTE));
+			//itm.add(AppActions.GetAction(AppActions.ID_CONNECT_TO_REMOTE));
 		}
 		/*
 		 * //Manage tags
@@ -644,6 +661,7 @@ public class FileView extends ViewBase
 		else
 			return GetSelectedTableElements();
 	}
+	@Override
 	protected Collection<CElement> GetSelectedTableElements()
 	{
 		LinkedList<CElement> llfi = new LinkedList<CElement>();
@@ -651,6 +669,7 @@ public class FileView extends ViewBase
 			llfi.add((CElement) ti.getData());
 		return llfi;
 	}
+	@Override
 	public Collection<CElement> GetSelectedElements()
 	{
 		if (m_Table.isFocusControl())
@@ -659,6 +678,7 @@ public class FileView extends ViewBase
 			return GetSelectedTreeElements();
 	}
 	
+	@Override
 	protected Collection<CElement> GetSelectedTreeElements()
 	{
 		LinkedList<CElement> llfi = new LinkedList<CElement>();
@@ -666,12 +686,14 @@ public class FileView extends ViewBase
 			llfi.add((CElement) ti.getData());
 		return llfi;
 	}
+	@Override
 	protected void ProcessSelection(final Object o, final int how,
 			final Collection<CElement> cce, final boolean bTree,
 			IProgressMonitor monitor)
 	{
 		Display.getDefault().syncExec(new Runnable()
 		{
+			@Override
 			public void run()
 			{
 				XNDApp.StartWaitCursor();
@@ -703,6 +725,7 @@ public class FileView extends ViewBase
 					{
 						String path = ((FSFolder) ce).GetFSObject()
 								.getAbsolutePath();
+/*						
 						if (Utils.CrossCheckDirs(path, Utils
 								.GetIncomingFolder()) != 0)
 						{
@@ -710,6 +733,7 @@ public class FileView extends ViewBase
 									"Cannot unmanage incoming folder!",
 									Window.OK);
 						} else
+*/						
 						{
 							m_rvm.RemoveManagedFolder(path);
 							// UpdateTree();
@@ -721,6 +745,7 @@ public class FileView extends ViewBase
 		{
 			Display.getDefault().syncExec(new Runnable()
 			{
+				@Override
 				public void run()
 				{
 					XNDApp.EndWaitCursor();
@@ -793,6 +818,7 @@ public class FileView extends ViewBase
 		}
 
 	}
+	@Override
 	protected Menu CreateContextMenu(Control parent)
 	{
 		final boolean bTree;
@@ -803,6 +829,7 @@ public class FileView extends ViewBase
 
 		Listener ml = new Listener()
 		{
+			@Override
 			public void handleEvent(Event event)
 			{
 				if (!(event.widget instanceof MenuItem))
@@ -935,6 +962,7 @@ public class FileView extends ViewBase
 /////////////// set tag submenu 
 		Listener setTagListener = new Listener()
 		{
+			@Override
 			public void handleEvent(Event event)
 			{
 				if (!(event.widget instanceof MenuItem))
@@ -957,6 +985,7 @@ public class FileView extends ViewBase
 /////////////// remove tag submenu 
 		Listener removeTagListener = new Listener()
 		{
+			@Override
 			public void handleEvent(Event event)
 			{
 				if (!(event.widget instanceof MenuItem))
@@ -979,6 +1008,7 @@ public class FileView extends ViewBase
 /////// default rule menu
 		Listener pl = new Listener()
 		{
+			@Override
 			public void handleEvent(Event event)
 			{
 				if (!(event.widget instanceof MenuItem))
@@ -1018,6 +1048,7 @@ public class FileView extends ViewBase
 
 		rsmenu.addMenuListener(new MenuListener()
 		{
+			@Override
 			public void menuShown(MenuEvent e)
 			{
 				MenuItem[] items = ((Menu) e.widget).getItems();
@@ -1030,6 +1061,7 @@ public class FileView extends ViewBase
 				EnableRuleMenuItem(items[RULECOLLECTION], el_types,
 						Rule.RULE_COL);
 			}
+			@Override
 			public void menuHidden(MenuEvent e)
 			{
 			}
@@ -1045,6 +1077,7 @@ public class FileView extends ViewBase
 		// custom rule submenu command listener.
 		Listener cpl = new Listener()
 		{
+			@Override
 			public void handleEvent(Event event)
 			{
 				if (!(event.widget instanceof MenuItem))
@@ -1060,6 +1093,7 @@ public class FileView extends ViewBase
 		}
 		rsmenu.addMenuListener(new MenuListener()
 		{
+			@Override
 			public void menuShown(MenuEvent e)
 			{
 				MenuItem[] items = ((Menu) e.widget).getItems();
@@ -1070,6 +1104,7 @@ public class FileView extends ViewBase
 							mi.getText()).getType());
 				}
 			}
+			@Override
 			public void menuHidden(MenuEvent e)
 			{
 			}
@@ -1096,6 +1131,7 @@ public class FileView extends ViewBase
 		 */
 		popup.addMenuListener(new MenuListener()
 		{
+			@Override
 			public void menuShown(MenuEvent e)
 			{
 				Menu m = (Menu) e.widget;
@@ -1149,6 +1185,7 @@ public class FileView extends ViewBase
 					items[MANAGE].setEnabled(false);
 				}
 			}
+			@Override
 			public void menuHidden(MenuEvent e)
 			{
 			}
@@ -1231,7 +1268,7 @@ public class FileView extends ViewBase
 			if (sel.length < 1)
 				m_TableViewer.setInput(null);
 			else
-				m_TableViewer.setInput((CElement) (sel[0].getData()));
+				m_TableViewer.setInput((sel[0].getData()));
 		}
 		UpdateStatus();
 	}
@@ -1248,6 +1285,7 @@ public class FileView extends ViewBase
 	 * ctv.setChecked(fi, fi.IsManaged()); } } }
 	 */
 	
+	@Override
 	public void dispose()
 	{
 		m_rvm.SessionEnd();
@@ -1255,6 +1293,7 @@ public class FileView extends ViewBase
 		super.dispose();
 	}
 
+	@Override
 	public void setFocus()
 	{
 		m_Table.setFocus();

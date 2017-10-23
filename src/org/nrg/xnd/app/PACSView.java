@@ -107,6 +107,7 @@ public class PACSView extends ViewBase
 	private ImageViewerManager m_imView;
 	private Dimension m_size;
 
+	@Override
 	protected TreeViewer InitializeTree(boolean bFS)
 	{
 		m_tv = new TreeViewer(m_TreeTabFolder, SWT.BORDER | SWT.MULTI
@@ -129,6 +130,7 @@ public class PACSView extends ViewBase
 		col1.setWidth(160);
 		tree.addListener(SWT.Selection, new Listener()
 		{
+			@Override
 			public void handleEvent(Event evt)
 			{
 				if (evt.item instanceof TreeItem)
@@ -165,6 +167,7 @@ public class PACSView extends ViewBase
 		m_tv.setLabelProvider(lp);
 		return m_tv;
 	}
+	@Override
 	public boolean CanUploadToXNAT()
 	{
 		if (!IsLocal())
@@ -231,6 +234,7 @@ public class PACSView extends ViewBase
 
 		dt.addDropListener(new DropTargetAdapter()
 		{
+			@Override
 			public void dragEnter(DropTargetEvent dte)
 			{
 				if (dte.detail == DND.DROP_DEFAULT)
@@ -238,20 +242,25 @@ public class PACSView extends ViewBase
 					dte.detail = DND.DROP_COPY;
 				}
 			}
+			@Override
 			public void dragOver(DropTargetEvent dte)
 			{
 			}
+			@Override
 			public void dragOperationChanged(DropTargetEvent dte)
 			{
 				if (dte.detail == DND.DROP_DEFAULT)
 					dte.detail = DND.DROP_COPY;
 			}
+			@Override
 			public void dragLeave(DropTargetEvent dte)
 			{
 			}
+			@Override
 			public void dropAccept(DropTargetEvent dte)
 			{
 			}
+			@Override
 			public void drop(DropTargetEvent dte)
 			{
 				/*
@@ -264,6 +273,7 @@ public class PACSView extends ViewBase
 			}
 		});
 	}
+	@Override
 	public void Refresh(boolean bTableOnly)
 	{
 		XNDApp.StartWaitCursor();
@@ -389,6 +399,7 @@ public class PACSView extends ViewBase
 			Display.getDefault().syncExec(new Runnable()
 			{
 				Collection<CElement> ccce;
+				@Override
 				public void run()
 				{
 					ccce = GetSelectedElements();
@@ -403,6 +414,7 @@ public class PACSView extends ViewBase
 			{
 				Display.getDefault().syncExec(new Runnable()
 				{
+					@Override
 					public void run()
 					{
 						m_imView.updateStatus("Found no DICOM studies in the selection");
@@ -417,6 +429,7 @@ public class PACSView extends ViewBase
 			{
 				Display.getDefault().syncExec(new Runnable()
 				{
+					@Override
 					public void run()
 					{
 						m_imView.updateStatus("More than one study in selection. First study will be loaded.");
@@ -429,6 +442,7 @@ public class PACSView extends ViewBase
 				if(monitor.isCanceled()) return;
 				Display.getDefault().syncExec(new Runnable()
 				{
+					@Override
 					public void run()
 					{
 						m_imView.updateStatus("Could not open some images!");
@@ -463,6 +477,7 @@ public class PACSView extends ViewBase
 	 * org.eclipse.ui.part.WorkbenchPart#createPartControl(org.eclipse.swt.widgets
 	 * .Composite)
 	 */
+	@Override
 	public void createPartControl(Composite parent)
 	{
 		Connect();
@@ -491,6 +506,7 @@ public class PACSView extends ViewBase
 						m_tabItem1.setControl(m_colList);
 						m_colList.addSelectionListener(new SelectionAdapter()
 						{
+							@Override
 							public void widgetSelected(SelectionEvent evt)
 							{
 								UpdateTree(false);
@@ -572,6 +588,7 @@ public class PACSView extends ViewBase
 					
 					m_viewFrame.addComponentListener(new ComponentAdapter() 
 					{
+						@Override
 						public void componentResized(ComponentEvent evt) 
 						{
 							onResize();
@@ -604,6 +621,7 @@ public class PACSView extends ViewBase
 
 		parent.addFocusListener(new FocusAdapter()
 		{
+			@Override
 			public void focusGained(FocusEvent evt)
 			{
 				System.out.println("parent.focusGained, event=" + evt);
@@ -632,7 +650,7 @@ public class PACSView extends ViewBase
 		if (!IsLocal())
 		{
 			// Connect to remote
-			itm.add(AppActions.GetAction(AppActions.ID_CONNECT_TO_REMOTE));
+			//itm.add(AppActions.GetAction(AppActions.ID_CONNECT_TO_REMOTE));
 		}
 		/*
 		 * //Manage tags
@@ -656,6 +674,7 @@ public class PACSView extends ViewBase
 	 * : m_Table.getSelection()) llfi.add((CElement) ti.getData()); return llfi;
 	 * }
 	 */
+	@Override
 	public Collection<CElement> GetSelectedElements()
 	{
 		// if (m_Table.isFocusControl())
@@ -663,6 +682,7 @@ public class PACSView extends ViewBase
 		// else
 		return GetSelectedTreeElements();
 	}
+	@Override
 	protected Collection<CElement> GetSelectedTreeElements()
 	{
 		LinkedList<CElement> llfi = new LinkedList<CElement>();
@@ -670,6 +690,7 @@ public class PACSView extends ViewBase
 			llfi.add((CElement) ti.getData());
 		return llfi;
 	}
+	@Override
 	protected void ProcessSelection(final Object o, final int how,
 			final Collection<CElement> cce, final boolean bTree,
 			IProgressMonitor monitor)
@@ -677,6 +698,7 @@ public class PACSView extends ViewBase
 
 		Display.getDefault().syncExec(new Runnable()
 		{
+			@Override
 			public void run()
 			{
 				XNDApp.StartWaitCursor();
@@ -724,6 +746,7 @@ public class PACSView extends ViewBase
 		{
 			Display.getDefault().syncExec(new Runnable()
 			{
+				@Override
 				public void run()
 				{
 					m_tv.getTree().setRedraw(true);
@@ -755,6 +778,7 @@ public class PACSView extends ViewBase
 		 * fv.m_Tree.setMenu(fv.m_TreeContextMenu); } catch (Exception e) { } }
 		 */
 	}
+	@Override
 	protected Menu CreateContextMenu(Control parent)
 	{
 		final boolean bTree;
@@ -765,6 +789,7 @@ public class PACSView extends ViewBase
 
 		Listener ml = new Listener()
 		{
+			@Override
 			public void handleEvent(Event event)
 			{
 				if (!(event.widget instanceof MenuItem))
@@ -1102,6 +1127,7 @@ public class PACSView extends ViewBase
 			System.out.println("Please refresh tree manually.");
 		}
 	}
+	@Override
 	public void dispose()
 	{
 		m_rvm.SessionEnd();
@@ -1109,6 +1135,7 @@ public class PACSView extends ViewBase
 		super.dispose();
 	}
 
+	@Override
 	public void setFocus()
 	{
 		if (!m_rvm.IsTagView())

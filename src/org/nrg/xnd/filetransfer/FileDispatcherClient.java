@@ -102,7 +102,8 @@ public class FileDispatcherClient
 				return null;
 			return f.getAbsolutePath();
 		}
-		String in_fold = Utils.GetIncomingFolder() + "/downloads";
+//		String in_fold = Utils.GetIncomingFolder() + "/downloads";
+		String in_fold = Utils.GetUserFolder() + "/downloads";
 		Calendar c = Calendar.getInstance();
 		in_fold += "/"
 				+ String.format("%1$04d_%2$02d_%3$02d", c.get(Calendar.YEAR), c

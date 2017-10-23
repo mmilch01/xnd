@@ -68,6 +68,7 @@ public class DICOMPrefs extends PreferencePage
 			m_AENameComboM.Sync(XNDApp.app_aeList.getAENames());
 			m_AENameCombo.addSelectionListener(new SelectionAdapter()
 			{
+				@Override
 				public void widgetSelected(SelectionEvent evt)
 				{
 					updateData(false);
@@ -82,6 +83,7 @@ public class DICOMPrefs extends PreferencePage
 			m_delAE.setText("Delete");
 			m_delAE.addSelectionListener(new SelectionAdapter()
 			{
+				@Override
 				public void widgetSelected(SelectionEvent evt)
 				{
 					if (m_AENameCombo.getText().compareTo("localhost") == 0)
@@ -167,12 +169,14 @@ public class DICOMPrefs extends PreferencePage
 			m_newAEButton.setText("New AE...");
 			m_newAEButton.addSelectionListener(new SelectionAdapter()
 			{
+				@Override
 				public void widgetSelected(SelectionEvent evt)
 				{
 					InputDialog id = new InputDialog(getShell(),
 							"Remote destination name", "Enter remote AE name:",
 							"", new IInputValidator()
 							{
+								@Override
 								public String isValid(String newText)
 								{
 									if (newText.length() < 1)
@@ -203,6 +207,7 @@ public class DICOMPrefs extends PreferencePage
 			m_applyChanges.setText("Apply changes");
 			m_applyChanges.addSelectionListener(new SelectionAdapter()
 			{
+				@Override
 				public void widgetSelected(SelectionEvent evt)
 				{
 					updateData(true);
@@ -238,6 +243,7 @@ public class DICOMPrefs extends PreferencePage
 		return super.performOk();
 	}
 
+	@Override
 	public void init(IWorkbench workbench)
 	{
 		// TODO Auto-generated method stub

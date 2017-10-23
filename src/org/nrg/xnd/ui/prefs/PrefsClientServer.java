@@ -39,6 +39,7 @@ public class PrefsClientServer extends PreferencePage
 	private boolean m_ServerRunning;
 	private int m_ServerPort;
 
+	@Override
 	public void init(IWorkbench workbench)
 	{
 		// server

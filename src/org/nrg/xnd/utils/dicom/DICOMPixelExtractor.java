@@ -32,12 +32,14 @@ public class DICOMPixelExtractor implements PixelExtractor
 	{
 		return (group << 16) & element;
 	}
+	@Override
 	public int GetBpp()
 	{
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	@Override
 	public LightXML GetImageInfo()
 	{
 		LightXML xml = new LightXML();
@@ -61,10 +63,12 @@ public class DICOMPixelExtractor implements PixelExtractor
 		return xml;
 	}
 
+	@Override
 	public Object GetPixels()
 	{
 		return m_pixels;
 	}
+	@Override
 	public boolean LoadImage(ItemRecord ir)
 	{
 		return false;

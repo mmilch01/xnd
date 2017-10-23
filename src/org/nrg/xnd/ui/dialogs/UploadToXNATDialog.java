@@ -184,6 +184,7 @@ public class UploadToXNATDialog extends Dialog
 				m_SelectAllButton.setText("Select all");
 				m_SelectAllButton.addSelectionListener(new SelectionListener()
 				{
+					@Override
 					public void widgetSelected(SelectionEvent evt)
 					{
 						// m_ExpTable.setRedraw(false);
@@ -199,6 +200,7 @@ public class UploadToXNATDialog extends Dialog
 						}
 						// m_ExpTable.setRedraw(true);
 					}
+					@Override
 					public void widgetDefaultSelected(SelectionEvent evt)
 					{
 					}
@@ -209,6 +211,7 @@ public class UploadToXNATDialog extends Dialog
 				m_ClearAllButton.setText("Clear all");
 				m_ClearAllButton.addSelectionListener(new SelectionListener()
 				{
+					@Override
 					public void widgetSelected(SelectionEvent evt)
 					{
 						// m_ExpTable.setRedraw(false);
@@ -223,6 +226,7 @@ public class UploadToXNATDialog extends Dialog
 						// m_ExpTable.setRedraw(true);
 						// m_ExpTable.redraw();
 					}
+					@Override
 					public void widgetDefaultSelected(SelectionEvent evt)
 					{
 					}

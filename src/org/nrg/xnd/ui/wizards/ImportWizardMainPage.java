@@ -91,6 +91,7 @@ public class ImportWizardMainPage extends WizardPage
 	{
 		super("IWMainPage", "Data sources", null);
 	}
+	@Override
 	public void createControl(Composite parent)
 	{
 		Composite topLevel = new Composite(parent, SWT.NONE);
@@ -228,6 +229,7 @@ public class ImportWizardMainPage extends WizardPage
 					"ImportWizardMainPage.Project", 10);
 			m_Project.addModifyListener(new ModifyListener()
 			{
+				@Override
 				public void modifyText(ModifyEvent evt)
 				{
 					getWizard().getContainer().updateButtons();
@@ -257,6 +259,7 @@ public class ImportWizardMainPage extends WizardPage
 					"ImportWizardMainPage.Subject", 10);
 			m_subjLabel.addModifyListener(new ModifyListener()
 			{
+				@Override
 				public void modifyText(ModifyEvent evt)
 				{
 					getWizard().getContainer().updateButtons();
@@ -286,6 +289,7 @@ public class ImportWizardMainPage extends WizardPage
 			}
 			m_ModalityCombo.addModifyListener(new ModifyListener()
 			{
+				@Override
 				public void modifyText(ModifyEvent evt)
 				{
 					getWizard().getContainer().updateButtons();

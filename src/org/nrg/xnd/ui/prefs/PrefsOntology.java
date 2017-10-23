@@ -371,6 +371,7 @@ public class PrefsOntology extends PreferencePage
 
 				m_ontCombo.addModifyListener(new ModifyListener()
 				{
+					@Override
 					public void modifyText(ModifyEvent evt)
 					{
 						String file = m_ontCombo.getText();
@@ -504,6 +505,7 @@ public class PrefsOntology extends PreferencePage
 	 * try{XNDApp.app_Prefs.flush();}catch(Exception e){}
 	 * FileView.UpdateMenus(); return true; }
 	 */
+	@Override
 	public void init(IWorkbench workbench)
 	{
 		// TODO Auto-generated method stub

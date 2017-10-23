@@ -30,6 +30,7 @@ public final class SimpleTagExtractor implements TagExtractor
 	 * 
 	 * @see org.nrg.xnat.importer.dicom.TagExtractor#getName()
 	 */
+	@Override
 	public String getName()
 	{
 		return name;
@@ -40,6 +41,7 @@ public final class SimpleTagExtractor implements TagExtractor
 	 * 
 	 * @see org.nrg.xnat.importer.dicom.TagExtractor#getMaxAttr()
 	 */
+	@Override
 	public int getMaxAttr()
 	{
 		return attr;
@@ -59,6 +61,7 @@ public final class SimpleTagExtractor implements TagExtractor
 	 * DicomObject)
 	 */
 	// public Collection<String> getValues(final DicomObject o) {
+	@Override
 	public Collection getValues(final DicomObject o)
 	{
 		return Utils.getValues(o, attr);

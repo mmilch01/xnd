@@ -115,42 +115,49 @@ public class ImageViewerManager implements WorklistManager
 */		
 	}
 
+	@Override
 	public String GetUser()
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public boolean IsGuestMode()
 	{
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	@Override
 	public boolean IsPreviewMode()
 	{
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	@Override
 	public boolean LoadSeries(DICOMRecord dr)
 	{
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	@Override
 	public void SetPreviewMode(boolean set)
 	{
 		// TODO Auto-generated method stub
 
 	}
 
+	@Override
 	public void ShowDBWindow(boolean show)
 	{
 		// TODO Auto-generated method stub
 
 	}
 
+	@Override
 	public boolean UpdateStudyNote(String note, DICOMRecord studyDR)
 	{
 		// TODO Auto-generated method stub

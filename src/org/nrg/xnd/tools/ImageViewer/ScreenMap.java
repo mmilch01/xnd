@@ -57,8 +57,8 @@ public class ScreenMap
 		double Scale = (double) Wsx / (double) Vsx; // Uniform
 		// scale
 		double xx, yy;
-		xx = ((double) (pt.x - Vcx)) * Scale + Wcx;
-		yy = ((double) (pt.y - Vcy)) * Scale + Wcy;
+		xx = (pt.x - Vcx) * Scale + Wcx;
+		yy = (pt.y - Vcy) * Scale + Wcy;
 		return new Point((int) (xx + 0.5), (int) (yy + 0.5));
 	}
 
@@ -70,8 +70,8 @@ public class ScreenMap
 		int Wsx = m_rImage.width, Wsy = m_rImage.height;
 		double Scale = (double) Vsx / (double) Wsx;
 		double xx, yy;
-		xx = ((double) (pt.x - Wcx)) * Scale + Vcx;
-		yy = ((double) (pt.y - Wcy)) * Scale + Vcy;
+		xx = (pt.x - Wcx) * Scale + Vcx;
+		yy = (pt.y - Wcy) * Scale + Vcy;
 		return new Point((int) (xx + 0.5), (int) (yy + 0.5));
 	}
 

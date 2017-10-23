@@ -475,13 +475,13 @@ public class Series extends Rectangle
 		if (m_ImageVector.size() == 0)
 			return;
 		m_study.getM_CineThread().m_controlID = 0;
-		double count = (double) GetSize();
+		double count = GetSize();
 		double icount;
 		double shift = 5;
 		Rectangle rect = m_ImageVector.get(0).GetScreenRect();
-		double picRatio = (double) (rect.width / rect.height);
-		double width = (double) this.width;
-		double height = (double) this.height;
+		double picRatio = (rect.width / rect.height);
+		double width = this.width;
+		double height = this.height;
 
 		m_SerClip = new Rectangle(this);
 		double zoom;

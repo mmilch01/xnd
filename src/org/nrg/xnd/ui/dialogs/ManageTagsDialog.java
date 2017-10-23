@@ -88,10 +88,12 @@ public class ManageTagsDialog extends Dialog
 			m_AddButton.setEnabled(true);
 			m_AddButton.addSelectionListener(new SelectionListener()
 			{
+				@Override
 				public void widgetSelected(SelectionEvent evt)
 				{
 					m_AddButtonKeyPressed(evt);
 				}
+				@Override
 				public void widgetDefaultSelected(SelectionEvent evt)
 				{
 					m_AddButtonKeyPressed(evt);
@@ -117,10 +119,12 @@ public class ManageTagsDialog extends Dialog
 			m_ButtonDelete.setEnabled(true);
 			m_ButtonDelete.addSelectionListener(new SelectionListener()
 			{
+				@Override
 				public void widgetSelected(SelectionEvent evt)
 				{
 					m_DelButtonPressed(evt);
 				}
+				@Override
 				public void widgetDefaultSelected(SelectionEvent evt)
 				{
 					m_DelButtonPressed(evt);

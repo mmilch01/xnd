@@ -194,6 +194,7 @@ public class EditMacroDialog extends Dialog
 				m_operationType.setLayoutData(m_operationTypeLData);
 				m_operationType.addModifyListener(new ModifyListener()
 				{
+					@Override
 					public void modifyText(ModifyEvent evt)
 					{
 						EnableAddControls();

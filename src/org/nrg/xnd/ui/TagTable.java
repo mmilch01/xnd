@@ -27,6 +27,7 @@ public class TagTable extends Table
 	{
 		return new Listener()
 		{
+			@Override
 			public void handleEvent(Event e)
 			{
 				t.setFocus();
@@ -54,6 +55,7 @@ public class TagTable extends Table
 				final int newCol = col;
 				newEd.addModifyListener(new ModifyListener()
 				{
+					@Override
 					public void modifyText(ModifyEvent e)
 					{
 						Text text = (Text) te.getEditor();
@@ -99,6 +101,7 @@ public class TagTable extends Table
 		 */
 		this.addControlListener(new ControlAdapter()
 		{
+			@Override
 			public void controlResized(ControlEvent evt)
 			{
 				Point p = getSize();

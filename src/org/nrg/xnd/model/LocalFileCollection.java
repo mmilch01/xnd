@@ -22,12 +22,14 @@ public class LocalFileCollection implements FileCollection
 	private TreeSet<String> m_Files = new TreeSet<String>();
 	private FSObject m_fso;
 
+	@Override
 	public void Delete()
 	{
 		if (!m_fso.delete())
 			m_fso.deleteOnExit();
 	}
 
+	@Override
 	public boolean ContainsFile(String rel_path)
 	{
 		return m_Files.contains(rel_path);
@@ -42,19 +44,23 @@ public class LocalFileCollection implements FileCollection
 		m_fso = new FSObject(Utils.GetCollectionFolder().getAbsolutePath()
 				+ "/" + m_ID);
 	}
+	@Override
 	public String GetID()
 	{
 		return m_ID;
 	}
+	@Override
 	public void AddFile(String rel_path)
 	{
 		m_Files.add(rel_path);
 	}
+	@Override
 	public Collection<String> GetAllFiles()
 	{
 		return m_Files;
 	}
 
+	@Override
 	public boolean Serialize(boolean is_loading)
 	{
 		if (is_loading)
