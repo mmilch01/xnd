@@ -191,7 +191,7 @@ public class XNDApp implements IApplication
 	 */
 	public boolean TestFunction1()
 	{
-		System.out.println("test");
+		//System.out.println("test");
 		/*
 		 * StringTree st=new StringTree(); String[]
 		 * cl={"abc","ab","a","ac","bec","ac","cbe"}; st.Add(cl); boolean

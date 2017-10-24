@@ -283,8 +283,7 @@ public class AppActions extends ActionBarAdvisor
 								.ShowMessageBox(
 										"Error",
 										"Either this directory or some of its subdirectories is already managed,\n"
-												+ "a directory with the same name is already managed, or this directory\n"
-												+ "contains an upload directory. Please select another directory.",
+												+ "or a directory with the same name is already managed.",
 										Window.OK);
 						return;
 					}

@@ -67,7 +67,7 @@
          </property>
          <property
                name="aboutText"
-               value="XNAT Desktop ver. 0.97&#x0D;&#x0A;Neuroinformatics Research Group, Washington University in St Louis&#x0D;&#x0A;https://wiki.xnat.org/display/XNAT16/XNAT+Desktop">
+               value="XNAT Desktop ver. 0.97&#x0A;Neuroinformatics Research Group, Washington University in St Louis&#x0A;https://wiki.xnat.org/display/XNAT16/XNAT+Desktop">
          </property>
          <property
                name="windowImages"

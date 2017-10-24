@@ -604,7 +604,7 @@ public abstract class Utils
 				return null;
 		} else
 		{
-			InputDialog d = new InputDialog(new Shell(), title, msg, "~/",
+			InputDialog d = new InputDialog(new Shell(), title, msg, Utils.GetUserFolder(),
 					new IInputValidator()
 					{
 						@Override
