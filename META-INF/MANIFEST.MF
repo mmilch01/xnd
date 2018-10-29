@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: XNAT Desktop Plug-in
 Bundle-SymbolicName: org.nrg.xnat.desktop; singleton:=true
-Bundle-Version: 0.98
+Bundle-Version: 0.99
 Bundle-Vendor: NRG
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui

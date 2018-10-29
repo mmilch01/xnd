@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="XNAT Desktop" uid="XND" id="org.nrg.xnat.desktop.xnd_product" application="org.nrg.xnat.desktop.application" version="0.98" useFeatures="false" includeLaunchers="true">
+<product name="XNAT Desktop" uid="XND" id="org.nrg.xnat.desktop.xnd_product" application="org.nrg.xnat.desktop.application" version="0.99" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/org.nrg.xnat.desktop/icons/logo.gif"/>
       <text>
-         XNAT Desktop ver. 0.97
+         XNAT Desktop ver. 0.99
 Neuroinformatics Research Group, Washington University in St Louis
 https://wiki.xnat.org/display/XNAT16/XNAT+Desktop
       </text>
@@ -31,8 +31,10 @@ https://wiki.xnat.org/display/XNAT16/XNAT+Desktop
       </win>
    </launcher>
 
+
    <vm>
    </vm>
+
 
    <plugins>
       <plugin id="com.ibm.icu"/>
