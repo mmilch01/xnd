@@ -60,6 +60,7 @@ public class XNDApp implements IApplication
 	public static RepositoryViewManager app_localVM = null;
 	public static RepositoryViewManager app_remoteVM = null;
 	public static RepositoryViewManager app_XNATVM = null;
+	public static XnatTypeManager app_XnatTypeManager = new XnatTypeManager();
 	public static AEList app_aeList = new AEList();
 	public static SocketServer app_rs = null;
 	public static SocketServer app_fs = null;
@@ -376,7 +377,7 @@ public class XNDApp implements IApplication
 		}
 		try
 		{
-			XnatTypeManager.LoadFromXML(new File(XnatTypeManager.GetDefaultLocation()));
+			app_XnatTypeManager.LoadFromXML(new File(XnatTypeManager.GetDefaultLocation()));
 		}catch(Exception e)
 		{
 			Utils.ShowMessageBox("", "Error loading the XNAT-XND tag mapper", SWT.OK);

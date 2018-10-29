@@ -20,7 +20,7 @@ import org.nrg.xnd.utils.Utils;
  */
 public final class XnatTypeManager
 {
-	private static TreeMap<String,property_group> m_property_groups=new TreeMap<String,property_group>();
+	private TreeMap<String,property_group> m_property_groups=new TreeMap<String,property_group>();
 	
 	public XnatTypeManager(){};
 	public static String GetDefaultLocation()
@@ -28,7 +28,7 @@ public final class XnatTypeManager
 		return new File(Utils.GetPluginPath()
 				+ "/xml_resources/xnat_complex_types.xml").getAbsolutePath();		
 	}
-	public static void LoadFromXML(File f) throws DocumentException
+	public void LoadFromXML(File f) throws DocumentException
 	{
 		Document d=new SAXReader().read(f);
 		Element el;
@@ -42,7 +42,7 @@ public final class XnatTypeManager
 			}
 		}
 	}	
-	public static String GetCompexTypeRestClauses(String ontology_key, ItemRecord it)
+	public String GetCompexTypeRestClauses(String ontology_key, ItemRecord it)
 	{
 		//ItemRecord is a set of all tags.
 		//ontology_key is a dividing tag name (modality)
@@ -56,6 +56,7 @@ public final class XnatTypeManager
 		String pr_gr,xtype;
 //		LinkedList<String> xnames=new LinkedList<String>();
 		String xnames="";
+		property_group pg;
 		for (Iterator<String> iter=m_property_groups.keySet().iterator(); iter.hasNext();)
 		{
 			pr_gr=iter.next();
@@ -63,12 +64,12 @@ public final class XnatTypeManager
 			
 			try
 			{
-				m_property_groups.get(pr_gr);
-				xtype=property_group.GetXnatName(dividingTag.GetFirstValue(), ontology_key);
+				pg=m_property_groups.get(pr_gr);
+				xtype=pg.GetXnatName(dividingTag.GetFirstValue(), ontology_key);
 				if (xtype!=null)
 				{
 					if(xnames.length()>0)
-						xnames+="&"+"xtype";
+						xnames+="&"+xtype;
 					else 
 						xnames=xtype;
 				}
@@ -76,10 +77,10 @@ public final class XnatTypeManager
 		}
 		return xnames;
 	}	
-	private final static class property_group
+	private final class property_group
 	{
-		public static String m_key;
-		public static TreeMap<String,TreeMap<String,String>> m_property_types=new TreeMap<String,TreeMap<String,String>>();
+		public String m_key;
+		public TreeMap<String,TreeMap<String,String>> m_property_types=new TreeMap<String,TreeMap<String,String>>();
 		public property_group(Element el)
 		{
 			m_key=el.attributeValue("key");
@@ -96,8 +97,8 @@ public final class XnatTypeManager
 				}
 				m_property_types.put(property_type.attributeValue("name"), xsimap);
 			}
-		}	
-		public static String GetXnatName(String property_type, String ontology_key) throws NullPointerException
+		}
+		public String GetXnatName(String property_type, String ontology_key) throws NullPointerException
 		{
 			return m_property_types.get(property_type).get(ontology_key);
 		}		

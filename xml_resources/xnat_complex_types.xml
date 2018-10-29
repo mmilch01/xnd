@@ -16,25 +16,40 @@ NB: see xnd_tags_default.xml for defined keys and their values.
  
  -->
 <property_groups>
-	<property_group key="Modality">
+	<property_group key="ExperimentModality">
+		<property_type name="PETMR">
+			<rest_clause text="xsiType=xnat:petmrSessionData" ontology_key="Experiment"/>
+		</property_type>		
 		<property_type name="MR">
 			<rest_clause text="xsiType=xnat:mrSessionData" ontology_key="Experiment"/>
-			<rest_clause text="xsiType=xnat:mrScanData" ontology_key="Scan"/>
 		</property_type>
 		<property_type name="CT">
 			<rest_clause text="xsiType=xnat:ctSessionData" ontology_key="Experiment"/>
-			<rest_clause text="xsiType=xnat:ctScanData" ontology_key="Scan"/>
 		</property_type>
 		<property_type name="US">
 			<rest_clause text="xsiType=xnat:usSessionData" ontology_key="Experiment"/>
-			<rest_clause text="xsiType=xnat:usScanData" ontology_key="Scan"/>
 		</property_type>
 		<property_type name="PET">
 			<rest_clause text="xsiType=xnat:petSessionData" ontology_key="Experiment"/>
-			<rest_clause text="xsiType=xnat:petScanData" ontology_key="Scan"/>
 		</property_type>
 		<property_type name="OTHER">
 			<rest_clause text="xsiType=xnat:imageSessionData" ontology_key="Experiment"/>
+		</property_type>
+	</property_group>
+	<property_group key="Modality">
+		<property_type name="MR">
+			<rest_clause text="xsiType=xnat:mrScanData" ontology_key="Scan"/>
+		</property_type>
+		<property_type name="CT">
+			<rest_clause text="xsiType=xnat:ctScanData" ontology_key="Scan"/>
+		</property_type>
+		<property_type name="US">
+			<rest_clause text="xsiType=xnat:usScanData" ontology_key="Scan"/>
+		</property_type>
+		<property_type name="PET">
+			<rest_clause text="xsiType=xnat:petScanData" ontology_key="Scan"/>
+		</property_type>
+		<property_type name="OTHER">
 			<rest_clause text="xsiType=xnat:imageScanData" ontology_key="Scan"/>
 		</property_type>
 	</property_group>

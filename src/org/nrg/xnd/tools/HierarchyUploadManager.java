@@ -67,7 +67,7 @@ public class HierarchyUploadManager extends Job
 	{
 		return m_validator.validate(bAutoFix);
 	}
-	private boolean createHierarchy(VirtualFolder vf)
+	private boolean createHierarchy(VirtualFolder vf, String expMod)
 	{
 		Context context = vf.getContext();
 
@@ -97,21 +97,21 @@ public class HierarchyUploadManager extends Job
 		if (contextToCreate.size() < 1)
 			return true;
 		// second, create sequentially all missing levels on server.
+		ItemRecord assocTags=vf.getAssociatedTags();
+		if (expMod!=null)	assocTags.tagSet(new ItemTag("ExperimentModality",expMod));
 		do
 		{
 			newContext.add(contextToCreate.getFirst());
 			contextToCreate.removeFirst();
 			String params;
-			if (null == (params = createHierarchyLevel(newContext, vf
-					.getAssociatedTags(), null)))
+			if (null == (params = createHierarchyLevel(newContext, assocTags, null)))
 			{
 				// amend context path for ambiguous contexts only - this is a
 				// temp fix.
 				if (XNATThesaurus.isAmbiguousContext(newContext))
 				{
 					XNATThesaurus.amendContext(newContext);
-					if (null != (createHierarchyLevel(newContext, vf
-							.getAssociatedTags(), params)))
+					if (null != (createHierarchyLevel(newContext, assocTags, params)))
 						continue;
 					/*
 					 * q = XNATRestAdapter.FormSubQuery(newContext); if (params
@@ -147,7 +147,34 @@ public class HierarchyUploadManager extends Job
 		}
 		return null;
 	}
-	public boolean uploadVirtualFolder(VirtualFolder vf,IProgressMonitor ipm)
+	private String getExperimentModality(VirtualFolder vf, IProgressMonitor ipm)
+	{
+		ItemRecord ir=vf.getAssociatedTags();
+		ItemTag at=ir.getTag("Experiment");
+		if (at==null) return null;
+		if (at.GetAllValues().length!=1 ) return null;		
+		
+		at=ir.getTag("Modality");
+		if (at==null) return null;
+		String[] mods=at.GetAllValues();
+		if (mods.length < 1 ) return null;
+		String em=null;
+		switch (mods.length)
+		{
+			case 1: em=mods[0]; break;
+			case 2: 
+				if ((mods[0].compareTo("PET")==0 && mods[1].compareTo("MR")==0) || (mods[1].compareTo("PET")==0 && mods[0].compareTo("MR")==0))
+					em="PETMR"; break;
+			default: em=null;	break;
+		}
+		return em;
+/*		if (em==null) return null;
+		ItemTag[] its=new ItemTag[1]; its[0]=new ItemTag("ExperimentModality",em);
+		ipm.setTaskName("Resolving experiment modality");
+		vf.ApplyOperation(its, 0, ipm);
+*/		
+	}
+	public boolean uploadVirtualFolder(VirtualFolder vf, String expModality, IProgressMonitor ipm)
 	{
 		// here, we need to find all sub-experiment level entries, separate them
 		// and send to the server each one separately.
@@ -155,9 +182,12 @@ public class HierarchyUploadManager extends Job
 		// extract all such sub-entities.
 		// first thing we do, is check whether this vf's level is low enough to
 		// upload in one piece.
+		
 		m_vf = vf;
 		ExpProgress("");
-
+//		setExperimentModality(vf,ipm);
+		if (expModality==null) expModality=getExperimentModality(vf,ipm);
+		ipm.setTaskName("Uploading");
 		Collection<CElement> cch = vf.GetChildren(null, m_ipm);
 		// extract immediate non-vf children
 		Collection<CElement> dbitems = new TypeFilter(TypeFilter.COLLECTION
@@ -170,14 +200,14 @@ public class HierarchyUploadManager extends Job
 				.Filter(dbitems);
 		boolean bRes = true, iRes = true;
 		if (collections.size() > 0 || files.size() > 0)
-		{
-			if (createHierarchy(vf))
+		{			
+			if (createHierarchy(vf,expModality))
 			{
 				ipm.subTask("Creating hierarchy for "+vf.GetLabel());
 				if (ipm.isCanceled()) return false;
 				iRes = uploadFileColAsResource(files);
 				bRes &= iRes;
-				if (ipm.isCanceled()) return false;
+				if (ipm.isCanceled()) return false;				
 				ipm.subTask("Uploading "+vf.GetLabel());
 				iRes &= uploadCollectionsAsResources(collections);
 				bRes &= iRes;
@@ -188,12 +218,13 @@ public class HierarchyUploadManager extends Job
 			if (!bRes)
 				return false;
 		}
+		
 		for (CElement ce : cch)
 		{
 			if (ce instanceof VirtualFolder)
 			{
 				ipm.subTask("Uploading "+ce.GetLabel());
-				bRes &= uploadVirtualFolder((VirtualFolder) ce,ipm);
+				bRes &= uploadVirtualFolder((VirtualFolder) ce,expModality,ipm);
 			}
 			if (ipm.isCanceled()) return false;
 		}
@@ -464,7 +495,7 @@ public class HierarchyUploadManager extends Job
 		{
 			if (el instanceof VirtualFolder)
 			{
-				if (!uploadVirtualFolder((VirtualFolder) el,ipm))
+				if (!uploadVirtualFolder((VirtualFolder) el,null,ipm))
 				{					
 					nErrors++;
 					if(!ipm.isCanceled())

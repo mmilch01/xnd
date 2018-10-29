@@ -19,6 +19,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
+import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.io.IOUtils;
 import org.dom4j.DocumentException;
 import org.dom4j.io.SAXReader;
@@ -161,15 +162,16 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 						{
 							try
 							{
-								is = new FileInputStream((File) body);
+								((PutMethod) method).setRequestEntity(new FileRequestEntity((File)body));
+/*								is = new FileInputStream((File) body);
 								((PutMethod) method)
 										.setRequestEntity(new InputStreamRequestEntity(
 												is));
+*/								
 								// setRequestBody(fis);
-							} catch (FileNotFoundException fnf)
+							} catch (Exception ex)
 							{
-								if (is != null)
-									is.close();
+								System.err.println("XNATRestAdapter.PerformConnection ERROR: cannot upload file "+((File)body).getAbsolutePath() );
 								return null;
 							}
 						} else if (body instanceof InputStream)
@@ -517,5 +519,39 @@ public class XNATRestAdapter extends RepositoryManager implements FileTransfer
 		// TODO Auto-generated method stub
 		return false;
 	}
+public class FileRequestEntity implements RequestEntity {
 
+    private File file = null;    
+    
+    public FileRequestEntity(File file) {
+        super();
+        this.file = file;
+    }
+
+    public boolean isRepeatable() {
+        return true;
+    }
+
+    public String getContentType() {
+        return "text/plain; charset=UTF-8";
+    }
+    
+    public void writeRequest(OutputStream out) throws IOException {
+        InputStream in = new FileInputStream(this.file);
+        try {
+            int l;
+            byte[] buffer = new byte[1024];
+            while ((l = in.read(buffer)) != -1) {
+                out.write(buffer, 0, l);
+            }
+        } finally {
+            in.close();
+        }
+    }
+
+    public long getContentLength() {
+        return file.length();
+    }
 }
+
+}//end of XNATRestAdapter class

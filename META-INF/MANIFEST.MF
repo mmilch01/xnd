@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: XNAT Desktop Plug-in
 Bundle-SymbolicName: org.nrg.xnat.desktop; singleton:=true
-Bundle-Version: 0.97
+Bundle-Version: 0.98
 Bundle-Vendor: NRG
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui
@@ -23,4 +23,4 @@ Bundle-ClassPath: bin/, plugins/, plugins/dcm4che-core-2.0.21.jar, plugins/activ
  plugins/pixelmed.jar, plugins/dcm4che-imageio-2.0.21.jar, plugins/dcm4che-image-2.0.21.jar, plugins/jai_imageio.jar
  .
 Eclipse-LazyStart: false
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

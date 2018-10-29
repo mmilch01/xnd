@@ -11,6 +11,7 @@ import org.dom4j.io.SAXReader;
 import org.nrg.fileserver.Context;
 import org.nrg.fileserver.ItemRecord;
 import org.nrg.fileserver.ItemTag;
+import org.nrg.xnd.app.XNDApp;
 import org.nrg.xnd.utils.Utils;
 
 public abstract class XNATThesaurus
@@ -76,7 +77,7 @@ public abstract class XNATThesaurus
 		String param = "", vname, val;
 		int i = 0;
 
-		param=XnatTypeManager.GetCompexTypeRestClauses(context.getLast().GetName(), tagRecord);
+		param=XNDApp.app_XnatTypeManager.GetCompexTypeRestClauses(context.getLast().GetName(), tagRecord);
 		
 		for (ItemTag it : tagRecord.getAllTags())
 		{
